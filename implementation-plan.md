@@ -227,49 +227,243 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
 ├── context.md                     # Hackathon rules and data info
 ├── traction-analysis-concept.md   # Technical concept
 ├── implementation-plan.md         # This file
-├── migration-plan.md              # Old migration notes
+├── migration-plan.md              # Migration notes
 │
-├── src/                           # Python backend
-│   ├── geometry.py                # GPS/centerline utilities (ported)
-│   ├── data_loader.py             # Telemetry loading
-│   ├── turn_detector.py           # Turn zone auto-detection
-│   ├── friction_envelope.py       # Envelope calculation
-│   ├── classifier.py              # Lap classification
-│   └── exporter.py                # Export JSON/CSV
+├── hackathon/                     # Main working directory
+│   │
+│   ├── src/                       # Python processing pipeline
+│   │   ├── __init__.py
+│   │   ├── geometry.py            # GPS/centerline utilities (ported)
+│   │   ├── data_loader.py         # Chunked telemetry loading
+│   │   ├── pit_extractor.py       # Pit lane extraction from USAC + telemetry
+│   │   ├── turn_detector.py       # Auto-detect turn zones (DBSCAN)
+│   │   ├── friction_envelope.py   # Build grip envelopes per driver/zone
+│   │   ├── classifier.py          # Lap classification logic
+│   │   └── exporter.py            # Export JSON/CSV for D3.js
+│   │
+│   ├── data/
+│   │   ├── input/                 # Raw data (symlinked, not committed)
+│   │   │   ├── telemetry.csv      # → ../../14.toyota-hackathon/deliverables/data/input/telemetry.csv
+│   │   │   └── usac_sectors.csv   # USAC sector analysis
+│   │   ├── processed/             # Generated artifacts (committed)
+│   │   │   ├── track_centerline.csv
+│   │   │   ├── pit_lane.json
+│   │   │   ├── turn_zones.json
+│   │   │   ├── friction_envelopes.json
+│   │   │   └── lap_classifications.csv
+│   │   └── assets/                # Manual files (committed)
+│   │       ├── corner_labels.json
+│   │       └── track_reference.png
+│   │
+│   ├── scripts/                   # Pipeline execution scripts
+│   │   ├── 1_generate_track.py    # Step 1: Generate centerline
+│   │   ├── 2_extract_pitlane.py   # Step 2: Extract pit lane
+│   │   ├── 3_detect_turns.py      # Step 3: Detect turn zones
+│   │   ├── 4_build_envelopes.py   # Step 4: Build friction envelopes
+│   │   └── 5_classify_laps.py     # Step 5: Classify laps
+│   │
+│   ├── frontend/                  # D3.js visualization
+│   │   ├── index.html             # Main dashboard
+│   │   ├── css/
+│   │   │   └── styles.css         # Dashboard styles
+│   │   ├── js/
+│   │   │   ├── main.js            # Dashboard initialization
+│   │   │   ├── track-view.js      # Track map visualization
+│   │   │   ├── analytics.js       # Friction circle + tables
+│   │   │   └── utils.js           # Shared utilities (rotation, data loading)
+│   │   └── test/                  # Test HTML pages for incremental dev
+│   │       ├── test_track.html    # Test: Track rendering only
+│   │       ├── test_pitlane.html  # Test: Track + pit lane
+│   │       └── test_zones.html    # Test: Track + turn zones
+│   │
+│   ├── requirements.txt           # Python dependencies
+│   ├── .gitignore                 # Exclude data/input/, large files
+│   └── README.md                  # Hackathon-specific notes
 │
-├── data/
-│   ├── input/                     # Raw data (not committed)
-│   │   ├── telemetry.csv          # 1.5GB telemetry (symlink to old repo)
-│   │   └── usac_sectors.csv       # USAC timing data
-│   ├── processed/                 # Generated artifacts
-│   │   ├── track_centerline.csv
-│   │   ├── pit_lane.json
-│   │   ├── turn_zones.json
-│   │   ├── friction_envelopes.json
-│   │   ├── lap_classifications.csv
-│   │   └── telemetry_sample.csv   # Small subset for browser
-│   └── assets/                    # Manual files
-│       ├── corner_labels.json
-│       └── track_reference.png
-│
-├── frontend/                      # D3.js visualization
-│   ├── index.html                 # Main dashboard
-│   ├── css/
-│   │   └── styles.css
-│   ├── js/
-│   │   ├── track-view.js          # Track map with zones
-│   │   ├── analytics.js           # Friction circle + tables
-│   │   └── utils.js               # Shared utilities (rotation, etc.)
-│   └── data/                      # Symlink to ../data/processed/
-│
-├── main.py                        # Pipeline orchestrator
-├── requirements.txt               # Python dependencies
-└── .gitignore                     # Exclude data/input/, large files
+└── deliverables/                  # Legacy files (may delete later)
+    └── ...
 ```
 
 ---
 
-## 5. Key Implementation Fixes
+## 5. High-Level Implementation Steps
+
+### Step 1: Create Folder Structure
+**Action:**
+```bash
+cd hackathon/
+mkdir -p src scripts data/{input,processed,assets} frontend/{css,js,test}
+```
+
+**Outcome:** Clean workspace ready for development
+
+---
+
+### Step 2: Delete Legacy Files
+**Action:**
+- Remove `/deliverables/` directory (old brake analysis code)
+- Keep only documentation in root: `README.md`, `context.md`, `traction-analysis-concept.md`
+
+**Outcome:** No confusion between old/new code
+
+---
+
+### Step 3: Install Dependencies
+**Action:**
+```bash
+# Create requirements.txt
+echo "pandas
+numpy
+scipy
+scikit-learn
+pyproj
+matplotlib" > requirements.txt
+
+# Install
+pip install -r requirements.txt
+```
+
+**Outcome:** Python environment ready
+
+---
+
+### Step 4: Port Geometry Utilities
+**Action:**
+- Copy `geometry.py` functions from old repo to `hackathon/src/geometry.py`
+- Copy `convert_gps_to_meters()`, `project_points_onto_centerline()` to `hackathon/src/geometry.py`
+
+**Files created:**
+- `hackathon/src/geometry.py`
+- `hackathon/src/data_loader.py`
+
+**Outcome:** Track-agnostic utilities available
+
+---
+
+### Step 5: Generate Track Centerline + Render in D3.js → **Show to Edu**
+
+**Processing:**
+```bash
+python scripts/1_generate_track.py
+```
+- Load telemetry GPS coordinates
+- Convert GPS → UTM meters
+- Generate smooth centerline
+- Save to `data/processed/track_centerline.csv`
+
+**Rendering:**
+- Create `frontend/test/test_track.html`
+- Load `track_centerline.csv` with D3.js
+- Render track as SVG path
+- Apply rotation to match PNG orientation
+
+**Outcome:** Interactive track map showing centerline → **Review with Edu**
+
+---
+
+### Step 6: Extract Pit Lane + Render on Track → **Show to Edu**
+
+**Processing:**
+```bash
+python scripts/2_extract_pitlane.py
+```
+- Load USAC sector data
+- Find laps with `CROSSING_FINISH_LINE_IN_PIT == 1`
+- Join USAC → telemetry via vehicle + timestamp
+- Filter to speed < 80 km/h
+- Stitch GPS paths, smooth
+- Save to `data/processed/pit_lane.json`
+
+**Rendering:**
+- Update `frontend/test/test_pitlane.html`
+- Load `pit_lane.json`
+- Render as dashed line on track
+
+**Outcome:** Track + pit lane visualization → **Review with Edu**
+
+---
+
+### Step 7: Auto-Detect Turn Zones + Render → **Show to Edu**
+
+**Processing:**
+```bash
+python scripts/3_detect_turns.py
+```
+- Filter racing laps (3500-4000m)
+- Calculate `|accy_can|`, keep P75+ samples
+- Project GPS → track distance
+- DBSCAN clustering on 1D track distance
+- Compute zone boundaries (P2.5 to P97.5)
+- Save to `data/processed/turn_zones.json`
+
+**Rendering:**
+- Update `frontend/test/test_zones.html`
+- Load `turn_zones.json`
+- Render colored polygons for each turn zone
+- Add zone labels
+
+**Outcome:** Track with auto-detected turn zones → **Review with Edu**
+
+---
+
+### Step 8: Build Friction Envelopes → **Show Sample Data to Edu**
+
+**Processing:**
+```bash
+python scripts/4_build_envelopes.py
+```
+- Calculate `total_G = sqrt(accx² + accy²)` for all samples
+- Group by driver + zone
+- Bin by `accy`, find 95th percentile `total_G` per bin
+- Save to `data/processed/friction_envelopes.json`
+
+**Validation:**
+- Print sample envelope for one driver/zone
+- Plot envelope curve with matplotlib
+
+**Outcome:** Friction envelope JSON → **Review sample data with Edu**
+
+---
+
+### Step 9: Classify Laps → **Show Sample Classifications to Edu**
+
+**Processing:**
+```bash
+python scripts/5_classify_laps.py
+```
+- For each lap/zone: calculate average `total_G`
+- Compare to envelope max
+- Detect over-limit events (wheelspin, understeer, oversteer)
+- Classify as Conservative/Aggressive/Optimal
+- Estimate time lost
+- Save to `data/processed/lap_classifications.csv`
+
+**Validation:**
+- Print sample classifications for one driver
+- Show distribution: % Conservative vs Aggressive vs Optimal
+
+**Outcome:** Lap classification CSV → **Review sample with Edu**
+
+---
+
+### Step 10: Build Full D3.js Dashboard → **Show to Edu**
+
+**Rendering:**
+- Create `frontend/index.html` with two tabs
+- **Tab 1: Track View**
+  - Load centerline, pit lane, zones, classifications
+  - Color zones by aggregated performance
+  - Click zone → filter to that zone
+- **Tab 2: Analytics**
+  - Left panel: Table of driver/zone/utilization/events
+  - Right panel: Friction circle hexbin heatmap
+  - Interactive filtering
+
+**Outcome:** Complete interactive dashboard → **Final review with Edu**
+
+---
+
+## 6. Key Implementation Fixes
 
 ### ✅ Cluster on Track Distance (1D), Not GPS (2D)
 - After projecting GPS → centerline, use **track distance** for DBSCAN
@@ -277,7 +471,7 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
 
 ### ✅ Rotation Only in Rendering
 - Store all processed data in raw UTM coordinates
-- Apply `rotate_coordinates()` only in D3.js visualization layer
+- Apply rotation in D3.js visualization layer only
 - Never rotate persisted artifacts
 
 ### ✅ Timebase Alignment for USAC → Telemetry
@@ -290,15 +484,3 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
   - Speed filter (`speed < 80 km/h`)
   - Geofence near pit entry/exit
 - Stitch multiple laps to recover full pit trace
-
----
-
-## Next Steps
-
-1. Create folder structure
-2. Port `geometry.py` utilities
-3. Verify track centerline generation works
-4. Implement turn zone detection
-5. Build friction envelope calculation
-6. Implement lap classifier
-7. Build D3.js dashboard

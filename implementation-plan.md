@@ -231,19 +231,17 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
 │
 ├── hackathon/                     # Main working directory
 │   │
-│   ├── src/                       # Python processing pipeline
-│   │   ├── __init__.py
-│   │   ├── geometry.py            # GPS/centerline utilities (ported)
-│   │   ├── data_loader.py         # Chunked telemetry loading
-│   │   ├── pit_extractor.py       # Pit lane extraction from USAC + telemetry
-│   │   ├── turn_detector.py       # Auto-detect turn zones (DBSCAN)
-│   │   ├── friction_envelope.py   # Build grip envelopes per driver/zone
-│   │   ├── classifier.py          # Lap classification logic
-│   │   └── exporter.py            # Export JSON/CSV for D3.js
+│   ├── src/                       # Python modules
+│   │   ├── geometry.py            # GPS/centerline/projection utilities
+│   │   └── analysis.py            # Turn detection, envelopes, classification
+│   │
+│   ├── scripts/
+│   │   ├── generate_geometry.py   # Generate track centerline + pit lane
+│   │   └── analyze_traction.py    # Detect turns, build envelopes, classify laps
 │   │
 │   ├── data/
 │   │   ├── input/                 # Raw data (symlinked, not committed)
-│   │   │   ├── telemetry.csv      # → ../../14.toyota-hackathon/deliverables/data/input/telemetry.csv
+│   │   │   ├── telemetry.csv      # → ../deliverables/data/input/telemetry.csv
 │   │   │   └── usac_sectors.csv   # USAC sector analysis
 │   │   ├── processed/             # Generated artifacts (committed)
 │   │   │   ├── track_centerline.csv
@@ -255,30 +253,12 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
 │   │       ├── corner_labels.json
 │   │       └── track_reference.png
 │   │
-│   ├── scripts/                   # Pipeline execution scripts
-│   │   ├── 1_generate_track.py    # Step 1: Generate centerline
-│   │   ├── 2_extract_pitlane.py   # Step 2: Extract pit lane
-│   │   ├── 3_detect_turns.py      # Step 3: Detect turn zones
-│   │   ├── 4_build_envelopes.py   # Step 4: Build friction envelopes
-│   │   └── 5_classify_laps.py     # Step 5: Classify laps
-│   │
-│   ├── frontend/                  # D3.js visualization
-│   │   ├── index.html             # Main dashboard
-│   │   ├── css/
-│   │   │   └── styles.css         # Dashboard styles
-│   │   ├── js/
-│   │   │   ├── main.js            # Dashboard initialization
-│   │   │   ├── track-view.js      # Track map visualization
-│   │   │   ├── analytics.js       # Friction circle + tables
-│   │   │   └── utils.js           # Shared utilities (rotation, data loading)
-│   │   └── test/                  # Test HTML pages for incremental dev
-│   │       ├── test_track.html    # Test: Track rendering only
-│   │       ├── test_pitlane.html  # Test: Track + pit lane
-│   │       └── test_zones.html    # Test: Track + turn zones
+│   ├── dashboard.html             # Single-page dashboard (track + analytics)
+│   ├── dashboard.js               # All D3.js logic (track view + friction circle)
+│   ├── dashboard.css              # All styles
 │   │
 │   ├── requirements.txt           # Python dependencies
-│   ├── .gitignore                 # Exclude data/input/, large files
-│   └── README.md                  # Hackathon-specific notes
+│   └── .gitignore                 # Exclude data/input/, large files
 │
 └── deliverables/                  # Legacy files (may delete later)
     └── ...
@@ -291,35 +271,24 @@ vehicle_number,lap,zone_id,classification,avg_utilization,over_limit_events,time
 ### Step 1: Create Folder Structure
 **Action:**
 ```bash
-cd hackathon/
-mkdir -p src scripts data/{input,processed,assets} frontend/{css,js,test}
+mkdir -p hackathon/{src,scripts,data/{input,processed,assets}}
+touch hackathon/{dashboard.html,dashboard.js,dashboard.css}
 ```
 
 **Outcome:** Clean workspace ready for development
 
 ---
 
-### Step 2: Delete Legacy Files
-**Action:**
-- Remove `/deliverables/` directory (old brake analysis code)
-- Keep only documentation in root: `README.md`, `context.md`, `traction-analysis-concept.md`
-
-**Outcome:** No confusion between old/new code
-
----
-
-### Step 3: Install Dependencies
+### Step 2: Install Dependencies
 **Action:**
 ```bash
-# Create requirements.txt
+cd hackathon/
 echo "pandas
 numpy
 scipy
 scikit-learn
-pyproj
-matplotlib" > requirements.txt
+pyproj" > requirements.txt
 
-# Install
 pip install -r requirements.txt
 ```
 
@@ -327,139 +296,101 @@ pip install -r requirements.txt
 
 ---
 
-### Step 4: Port Geometry Utilities
+### Step 3: Port Geometry Utilities
 **Action:**
-- Copy `geometry.py` functions from old repo to `hackathon/src/geometry.py`
-- Copy `convert_gps_to_meters()`, `project_points_onto_centerline()` to `hackathon/src/geometry.py`
+- Copy functions from old repo to `src/geometry.py`:
+  - `convert_gps_to_meters()`, `compute_centerline()`, `project_points_onto_centerline()`
+  - `resample_by_distance()`, `smooth_periodic()`, `rotate_coordinates()`
 
 **Files created:**
-- `hackathon/src/geometry.py`
-- `hackathon/src/data_loader.py`
+- `src/geometry.py` (all GPS/track utilities)
 
 **Outcome:** Track-agnostic utilities available
 
 ---
 
-### Step 5: Generate Track Centerline + Render in D3.js → **Show to Edu**
+### Step 4: Generate Track + Pit Lane → **Show to Edu**
 
 **Processing:**
 ```bash
-python scripts/1_generate_track.py
+python scripts/generate_geometry.py
 ```
-- Load telemetry GPS coordinates
-- Convert GPS → UTM meters
-- Generate smooth centerline
-- Save to `data/processed/track_centerline.csv`
+- Load telemetry GPS → convert to UTM → generate centerline
+- Extract pit lane (USAC + telemetry join + speed filter + smoothing)
+- Save:
+  - `data/processed/track_centerline.csv`
+  - `data/processed/pit_lane.json`
 
 **Rendering:**
-- Create `frontend/test/test_track.html`
-- Load `track_centerline.csv` with D3.js
-- Render track as SVG path
-- Apply rotation to match PNG orientation
+- Create basic `dashboard.html` with D3.js
+- Load centerline + pit lane
+- Render track as SVG (apply rotation to match PNG)
 
-**Outcome:** Interactive track map showing centerline → **Review with Edu**
+**Outcome:** Interactive track map → **Review with Edu**
 
 ---
 
-### Step 6: Extract Pit Lane + Render on Track → **Show to Edu**
+### Step 5: Detect Turn Zones + Render → **Show to Edu**
 
 **Processing:**
 ```bash
-python scripts/2_extract_pitlane.py
+python scripts/analyze_traction.py --step=detect_turns
 ```
-- Load USAC sector data
-- Find laps with `CROSSING_FINISH_LINE_IN_PIT == 1`
-- Join USAC → telemetry via vehicle + timestamp
-- Filter to speed < 80 km/h
-- Stitch GPS paths, smooth
-- Save to `data/processed/pit_lane.json`
+- Filter racing laps, keep high `|accy_can|` samples
+- Project GPS → track distance, cluster with DBSCAN
+- Save: `data/processed/turn_zones.json`
 
 **Rendering:**
-- Update `frontend/test/test_pitlane.html`
-- Load `pit_lane.json`
-- Render as dashed line on track
-
-**Outcome:** Track + pit lane visualization → **Review with Edu**
-
----
-
-### Step 7: Auto-Detect Turn Zones + Render → **Show to Edu**
-
-**Processing:**
-```bash
-python scripts/3_detect_turns.py
-```
-- Filter racing laps (3500-4000m)
-- Calculate `|accy_can|`, keep P75+ samples
-- Project GPS → track distance
-- DBSCAN clustering on 1D track distance
-- Compute zone boundaries (P2.5 to P97.5)
-- Save to `data/processed/turn_zones.json`
-
-**Rendering:**
-- Update `frontend/test/test_zones.html`
-- Load `turn_zones.json`
-- Render colored polygons for each turn zone
+- Update `dashboard.html`: render turn zones as colored polygons
 - Add zone labels
 
-**Outcome:** Track with auto-detected turn zones → **Review with Edu**
+**Outcome:** Track with auto-detected zones → **Review with Edu**
 
 ---
 
-### Step 8: Build Friction Envelopes → **Show Sample Data to Edu**
+### Step 6: Build Friction Envelopes → **Show Sample Data**
 
 **Processing:**
 ```bash
-python scripts/4_build_envelopes.py
+python scripts/analyze_traction.py --step=build_envelopes
 ```
-- Calculate `total_G = sqrt(accx² + accy²)` for all samples
-- Group by driver + zone
-- Bin by `accy`, find 95th percentile `total_G` per bin
-- Save to `data/processed/friction_envelopes.json`
+- Calculate `total_G = sqrt(accx² + accy²)`
+- Group by driver/zone, bin by `accy`, find 95th percentile
+- Save: `data/processed/friction_envelopes.json`
 
 **Validation:**
 - Print sample envelope for one driver/zone
-- Plot envelope curve with matplotlib
 
-**Outcome:** Friction envelope JSON → **Review sample data with Edu**
+**Outcome:** Envelope data ready → **Review with Edu**
 
 ---
 
-### Step 9: Classify Laps → **Show Sample Classifications to Edu**
+### Step 7: Classify Laps → **Show Sample Classifications**
 
 **Processing:**
 ```bash
-python scripts/5_classify_laps.py
+python scripts/analyze_traction.py --step=classify_laps
 ```
-- For each lap/zone: calculate average `total_G`
-- Compare to envelope max
-- Detect over-limit events (wheelspin, understeer, oversteer)
+- Compare actual vs envelope, detect over-limit events
 - Classify as Conservative/Aggressive/Optimal
-- Estimate time lost
-- Save to `data/processed/lap_classifications.csv`
+- Save: `data/processed/lap_classifications.csv`
 
 **Validation:**
-- Print sample classifications for one driver
-- Show distribution: % Conservative vs Aggressive vs Optimal
+- Show distribution for one driver
 
-**Outcome:** Lap classification CSV → **Review sample with Edu**
+**Outcome:** Classifications ready → **Review with Edu**
 
 ---
 
-### Step 10: Build Full D3.js Dashboard → **Show to Edu**
+### Step 8: Build Full Dashboard → **Show to Edu**
 
 **Rendering:**
-- Create `frontend/index.html` with two tabs
-- **Tab 1: Track View**
-  - Load centerline, pit lane, zones, classifications
-  - Color zones by aggregated performance
-  - Click zone → filter to that zone
-- **Tab 2: Analytics**
-  - Left panel: Table of driver/zone/utilization/events
-  - Right panel: Friction circle hexbin heatmap
-  - Interactive filtering
+- Complete `dashboard.html` with two views:
+  - **Track View**: Color zones by performance, interactive filtering
+  - **Friction Circle**: Hexbin heatmap + envelope overlay
+- Load all processed data, add interactivity
 
-**Outcome:** Complete interactive dashboard → **Final review with Edu**
+**Outcome:** Complete dashboard → **Final review with Edu**
 
 ---
 

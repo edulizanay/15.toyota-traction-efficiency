@@ -13,24 +13,14 @@ __pycache__/
 # Jupyter Notebook
 .ipynb_checkpoints/
 
-# Data files (too large for git)
+# Raw data files (too large for git)
 barber/*.csv
 barber/not-used/
-data/telemetry-raw/*.csv
-*.csv
+hackathon/data/input/*.csv
 
-# BUT keep deliverables input files (required for package)
-!deliverables/data/input/*.csv
-!deliverables/data/input/*.json
-
-# EXCEPT telemetry.csv (too large - 1.5GB, exceeds GitHub's 100MB limit)
-deliverables/data/input/telemetry.csv
-
-# Generated outputs from deliverables package
-deliverables/dashboard.html
-deliverables/data/output/
-deliverables/data/processed/
-deliverables/data/raw/
+# Keep processed artifacts (commit these)
+!hackathon/data/processed/*.csv
+!hackathon/data/processed/*.json
 
 # OS files
 .DS_Store

@@ -18,6 +18,14 @@ from src.geometry import (
     load_centerline,
     project_points_onto_centerline,
 )
+from src.event_detection import detect_events, classify_zone
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    # Fallback if tqdm not installed
+    def tqdm(iterable, desc=None):
+        return iterable
 
 
 def load_telemetry_chunked(
@@ -262,6 +270,150 @@ def detect_turn_zones(
     print(f"✓ Saved {len(turn_zones)} turn zones to: {output_path}")
 
 
+def classify_laps_step(
+    telemetry_paths,
+    centerline_path,
+    turn_zones_path,
+    envelopes_path,
+    output_path,
+    sample_fraction=1.0,
+):
+    """
+    Classify laps based on grip utilization and over-limit events.
+
+    Args:
+        telemetry_paths: List of (race_name, path) tuples
+        centerline_path: Path to track centerline CSV
+        turn_zones_path: Path to turn_zones.json
+        envelopes_path: Path to friction_envelopes.json
+        output_path: Path to save lap_classifications.csv
+        sample_fraction: Fraction of data to sample (1.0 = 100%)
+    """
+    print("\n=== Classify Laps: Load Data ===")
+
+    # Load centerline
+    centerline_x, centerline_y = load_centerline(centerline_path)
+
+    # Load turn zones
+    with open(turn_zones_path) as f:
+        turn_zones = json.load(f)
+    print(f"  Loaded {len(turn_zones)} turn zones")
+
+    # Load friction envelopes
+    with open(envelopes_path) as f:
+        envelopes = json.load(f)
+    print(f"  Loaded envelopes for {len(envelopes)} drivers")
+
+    # Load telemetry with all needed signals
+    needed_params = [
+        "VBOX_Long_Minutes",
+        "VBOX_Lat_Min",
+        "accx_can",
+        "accy_can",
+        "aps",
+        "Steering_Angle",
+    ]
+
+    print("\n=== Loading telemetry ===")
+    df = load_telemetry_chunked(
+        telemetry_paths,
+        needed_params,
+        chunk_size=50000,
+        sample_fraction=sample_fraction,
+    )
+
+    print(f"\n  Total samples loaded: {len(df):,}")
+    print(f"  Races: {df['race'].unique()}")
+    print(f"  Vehicles: {df['vehicle_number'].nunique()}")
+
+    # Project to track distance
+    print("\n=== Projecting to track distance ===")
+    track_distances = project_points_onto_centerline(
+        df["x_meters"].values,
+        df["y_meters"].values,
+        centerline_x,
+        centerline_y,
+    )
+    df["track_distance_m"] = track_distances
+    print(f"  Projected {len(track_distances):,} points to centerline")
+
+    # Process each race separately
+    all_results = []
+
+    for race_name in df["race"].unique():
+        print(f"\n=== Processing {race_name} ===")
+        race_data = df[df["race"] == race_name].copy()
+
+        # Process each driver
+        drivers = race_data["vehicle_number"].unique()
+        for driver in tqdm(drivers, desc=f"  {race_name} drivers"):
+            driver_data = race_data[race_data["vehicle_number"] == driver].copy()
+
+            # Detect events using rolling window
+            driver_data = detect_events(driver_data, window_size=10)
+
+            # Get envelope for this driver
+            driver_envelope = envelopes.get(str(driver), {})
+
+            # Process each lap
+            laps = driver_data["lap"].unique()
+            for lap_num in laps:
+                lap_data = driver_data[driver_data["lap"] == lap_num]
+
+                # Process each zone
+                for zone in turn_zones:
+                    zone_id = zone["zone_id"]
+                    zone_start = zone["start_distance_m"]
+                    zone_end = zone["end_distance_m"]
+
+                    # Filter samples in this zone
+                    zone_samples = lap_data[
+                        (lap_data["track_distance_m"] >= zone_start)
+                        & (lap_data["track_distance_m"] <= zone_end)
+                    ]
+
+                    # Skip if no samples in zone
+                    if len(zone_samples) == 0:
+                        continue
+
+                    # Classify this zone
+                    classification_result = classify_zone(
+                        zone_samples, driver_envelope, zone_id
+                    )
+
+                    # Build result row
+                    result = {
+                        "race": race_name,
+                        "vehicle_number": driver,
+                        "lap": lap_num,
+                        "zone_id": zone_id,
+                        "zone_name": zone["name"],
+                        **classification_result,
+                    }
+                    all_results.append(result)
+
+    # Convert to DataFrame and save
+    print("\n=== Saving Results ===")
+    results_df = pd.DataFrame(all_results)
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    results_df.to_csv(output_path, index=False)
+    print(f"  Saved {len(results_df)} classifications to: {output_path}")
+
+    # Print summary statistics
+    print("\n=== Summary Statistics ===")
+    print("\nClassification Distribution:")
+    print(results_df["classification"].value_counts())
+    print("\nEvent Distribution:")
+    print(f"  Wheelspin events: {results_df['wheelspin'].sum()}")
+    print(f"  Understeer events: {results_df['understeer'].sum()}")
+    print(f"  Oversteer events: {results_df['oversteer'].sum()}")
+
+    print("\nAverage Utilization by Classification:")
+    print(results_df.groupby("classification")["avg_utilization"].mean())
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Traction efficiency analysis pipeline"
@@ -335,7 +487,21 @@ def main():
         print("TODO: Implement friction envelope building")
 
     elif args.step == "classify_laps":
-        print("TODO: Implement lap classification")
+        telemetry_paths = [("R1", r1_path), ("R2", r2_path)]
+        turn_zones_path = script_dir / "data/processed/turn_zones.json"
+        envelopes_path = script_dir / "data/processed/friction_envelopes.json"
+        output_path = (
+            args.output or script_dir / "data/processed/lap_classifications.csv"
+        )
+
+        classify_laps_step(
+            telemetry_paths=telemetry_paths,
+            centerline_path=centerline_path,
+            turn_zones_path=turn_zones_path,
+            envelopes_path=envelopes_path,
+            output_path=output_path,
+            sample_fraction=args.sample_fraction,
+        )
 
 
 if __name__ == "__main__":

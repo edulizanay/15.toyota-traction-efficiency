@@ -1,0 +1,64 @@
+/* ABOUTME: Styling for traction efficiency analysis dashboard */
+/* ABOUTME: Clean layout with full-screen track visualization */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+#header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+#header p {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+}
+
+#track-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#track-svg {
+    width: 100%;
+    height: 100%;
+    cursor: move;
+}
+
+.track-surface {
+    fill: #2a2a2a;
+    stroke: #444;
+    stroke-width: 1;
+    stroke-linejoin: round;
+}
+
+.track-surface:hover {
+    fill: #333;
+}

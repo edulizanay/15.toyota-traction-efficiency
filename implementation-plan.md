@@ -92,11 +92,12 @@ frontend/
 **Algorithm:**
 1. Filter telemetry to racing laps (3500-4000m)
 2. Calculate `|accy_can|` for all samples
-3. Keep samples where `|accy_can| > P75` (75th percentile = real cornering)
-4. Project GPS → track distance: `track_dist = project_points_onto_centerline(x, y, centerline_x, centerline_y)`
-5. Cluster on 1D track distance using DBSCAN (`eps=50m`, `min_samples=20`)
-6. For each cluster: compute zone boundaries (2.5th to 97.5th percentile of track distance)
-7. Save as `data/processed/turn_zones.json`
+3. Remove samples where `accy_can == 0` (straights/noise)
+4. Keep samples where `|accy_can| > P10` (90th percentile = top 90% of non-zero cornering data)
+5. Project GPS → track distance: `track_dist = project_points_onto_centerline(x, y, centerline_x, centerline_y)`
+6. Cluster on 1D track distance using DBSCAN (`eps=50m`, `min_samples=20`)
+7. For each cluster: compute zone boundaries (2.5th to 97.5th percentile of track distance)
+8. Save as `data/processed/turn_zones.json`
 
 **Output format:**
 ```json
@@ -336,7 +337,7 @@ python scripts/generate_geometry.py
 ```bash
 python scripts/analyze_traction.py --step=detect_turns
 ```
-- Filter racing laps, keep high `|accy_can|` samples
+- Filter racing laps, remove `accy_can == 0`, keep `|accy_can| > P10` (top 90% of cornering data)
 - Project GPS → track distance, cluster with DBSCAN
 - Save: `data/processed/turn_zones.json`
 

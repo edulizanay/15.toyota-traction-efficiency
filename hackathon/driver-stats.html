@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Statistics - Traction Efficiency Analysis</title>
+    <link rel="stylesheet" href="driver-stats.css">
+</head>
+<body>
+    <div id="content-wrapper">
+        <div id="header">
+            <div class="header-left">
+                <h1>Driver Statistics</h1>
+                <p>Traction Efficiency Analysis - Barber Motorsports Park</p>
+            </div>
+            <div id="race-selector">
+                <button class="race-btn active" data-race="R1">R1</button>
+                <button class="race-btn" data-race="R2">R2</button>
+                <button class="race-btn" data-race="all">Both Races</button>
+            </div>
+        </div>
+
+        <div id="table-container">
+            <table id="stats-table">
+                <thead>
+                    <tr>
+                        <th data-sort="driver" class="sortable">Driver</th>
+                        <th data-sort="best_time" class="sortable">Best Time</th>
+                        <th data-sort="total_zones" class="sortable">Total Zones</th>
+                        <th data-sort="optimal_pct" class="sortable">Optimal %</th>
+                        <th data-sort="conservative_pct" class="sortable">Conservative %</th>
+                        <th data-sort="aggressive_pct" class="sortable">Aggressive %</th>
+                        <th data-sort="wheelspin" class="sortable">Wheelspin</th>
+                        <th data-sort="understeer" class="sortable">Understeer</th>
+                        <th data-sort="oversteer" class="sortable">Oversteer</th>
+                        <th data-sort="avg_utilization" class="sortable">Avg Utilization %</th>
+                    </tr>
+                </thead>
+                <tbody id="stats-body">
+                    <!-- Data will be loaded dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="driver-stats.js"></script>
+</body>
+</html>

@@ -26,7 +26,7 @@ function rotateCoordinates(x, y, angleDegrees) {
     console.log(`  Centerline: ${centerline.length} points`);
 
     // Rotate all coordinates around origin (negative = clockwise)
-    const rotationAngle = -45;
+    const rotationAngle = -42;
     console.log(`Rotating track ${Math.abs(rotationAngle)}° clockwise`);
 
     // Rotate boundary points
@@ -162,7 +162,7 @@ function rotateCoordinates(x, y, angleDegrees) {
     svg.call(zoom);
 
     // Initial zoom to fit
-    const scale = 0.9 * Math.min(
+    const scale = 0.81 * Math.min(
         width / (trackWidth * (1 + 2 * padding)),
         height / (trackHeight * (1 + 2 * padding))
     );

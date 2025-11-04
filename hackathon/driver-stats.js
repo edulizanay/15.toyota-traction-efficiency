@@ -1,0 +1,163 @@
+// ABOUTME: JavaScript for driver statistics table with sorting and filtering
+// ABOUTME: Loads classification data and displays per-driver metrics
+
+(async function() {
+    // Load data
+    const classifications = await d3.csv('data/processed/lap_classifications.csv');
+    const driverBestLaps = await d3.json('data/processed/driver_best_laps.json');
+
+    console.log(`Loaded ${classifications.length} classifications`);
+
+    // Current state
+    let currentRace = 'R1';
+    let currentSort = { column: 'driver', direction: 'asc' };
+
+    // Calculate statistics for each driver
+    function calculateStats(race) {
+        const filtered = race === 'all'
+            ? classifications
+            : classifications.filter(d => d.race === race);
+
+        // Group by driver
+        const byDriver = d3.group(filtered, d => d.vehicle_number);
+
+        const stats = [];
+
+        byDriver.forEach((zones, driver) => {
+            const total = zones.length;
+            const optimal = zones.filter(z => z.classification === 'Optimal').length;
+            const conservative = zones.filter(z => z.classification === 'Conservative').length;
+            const aggressive = zones.filter(z => z.classification === 'Aggressive').length;
+
+            const wheelspin = zones.filter(z => z.wheelspin === 'True').length;
+            const understeer = zones.filter(z => z.understeer === 'True').length;
+            const oversteer = zones.filter(z => z.oversteer === 'True').length;
+
+            const avgUtilization = d3.mean(zones, z => parseFloat(z.avg_utilization));
+            const bestTime = driverBestLaps[driver] || '--:--';
+
+            stats.push({
+                driver: parseInt(driver),
+                best_time: bestTime,
+                total_zones: total,
+                optimal_count: optimal,
+                optimal_pct: Math.round(optimal / total * 100),
+                conservative_count: conservative,
+                conservative_pct: Math.round(conservative / total * 100),
+                aggressive_count: aggressive,
+                aggressive_pct: Math.round(aggressive / total * 100),
+                wheelspin,
+                understeer,
+                oversteer,
+                avg_utilization: Math.round(avgUtilization * 100)
+            });
+        });
+
+        return stats;
+    }
+
+    // Sort data
+    function sortData(data, column, direction) {
+        return [...data].sort((a, b) => {
+            let aVal = a[column];
+            let bVal = b[column];
+
+            // Convert to numbers for numeric columns
+            if (column !== 'best_time') {
+                aVal = parseFloat(aVal);
+                bVal = parseFloat(bVal);
+            }
+
+            if (direction === 'asc') {
+                return aVal > bVal ? 1 : -1;
+            } else {
+                return aVal < bVal ? 1 : -1;
+            }
+        });
+    }
+
+    // Render table
+    function renderTable() {
+        const stats = calculateStats(currentRace);
+        const sorted = sortData(stats, currentSort.column, currentSort.direction);
+
+        // Calculate min/max for gradient
+        const optimalExtent = d3.extent(sorted, d => d.optimal_pct);
+        const aggressiveExtent = d3.extent(sorted, d => d.aggressive_pct);
+
+        // Create opacity scales (min: 0.05, max: 0.35)
+        const optimalOpacityScale = d3.scaleLinear()
+            .domain(optimalExtent)
+            .range([0.05, 0.35]);
+
+        const aggressiveOpacityScale = d3.scaleLinear()
+            .domain(aggressiveExtent)
+            .range([0.05, 0.35]);
+
+        const tbody = d3.select('#stats-body');
+        tbody.selectAll('tr').remove();
+
+        sorted.forEach(driver => {
+            const row = tbody.append('tr');
+
+            row.append('td').text(`#${driver.driver}`);
+            row.append('td').text(driver.best_time);
+            row.append('td').text(driver.total_zones);
+
+            // Optimal % with green gradient (higher = better)
+            const optimalOpacity = optimalOpacityScale(driver.optimal_pct);
+            row.append('td')
+                .attr('class', 'pct-optimal')
+                .style('background-color', `rgba(34, 197, 94, ${optimalOpacity})`)
+                .text(`${driver.optimal_pct}%`);
+
+            row.append('td').attr('class', 'pct-conservative').text(`${driver.conservative_pct}%`);
+
+            // Aggressive % with red gradient (higher = worse)
+            const aggressiveOpacity = aggressiveOpacityScale(driver.aggressive_pct);
+            row.append('td')
+                .attr('class', 'pct-aggressive')
+                .style('background-color', `rgba(239, 68, 68, ${aggressiveOpacity})`)
+                .text(`${driver.aggressive_pct}%`);
+
+            row.append('td').attr('class', 'event-count').text(driver.wheelspin);
+            row.append('td').attr('class', 'event-count').text(driver.understeer);
+            row.append('td').attr('class', 'event-count').text(driver.oversteer);
+            row.append('td').attr('class', 'utilization').text(`${driver.avg_utilization}%`);
+        });
+
+        // Update sort indicators
+        d3.selectAll('th').classed('sorted-asc', false).classed('sorted-desc', false);
+        d3.select(`th[data-sort="${currentSort.column}"]`)
+            .classed(`sorted-${currentSort.direction}`, true);
+    }
+
+    // Set up race selector
+    d3.selectAll('.race-btn').on('click', function() {
+        d3.selectAll('.race-btn').classed('active', false);
+        d3.select(this).classed('active', true);
+
+        currentRace = d3.select(this).attr('data-race');
+        renderTable();
+    });
+
+    // Set up column sorting
+    d3.selectAll('th.sortable').on('click', function() {
+        const column = d3.select(this).attr('data-sort');
+
+        if (currentSort.column === column) {
+            // Toggle direction
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            // New column, default to desc for most metrics (except driver)
+            currentSort.column = column;
+            currentSort.direction = column === 'driver' || column === 'best_time' ? 'asc' : 'desc';
+        }
+
+        renderTable();
+    });
+
+    // Initial render
+    renderTable();
+    console.log('Driver statistics table ready');
+})();

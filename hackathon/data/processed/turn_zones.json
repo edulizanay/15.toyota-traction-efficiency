@@ -1,0 +1,68 @@
+[
+  {
+    "zone_id": 1,
+    "start_distance_m": 160,
+    "end_distance_m": 290,
+    "name": "Turn 1"
+  },
+  {
+    "zone_id": 2,
+    "start_distance_m": 360,
+    "end_distance_m": 560,
+    "name": "Turn 2"
+  },
+  {
+    "zone_id": 3,
+    "start_distance_m": 1050,
+    "end_distance_m": 1140,
+    "name": "Turn 3"
+  },
+  {
+    "zone_id": 4,
+    "start_distance_m": 1620,
+    "end_distance_m": 1700,
+    "name": "Turn 4"
+  },
+  {
+    "zone_id": 5,
+    "start_distance_m": 1760,
+    "end_distance_m": 1860,
+    "name": "Turn 5"
+  },
+  {
+    "zone_id": 6,
+    "start_distance_m": 2180,
+    "end_distance_m": 2290,
+    "name": "Turn 6"
+  },
+  {
+    "zone_id": 7,
+    "start_distance_m": 2600,
+    "end_distance_m": 2670,
+    "name": "Turn 7"
+  },
+  {
+    "zone_id": 8,
+    "start_distance_m": 2700,
+    "end_distance_m": 2780,
+    "name": "Turn 8"
+  },
+  {
+    "zone_id": 9,
+    "start_distance_m": 2880,
+    "end_distance_m": 3050,
+    "name": "Turn 9"
+  },
+  {
+    "zone_id": 10,
+    "start_distance_m": 3090,
+    "end_distance_m": 3190,
+    "name": "Turn 10"
+  },
+  {
+    "zone_id": 11,
+    "start_distance_m": 3220,
+    "end_distance_m": 3360,
+    "name": "Turn 11"
+  }
+]

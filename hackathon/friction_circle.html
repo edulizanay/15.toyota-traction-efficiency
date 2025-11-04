@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friction Circle - Driver Grip Analysis</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <style>
+        body {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 350px;
+            padding: 20px;
+            background: #252526;
+            overflow-y: auto;
+        }
+
+        .chart-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4ec9b0;
+            margin: 0 0 20px 0;
+            font-size: 20px;
+        }
+
+        .controls {
+            margin: 0 0 20px 0;
+            padding: 15px;
+            background: #2d2d2d;
+            border-left: 4px solid #4ec9b0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4ec9b0;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #4ec9b0;
+            padding: 8px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .stats {
+            margin: 0;
+            padding: 15px;
+            background: #2d2d2d;
+            border-left: 4px solid #ce9178;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            background: #1e1e1e;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .stat-label {
+            color: #858585;
+            font-size: 12px;
+        }
+
+        .stat-value {
+            color: #4ec9b0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #chart {
+            display: inline-block;
+        }
+
+        .hexagon {
+            stroke: none;
+        }
+
+
+        .axis-label {
+            font-size: 14px;
+            fill: #d4d4d4;
+        }
+
+        .axis line, .axis path {
+            stroke: #858585;
+        }
+
+        .axis text {
+            fill: #d4d4d4;
+        }
+
+        .grid line {
+            stroke: #3a3a3a;
+            stroke-dasharray: 2,2;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 40px;
+            color: #4ec9b0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>Friction Circle</h1>
+
+            <div class="controls">
+                <label for="driverSelect">Select Driver:</label>
+                <select id="driverSelect">
+                    <option value="">Loading...</option>
+                </select>
+            </div>
+
+            <div class="stats">
+                <strong>Driver Statistics</strong>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Max Grip</div>
+                        <div class="stat-value" id="maxGrip">--</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Samples</div>
+                        <div class="stat-value" id="sampleCount">--</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Mean Total G</div>
+                        <div class="stat-value" id="meanGrip">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" style="margin-top: 20px; text-align: center; color: #4ec9b0;">Loading...</div>
+        </div>
+
+        <div class="chart-container">
+            <div id="chart"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global data storage
+        let allSamples = [];
+        let envelopes = {};
+        let currentDriver = null;
+
+        // Chart dimensions
+        const margin = { top: 40, right: 40, bottom: 60, left: 60 };
+        const width = 800 - margin.left - margin.right;
+        const height = 640 - margin.top - margin.bottom;
+
+        // Load data
+        Promise.all([
+            d3.csv('data/processed/friction_circle_samples.csv'),
+            d3.json('data/processed/friction_envelopes.json')
+        ]).then(([samples, envelopeData]) => {
+            // Parse samples
+            allSamples = samples.map(d => ({
+                vehicle: +d.vehicle_number,
+                accx: +d.abs_accx,
+                accy: +d.abs_accy
+            }));
+
+            envelopes = envelopeData;
+
+            // Populate driver dropdown
+            const vehicles = Array.from(new Set(allSamples.map(d => d.vehicle))).sort((a, b) => a - b);
+            const select = d3.select('#driverSelect');
+
+            select.selectAll('option').remove();
+            select.selectAll('option')
+                .data(vehicles)
+                .enter()
+                .append('option')
+                .attr('value', d => d)
+                .text(d => `Vehicle #${d}`);
+
+            // Set initial driver
+            currentDriver = vehicles[0];
+            select.property('value', currentDriver);
+
+            // Hide loading message
+            d3.select('#loading').style('display', 'none');
+
+            // Draw initial chart
+            updateChart();
+
+            // Add change listener
+            select.on('change', function() {
+                currentDriver = +this.value;
+                updateChart();
+            });
+        }).catch(error => {
+            console.error('Error loading data:', error);
+            d3.select('#loading').html('Error loading data. Please ensure files exist in data/processed/');
+        });
+
+        function updateChart() {
+            // Filter data for current driver
+            const driverData = allSamples.filter(d => d.vehicle === currentDriver);
+            const envelope = envelopes[currentDriver.toString()] || [];
+
+            // Update stats
+            const maxGrip = d3.max(envelope, d => d.total_g_max) || 0;
+            const meanGrip = d3.mean(driverData, d => Math.sqrt(d.accx ** 2 + d.accy ** 2)) || 0;
+
+            d3.select('#maxGrip').text(maxGrip.toFixed(2) + 'g');
+            d3.select('#sampleCount').text(driverData.length.toLocaleString());
+            d3.select('#meanGrip').text(meanGrip.toFixed(2) + 'g');
+
+            // Clear previous chart
+            d3.select('#chart').selectAll('*').remove();
+
+            // Create SVG
+            const svg = d3.select('#chart')
+                .append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+
+            // Scales
+            const xScale = d3.scaleLinear()
+                .domain([0, 2.5])
+                .range([0, width]);
+
+            const yScale = d3.scaleLinear()
+                .domain([0, 2.5])
+                .range([height, 0]);
+
+            // Add grid
+            svg.append('g')
+                .attr('class', 'grid')
+                .call(d3.axisLeft(yScale)
+                    .tickSize(-width)
+                    .tickFormat(''))
+                .call(g => g.select('.domain').remove());
+
+            svg.append('g')
+                .attr('class', 'grid')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(xScale)
+                    .tickSize(-height)
+                    .tickFormat(''))
+                .call(g => g.select('.domain').remove());
+
+            // Create hexbin generator
+            const hexbin = d3.hexbin()
+                .x(d => xScale(d.accx))
+                .y(d => yScale(d.accy))
+                .radius(10)
+                .extent([[0, 0], [width, height]]);
+
+            // Generate hexbins
+            const bins = hexbin(driverData);
+
+            // Color scale
+            const colorScale = d3.scaleSequential(d3.interpolateViridis)
+                .domain([0, d3.max(bins, d => d.length)]);
+
+            // Draw hexbins
+            svg.append('g')
+                .selectAll('path')
+                .data(bins)
+                .enter()
+                .append('path')
+                .attr('class', 'hexagon')
+                .attr('d', hexbin.hexagon())
+                .attr('transform', d => `translate(${d.x},${d.y})`)
+                .attr('fill', d => colorScale(d.length))
+                .attr('opacity', 0.8);
+
+            // Add axes
+            svg.append('g')
+                .attr('class', 'axis')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(xScale).ticks(10));
+
+            svg.append('g')
+                .attr('class', 'axis')
+                .call(d3.axisLeft(yScale).ticks(10));
+
+            // Axis labels
+            svg.append('text')
+                .attr('class', 'axis-label')
+                .attr('text-anchor', 'middle')
+                .attr('x', width / 2)
+                .attr('y', height + 45)
+                .text('Longitudinal G (|accx|)');
+
+            svg.append('text')
+                .attr('class', 'axis-label')
+                .attr('text-anchor', 'middle')
+                .attr('transform', 'rotate(-90)')
+                .attr('x', -height / 2)
+                .attr('y', -45)
+                .text('Lateral G (|accy|)');
+        }
+    </script>
+</body>
+</html>

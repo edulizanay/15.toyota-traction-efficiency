@@ -463,39 +463,32 @@
             // Sort by angle for proper rendering
             p995EnvelopePoints.sort((a, b) => Math.atan2(a.accy, a.accx) - Math.atan2(b.accy, b.accx));
 
-            // Fit ellipse to blue envelope points
-            // Ellipse equation: (x/a)² + (y/b)² = 1
-            // Rearranged: x²*(1/a²) + y²*(1/b²) = 1
-            // Solve for 1/a² and 1/b² using least squares
-
-            const n = p995EnvelopePoints.length;
-            let sumX4 = 0, sumY4 = 0, sumX2Y2 = 0, sumX2 = 0, sumY2 = 0;
-
-            p995EnvelopePoints.forEach(d => {
-                const x2 = d.accx * d.accx;
-                const y2 = d.accy * d.accy;
-                sumX4 += x2 * x2;
-                sumY4 += y2 * y2;
-                sumX2Y2 += x2 * y2;
-                sumX2 += x2;
-                sumY2 += y2;
+            // Fit polynomial in polar coordinates: r = f(theta)
+            // Convert envelope points to polar coordinates
+            const polarPoints = p995EnvelopePoints.map(d => {
+                const r = Math.sqrt(d.accx * d.accx + d.accy * d.accy);
+                const theta = Math.atan2(d.accy, d.accx);
+                return { r, theta, accx: d.accx, accy: d.accy };
             });
 
-            // Solve 2x2 system: [sumX4, sumX2Y2] [u]   [sumX2]
-            //                   [sumX2Y2, sumY4] [v] = [sumY2]
-            const det = sumX4 * sumY4 - sumX2Y2 * sumX2Y2;
-            const u = (sumY4 * sumX2 - sumX2Y2 * sumY2) / det;  // 1/a²
-            const v = (sumX4 * sumY2 - sumX2Y2 * sumX2) / det;  // 1/b²
+            // Sort by theta for fitting
+            polarPoints.sort((a, b) => a.theta - b.theta);
 
-            const a = Math.sqrt(1 / u);  // semi-major axis (longitudinal)
-            const b = Math.sqrt(1 / v);  // semi-minor axis (lateral)
+            // Extract theta and r arrays for polynomial fitting
+            const thetas = polarPoints.map(p => p.theta);
+            const radii = polarPoints.map(p => p.r);
 
-            // Generate ellipse points
+            // Fit 5th degree polynomial: r = a0 + a1*theta + a2*theta² + a3*theta³ + a4*theta⁴ + a5*theta⁵
+            const degree = 5;
+            const coeffs = polynomialFit(thetas, radii, degree);
+
+            // Generate smooth curve points using the polynomial
             const curvePoints = [];
             for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) { // 1° increments
+                const r = polyEval(coeffs, theta);
                 curvePoints.push({
-                    accx: a * Math.cos(theta),
-                    accy: b * Math.sin(theta)
+                    accx: r * Math.cos(theta),
+                    accy: r * Math.sin(theta)
                 });
             }
 

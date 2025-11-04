@@ -68,7 +68,7 @@ def detect_realistic_max_local_window(
 
 
 def correct_outliers_angular(
-    df_vehicle, num_angle_bins=12, window_size=5, threshold=3.0
+    df_vehicle, num_angle_bins=12, window_size=5, threshold=3.0, extension_ratio=0.10
 ):
     """
     Correct outliers using angular binning and local window median.
@@ -78,6 +78,7 @@ def correct_outliers_angular(
         num_angle_bins: Number of angular bins (e.g., 12 = 7.5° each)
         window_size: Window size for local median
         threshold: Gap threshold multiplier
+        extension_ratio: Allow outliers to extend beyond realistic_max by this ratio (e.g., 0.10 = 10%)
 
     Returns:
         DataFrame with corrected abs_accx_corrected and abs_accy_corrected columns
@@ -94,8 +95,9 @@ def correct_outliers_angular(
         df["angle"], bins=angle_edges, labels=False, include_lowest=True
     )
 
-    # Detect realistic max for each angular bin
+    # Detect realistic max and actual max for each angular bin
     realistic_max_per_bin = {}
+    actual_max_per_bin = {}
 
     for bin_idx in range(num_angle_bins):
         bin_data = df[df["angle_bin"] == bin_idx]
@@ -108,6 +110,7 @@ def correct_outliers_angular(
             radii, window_size=window_size, threshold=threshold
         )
         realistic_max_per_bin[bin_idx] = realistic_max
+        actual_max_per_bin[bin_idx] = radii[0]  # Track actual max before correction
 
     # Apply radial rescaling
     df["abs_accx_corrected"] = df["abs_accx"]
@@ -120,11 +123,25 @@ def correct_outliers_angular(
             continue
 
         realistic_max = realistic_max_per_bin[bin_idx]
+        actual_max = actual_max_per_bin.get(bin_idx, realistic_max)
         current_radius = row["radius"]
 
-        if current_radius > realistic_max:
-            # Rescale radially
-            scale_factor = realistic_max / current_radius
+        if current_radius > realistic_max and actual_max > realistic_max:
+            # Compress outliers instead of capping them
+            # Map [realistic_max, actual_max] -> [realistic_max, realistic_max * (1 + extension_ratio)]
+
+            target_max = realistic_max * (1 + extension_ratio)
+
+            # Calculate where this point falls in the outlier range (0.0 to 1.0)
+            distance_ratio = (current_radius - realistic_max) / (
+                actual_max - realistic_max
+            )
+
+            # Map it proportionally to the compressed range
+            new_radius = realistic_max + distance_ratio * (target_max - realistic_max)
+
+            # Apply radial rescaling
+            scale_factor = new_radius / current_radius
             df.at[idx, "abs_accx_corrected"] = row["abs_accx"] * scale_factor
             df.at[idx, "abs_accy_corrected"] = row["abs_accy"] * scale_factor
 
@@ -164,6 +181,12 @@ def main():
         help="Gap threshold multiplier (default: 3.0)",
     )
     parser.add_argument(
+        "--extension-ratio",
+        type=float,
+        default=0.10,
+        help="Allow outliers to extend beyond realistic_max by this ratio (default: 0.10 = 10%%)",
+    )
+    parser.add_argument(
         "--test-vehicle", type=int, help="Test on single vehicle only (for debugging)"
     )
 
@@ -178,7 +201,7 @@ def main():
     print(f"Input: {input_path}")
     print(f"Output: {output_path}")
     print(
-        f"Parameters: {args.angle_bins} angular bins, window={args.window_size}, threshold={args.threshold}x"
+        f"Parameters: {args.angle_bins} angular bins, window={args.window_size}, threshold={args.threshold}x, extension={args.extension_ratio * 100:.0f}%"
     )
 
     # Load data
@@ -211,6 +234,7 @@ def main():
             num_angle_bins=args.angle_bins,
             window_size=args.window_size,
             threshold=args.threshold,
+            extension_ratio=args.extension_ratio,
         )
 
         vehicle_data["abs_accx"] = corrected_cols["abs_accx_corrected"]

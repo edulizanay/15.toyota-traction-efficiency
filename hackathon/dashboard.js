@@ -22,8 +22,9 @@
     svg.attr('width', width)
        .attr('height', height);
 
-    // Create main group for zoom/pan
-    const g = svg.append('g');
+    // Create separate groups for track (rotated) and UI elements (not rotated)
+    const trackGroup = svg.append('g').attr('class', 'track-elements');
+    const uiGroup = svg.append('g').attr('class', 'ui-elements');
 
     // Calculate bounds from all boundary points
     const allPoints = [...boundaries.inner, ...boundaries.outer];
@@ -63,7 +64,7 @@
         .curve(d3.curveLinear);
 
     // Draw track surface as filled polygon
-    g.append('path')
+    trackGroup.append('path')
         .datum(trackPolygon)
         .attr('class', 'track-surface')
         .attr('d', line)
@@ -95,8 +96,8 @@
 
     // Direction triangles removed
 
-    // Draw corner labels
-    const cornerLabelGroup = g.append('g').attr('class', 'corner-labels');
+    // Draw corner labels in UI group (not rotated)
+    const cornerLabelGroup = uiGroup.append('g').attr('class', 'corner-labels');
 
     cornerLabels.forEach(corner => {
         const labelGroup = cornerLabelGroup.append('g')
@@ -119,11 +120,24 @@
             .text(corner.label);
     });
 
-    // Add zoom behavior
+    // Rotation angle (positive for clockwise in SVG)
+    const rotationAngle = 40;
+
+    // Add zoom behavior with rotation on track only
     const zoom = d3.zoom()
         .scaleExtent([0.5, 10])
         .on('zoom', (event) => {
-            g.attr('transform', event.transform);
+            // Apply zoom transform with rotation to track, without rotation to UI
+            const cx = width / 2;
+            const cy = height / 2;
+
+            // Track group: rotated + zoom/pan
+            trackGroup.attr('transform',
+                `translate(${cx},${cy}) rotate(${rotationAngle}) translate(${-cx},${-cy}) ${event.transform}`
+            );
+
+            // UI group: zoom/pan only (no rotation)
+            uiGroup.attr('transform', event.transform);
         });
 
     svg.call(zoom);

@@ -1,4 +1,4 @@
-# ABOUTME: Generate track centerline and boundaries from telemetry GPS data  
+# ABOUTME: Generate track centerline and boundaries from telemetry GPS data
 # ABOUTME: Combines R1 + R2 telemetry for better statistical confidence
 
 import sys
@@ -103,9 +103,9 @@ print()
 
 print("Step 5: Computing track boundaries...")
 print("-" * 80)
-print("Using 12m track width")
+print("Using 14m track width")
 inner_x, inner_y, outer_x, outer_y = compute_track_boundaries(
-    centerline_x, centerline_y, track_width_m=12.0
+    centerline_x, centerline_y, track_width_m=14.0
 )
 print(f"✓ Computed inner/outer boundaries ({len(inner_x)} points each)")
 print()
@@ -127,7 +127,7 @@ print(f"  X range: {centerline_x.min():.1f}m to {centerline_x.max():.1f}m")
 print(f"  Y range: {centerline_y.min():.1f}m to {centerline_y.max():.1f}m")
 print()
 print(f"Track boundaries saved to: {OUTPUT_DIR / 'track_boundaries.json'}")
-print(f"  Track width: 12.0m")
+print("  Track width: 14.0m")
 print()
 print("Next: Open http://localhost:8000/dashboard.html to visualize the track!")
 print()

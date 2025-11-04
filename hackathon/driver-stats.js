@@ -4,7 +4,7 @@
 (async function() {
     // Load data
     const classifications = await d3.csv('data/processed/lap_classifications.csv');
-    const driverBestLaps = await d3.json('data/processed/driver_best_laps.json');
+    const driverTotalTimes = await d3.json('data/processed/driver_total_times.json');
 
     console.log(`Loaded ${classifications.length} classifications`);
 
@@ -34,11 +34,15 @@
             const oversteer = zones.filter(z => z.oversteer === 'True').length;
 
             const avgUtilization = d3.mean(zones, z => parseFloat(z.avg_utilization));
-            const bestTime = driverBestLaps[driver] || '--:--';
+            // Pick total time for the selected race; for 'all', prefer R1 then R2
+            const totalTimeEntry = driverTotalTimes[driver] || {};
+            const bestTime = (
+                currentRace === 'R1' || currentRace === 'R2'
+            ) ? (totalTimeEntry[currentRace] || '--:--') : (totalTimeEntry['R1'] || totalTimeEntry['R2'] || '--:--');
 
             stats.push({
                 driver: parseInt(driver),
-                best_time: bestTime,
+                total_time: bestTime,
                 total_zones: total,
                 optimal_count: optimal,
                 optimal_pct: Math.round(optimal / total * 100),
@@ -63,7 +67,7 @@
             let bVal = b[column];
 
             // Convert to numbers for numeric columns
-            if (column !== 'best_time') {
+            if (column !== 'total_time') {
                 aVal = parseFloat(aVal);
                 bVal = parseFloat(bVal);
             }
@@ -101,7 +105,7 @@
             const row = tbody.append('tr');
 
             row.append('td').text(`#${driver.driver}`);
-            row.append('td').text(driver.best_time);
+            row.append('td').text(driver.total_time);
             row.append('td').text(driver.total_zones);
 
             // Optimal % with green gradient (higher = better)

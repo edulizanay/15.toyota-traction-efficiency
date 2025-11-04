@@ -357,9 +357,12 @@
 
         // Load data (with cache-busting timestamp)
         const timestamp = Date.now();
+        // Try to load corrected envelopes first; fall back to raw if missing
         Promise.all([
             d3.csv(`data/processed/friction_circle_samples_corrected.csv?v=${timestamp}`),
-            d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`),
+            // Attempt corrected envelopes JSON first
+            d3.json(`data/processed/friction_envelopes_corrected.json?v=${timestamp}`)
+                .catch(() => d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`)),
             d3.json(`data/processed/zone_statistics.json?v=${timestamp}`)
         ]).then(([samples, envelopeData, zoneStatsData]) => {
             // Parse samples

@@ -171,6 +171,124 @@
     </div>
 
     <script>
+        // Polynomial fitting utilities
+        function polynomialFit(x, y, degree) {
+            // Least squares polynomial fit
+            // Returns coefficients [a0, a1, a2, ..., an] for polynomial a0 + a1*x + a2*x² + ... + an*xⁿ
+            const n = x.length;
+            const m = degree + 1;
+
+            // Build design matrix X and target vector Y
+            const X = [];
+            for (let i = 0; i < n; i++) {
+                const row = [];
+                for (let j = 0; j < m; j++) {
+                    row.push(Math.pow(x[i], j));
+                }
+                X.push(row);
+            }
+
+            // Solve normal equations: (X^T X) * coeffs = X^T * y
+            const XtX = matrixMultiply(matrixTranspose(X), X);
+            const Xty = matrixVectorMultiply(matrixTranspose(X), y);
+
+            return solveLinearSystem(XtX, Xty);
+        }
+
+        function polyEval(coeffs, x) {
+            // Evaluate polynomial at x
+            let result = 0;
+            for (let i = 0; i < coeffs.length; i++) {
+                result += coeffs[i] * Math.pow(x, i);
+            }
+            return result;
+        }
+
+        function matrixTranspose(A) {
+            const rows = A.length;
+            const cols = A[0].length;
+            const result = [];
+            for (let j = 0; j < cols; j++) {
+                const row = [];
+                for (let i = 0; i < rows; i++) {
+                    row.push(A[i][j]);
+                }
+                result.push(row);
+            }
+            return result;
+        }
+
+        function matrixMultiply(A, B) {
+            const rowsA = A.length;
+            const colsA = A[0].length;
+            const colsB = B[0].length;
+            const result = [];
+            for (let i = 0; i < rowsA; i++) {
+                const row = [];
+                for (let j = 0; j < colsB; j++) {
+                    let sum = 0;
+                    for (let k = 0; k < colsA; k++) {
+                        sum += A[i][k] * B[k][j];
+                    }
+                    row.push(sum);
+                }
+                result.push(row);
+            }
+            return result;
+        }
+
+        function matrixVectorMultiply(A, v) {
+            const rows = A.length;
+            const cols = A[0].length;
+            const result = [];
+            for (let i = 0; i < rows; i++) {
+                let sum = 0;
+                for (let j = 0; j < cols; j++) {
+                    sum += A[i][j] * v[j];
+                }
+                result.push(sum);
+            }
+            return result;
+        }
+
+        function solveLinearSystem(A, b) {
+            // Gaussian elimination with partial pivoting
+            const n = A.length;
+            const augmented = A.map((row, i) => [...row, b[i]]);
+
+            // Forward elimination
+            for (let i = 0; i < n; i++) {
+                // Partial pivoting
+                let maxRow = i;
+                for (let k = i + 1; k < n; k++) {
+                    if (Math.abs(augmented[k][i]) > Math.abs(augmented[maxRow][i])) {
+                        maxRow = k;
+                    }
+                }
+                [augmented[i], augmented[maxRow]] = [augmented[maxRow], augmented[i]];
+
+                // Eliminate column
+                for (let k = i + 1; k < n; k++) {
+                    const factor = augmented[k][i] / augmented[i][i];
+                    for (let j = i; j <= n; j++) {
+                        augmented[k][j] -= factor * augmented[i][j];
+                    }
+                }
+            }
+
+            // Back substitution
+            const x = new Array(n);
+            for (let i = n - 1; i >= 0; i--) {
+                x[i] = augmented[i][n];
+                for (let j = i + 1; j < n; j++) {
+                    x[i] -= augmented[i][j] * x[j];
+                }
+                x[i] /= augmented[i][i];
+            }
+
+            return x;
+        }
+
         // Global data storage
         let allSamples = [];
         let envelopes = {};
@@ -181,10 +299,11 @@
         const width = 800 - margin.left - margin.right;
         const height = 640 - margin.top - margin.bottom;
 
-        // Load data
+        // Load data (with cache-busting timestamp)
+        const timestamp = Date.now();
         Promise.all([
-            d3.csv('data/processed/friction_circle_samples.csv'),
-            d3.json('data/processed/friction_envelopes.json')
+            d3.csv(`data/processed/friction_circle_samples_corrected.csv?v=${timestamp}`),
+            d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`)
         ]).then(([samples, envelopeData]) => {
             // Parse samples
             allSamples = samples.map(d => ({
@@ -301,6 +420,109 @@
                 .attr('transform', d => `translate(${d.x},${d.y})`)
                 .attr('fill', d => colorScale(d.length))
                 .attr('opacity', 0.8);
+
+            // Compute envelopes using angular binning (like Python correction)
+            const numAngleBins = 72; // 1.25° per bin for smoother envelope
+            const angleBins = new Map(); // Map of angle bin -> array of {radius, accx, accy}
+
+            // Convert to polar and collect by angle bin
+            driverData.forEach(d => {
+                const radius = Math.sqrt(d.accx ** 2 + d.accy ** 2);
+                const angle = Math.atan2(d.accy, d.accx); // radians, 0 to π/2
+                const binKey = Math.floor(angle / (Math.PI / 2) * numAngleBins);
+
+                if (!angleBins.has(binKey)) {
+                    angleBins.set(binKey, []);
+                }
+                angleBins.get(binKey).push({ radius, accx: d.accx, accy: d.accy, angle });
+            });
+
+            // Compute 99.5th percentile radius for each angular bin
+            const p995EnvelopePoints = [];
+
+            angleBins.forEach((points, binIdx) => {
+                // Sort by radius descending
+                points.sort((a, b) => b.radius - a.radius);
+
+                if (points.length === 0) return;
+
+                // Get 99.5th percentile radius
+                const p995Index = Math.floor(points.length * 0.005); // top 0.5%
+                const p995Radius = points[p995Index].radius;
+
+                // Find representative angle for this bin
+                const avgAngle = points.reduce((sum, p) => sum + p.angle, 0) / points.length;
+
+                // Convert back to cartesian
+                const p995Accx = p995Radius * Math.cos(avgAngle);
+                const p995Accy = p995Radius * Math.sin(avgAngle);
+
+                p995EnvelopePoints.push({ accx: p995Accx, accy: p995Accy });
+            });
+
+            // Sort by angle for proper rendering
+            p995EnvelopePoints.sort((a, b) => Math.atan2(a.accy, a.accx) - Math.atan2(b.accy, b.accx));
+
+            // Fit ellipse to blue envelope points
+            // Ellipse equation: (x/a)² + (y/b)² = 1
+            // Rearranged: x²*(1/a²) + y²*(1/b²) = 1
+            // Solve for 1/a² and 1/b² using least squares
+
+            const n = p995EnvelopePoints.length;
+            let sumX4 = 0, sumY4 = 0, sumX2Y2 = 0, sumX2 = 0, sumY2 = 0;
+
+            p995EnvelopePoints.forEach(d => {
+                const x2 = d.accx * d.accx;
+                const y2 = d.accy * d.accy;
+                sumX4 += x2 * x2;
+                sumY4 += y2 * y2;
+                sumX2Y2 += x2 * y2;
+                sumX2 += x2;
+                sumY2 += y2;
+            });
+
+            // Solve 2x2 system: [sumX4, sumX2Y2] [u]   [sumX2]
+            //                   [sumX2Y2, sumY4] [v] = [sumY2]
+            const det = sumX4 * sumY4 - sumX2Y2 * sumX2Y2;
+            const u = (sumY4 * sumX2 - sumX2Y2 * sumY2) / det;  // 1/a²
+            const v = (sumX4 * sumY2 - sumX2Y2 * sumX2) / det;  // 1/b²
+
+            const a = Math.sqrt(1 / u);  // semi-major axis (longitudinal)
+            const b = Math.sqrt(1 / v);  // semi-minor axis (lateral)
+
+            // Generate ellipse points
+            const curvePoints = [];
+            for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) { // 1° increments
+                curvePoints.push({
+                    accx: a * Math.cos(theta),
+                    accy: b * Math.sin(theta)
+                });
+            }
+
+            // Draw fitted curve in cyan
+            const lineGenerator = d3.line()
+                .x(d => xScale(d.accx))
+                .y(d => yScale(d.accy))
+                .curve(d3.curveLinear);
+
+            svg.append('path')
+                .datum(curvePoints)
+                .attr('fill', 'none')
+                .attr('stroke', 'cyan')
+                .attr('stroke-width', 2)
+                .attr('d', lineGenerator);
+
+            // Draw 99.5th percentile envelope in blue
+            svg.append('g')
+                .selectAll('circle')
+                .data(p995EnvelopePoints)
+                .enter()
+                .append('circle')
+                .attr('cx', d => xScale(d.accx))
+                .attr('cy', d => yScale(d.accy))
+                .attr('r', 3)
+                .attr('fill', 'blue')
+                .attr('opacity', 0.9);
 
             // Add axes
             svg.append('g')

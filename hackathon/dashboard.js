@@ -1,6 +1,17 @@
 // ABOUTME: D3.js visualization for Barber Motorsports Park track analysis
 // ABOUTME: Renders track surface with boundaries and interactive zoom/pan
 
+// Rotate coordinates using 2D rotation matrix
+function rotateCoordinates(x, y, angleDegrees) {
+    const angleRadians = (angleDegrees * Math.PI) / 180;
+    const cos = Math.cos(angleRadians);
+    const sin = Math.sin(angleRadians);
+    return {
+        x: x * cos - y * sin,
+        y: x * sin + y * cos
+    };
+}
+
 (async function() {
     // Load track boundaries and centerline
     const boundaries = await d3.json('data/processed/track_boundaries.json');
@@ -14,6 +25,21 @@
     console.log(`  Outer: ${boundaries.outer.length} points`);
     console.log(`  Centerline: ${centerline.length} points`);
 
+    // Rotate all coordinates (negative = clockwise)
+    const rotationAngle = 40;
+    console.log(`Rotating track ${rotationAngle}° clockwise`);
+
+    // Rotate boundary points
+    boundaries.inner = boundaries.inner.map(p => rotateCoordinates(p.x, p.y, rotationAngle));
+    boundaries.outer = boundaries.outer.map(p => rotateCoordinates(p.x, p.y, rotationAngle));
+
+    // Rotate centerline points
+    centerline.forEach((p, i) => {
+        const rotated = rotateCoordinates(p.x, p.y, rotationAngle);
+        centerline[i].x = rotated.x;
+        centerline[i].y = rotated.y;
+    });
+
     // Set up SVG
     const svg = d3.select('#track-svg');
     const width = window.innerWidth;
@@ -22,9 +48,8 @@
     svg.attr('width', width)
        .attr('height', height);
 
-    // Create separate groups for track (rotated) and UI elements (not rotated)
-    const trackGroup = svg.append('g').attr('class', 'track-elements');
-    const uiGroup = svg.append('g').attr('class', 'ui-elements');
+    // Create main group for zoom/pan
+    const g = svg.append('g');
 
     // Calculate bounds from all boundary points
     const allPoints = [...boundaries.inner, ...boundaries.outer];
@@ -64,7 +89,7 @@
         .curve(d3.curveLinear);
 
     // Draw track surface as filled polygon
-    trackGroup.append('path')
+    g.append('path')
         .datum(trackPolygon)
         .attr('class', 'track-surface')
         .attr('d', line)
@@ -75,6 +100,13 @@
     // Load corner labels
     const cornerLabels = await d3.json('data/assets/corner_labels.json');
     console.log(`  Corner labels: ${cornerLabels.length} corners`);
+
+    // Rotate corner label positions
+    cornerLabels.forEach(corner => {
+        const rotated = rotateCoordinates(corner.x_meters, corner.y_meters, rotationAngle);
+        corner.x_meters = rotated.x;
+        corner.y_meters = rotated.y;
+    });
 
     // Calculate cumulative distances along centerline
     const centerlineWithDistance = [];
@@ -96,8 +128,8 @@
 
     // Direction triangles removed
 
-    // Draw corner labels in UI group (not rotated)
-    const cornerLabelGroup = uiGroup.append('g').attr('class', 'corner-labels');
+    // Draw corner labels
+    const cornerLabelGroup = g.append('g').attr('class', 'corner-labels');
 
     cornerLabels.forEach(corner => {
         const labelGroup = cornerLabelGroup.append('g')
@@ -120,24 +152,11 @@
             .text(corner.label);
     });
 
-    // Rotation angle (positive for clockwise in SVG)
-    const rotationAngle = 40;
-
-    // Add zoom behavior with rotation on track only
+    // Add zoom behavior
     const zoom = d3.zoom()
         .scaleExtent([0.5, 10])
         .on('zoom', (event) => {
-            // Apply zoom transform with rotation to track, without rotation to UI
-            const cx = width / 2;
-            const cy = height / 2;
-
-            // Track group: rotated + zoom/pan
-            trackGroup.attr('transform',
-                `translate(${cx},${cy}) rotate(${rotationAngle}) translate(${-cx},${-cy}) ${event.transform}`
-            );
-
-            // UI group: zoom/pan only (no rotation)
-            uiGroup.attr('transform', event.transform);
+            g.attr('transform', event.transform);
         });
 
     svg.call(zoom);

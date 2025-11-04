@@ -10,31 +10,31 @@ Legend: [ ] pending, [x] done, [~] in progress
   - Geometry: `track_centerline.csv`, `track_boundaries.json`
 
 ## 1) Project Telemetry To Track Distance
-- [ ] Load R1/R2 telemetry in chunks (need: `VBOX_Long_Minutes`, `VBOX_Lat_Min`, `accx_can`, `accy_can`, `vehicle_number`, `lap`, `timestamp`)
-- [ ] Convert GPS to meters
-- [ ] Project each sample onto the centerline → add `track_distance_m`
-- [ ] Persist intermediate (in memory or parquet/CSV per chunk) as needed
+- [x] Load R1/R2 telemetry in chunks (need: `VBOX_Long_Minutes`, `VBOX_Lat_Min`, `accx_can`, `accy_can`, `vehicle_number`, `lap`, `timestamp`)
+- [x] Convert GPS to meters
+- [x] Project each sample onto the centerline → add `track_distance_m`
+- [x] Persist intermediate (in memory or parquet/CSV per chunk) as needed
 
 ## 2) Detect Turn Zones (1D Clustering)
-- [ ] Filter to racing laps (e.g., lap length sanity window)
-- [ ] Keep samples with |`accy_can`| above a percentile threshold (e.g., P10)
-- [ ] DBSCAN on 1D `track_distance_m` (suggest: `eps=50 m`, `min_samples=20`)
-- [ ] For each cluster: compute robust start/end (2.5–97.5th percentile of `track_distance_m`)
-- [ ] Save `turn_zones.json`
-- [ ] QA: Expect ~17 zones at Barber; inspect gaps/overlaps
+- [x] Filter to racing laps (e.g., lap length sanity window)
+- [x] Keep samples with |`accy_can`| above a percentile threshold (e.g., P10)
+- [x] DBSCAN on 1D `track_distance_m` (suggest: `eps=50 m`, `min_samples=20`)
+- [x] For each cluster: compute robust start/end (2.5–97.5th percentile of `track_distance_m`)
+- [x] Save `turn_zones.json`
+- [x] QA: Expect ~17 zones at Barber; inspect gaps/overlaps
 
 ## 3) Build Friction Envelopes (per driver, per zone)
-- [ ] Compute `total_G = sqrt(accx_can^2 + accy_can^2)` per sample
-- [ ] Bin by `accy_can` (e.g., 20 bins uniform in |accy| or quantiles)
-- [ ] For each bin: 95th percentile of `total_G` → envelope point
-- [ ] Save per driver/zone curves → `friction_envelopes.json`
-- [ ] QA: Plot one driver/zone to visually confirm shape and smoothness
+- [x] Compute `total_G = sqrt(accx_can^2 + accy_can^2)` per sample
+- [x] Bin by `accy_can` (e.g., 20 bins uniform in |accy| or quantiles)
+- [x] For each bin: 95th percentile of `total_G` → envelope point
+- [x] Save per driver/zone curves → `friction_envelopes.json`
+- [x] QA: Plot one driver/zone to visually confirm shape and smoothness
 
 ## 4) Classify Laps + Estimate Time Lost
 - [ ] Aggregate samples by (driver, lap, zone)
 - [ ] Compute `avg_total_G` and find `envelope_max` for that `accy` range
 - [ ] Utilization = `avg_total_G / envelope_max`
-- [ ] (Optional) Detect events via short rolling trends:
+- [ ] Detect events via short rolling trends:
   - Wheelspin: throttle↑ while `accx_can` trend↓
   - Understeer: steering↑ while `accy_can` plateaus
   - Oversteer: `accy_can` spike with `accx_can` drop

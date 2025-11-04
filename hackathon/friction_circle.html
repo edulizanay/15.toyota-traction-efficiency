@@ -138,6 +138,14 @@
             <h1>Friction Circle</h1>
 
             <div class="controls">
+                <label for="raceSelect">Select Race:</label>
+                <select id="raceSelect">
+                    <option value="R1">Race 1</option>
+                    <option value="R2">Race 2</option>
+                </select>
+            </div>
+
+            <div class="controls">
                 <label for="driverSelect">Select Driver:</label>
                 <select id="driverSelect">
                     <option value="">Loading...</option>
@@ -159,6 +167,24 @@
                         <div class="stat-label">Mean Total G</div>
                         <div class="stat-value" id="meanGrip">--</div>
                     </div>
+                </div>
+            </div>
+
+            <div class="stats" style="margin-top: 20px;">
+                <strong>Turn Zone Statistics</strong>
+                <div id="zoneTable" style="margin-top: 10px; max-height: 300px; overflow-y: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+                        <thead style="position: sticky; top: 0; background: #2d2d2d;">
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #4ec9b0;">Zone</th>
+                                <th style="padding: 8px; text-align: right; border-bottom: 1px solid #4ec9b0;">Avg G</th>
+                                <th style="padding: 8px; text-align: right; border-bottom: 1px solid #4ec9b0;">Samples</th>
+                            </tr>
+                        </thead>
+                        <tbody id="zoneTableBody">
+                            <tr><td colspan="3" style="padding: 8px; text-align: center;">--</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -292,7 +318,9 @@
         // Global data storage
         let allSamples = [];
         let envelopes = {};
+        let zoneStats = {};
         let currentDriver = null;
+        let currentRace = 'R1';
 
         // Chart dimensions
         const margin = { top: 40, right: 40, bottom: 60, left: 60 };
@@ -303,8 +331,9 @@
         const timestamp = Date.now();
         Promise.all([
             d3.csv(`data/processed/friction_circle_samples_corrected.csv?v=${timestamp}`),
-            d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`)
-        ]).then(([samples, envelopeData]) => {
+            d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`),
+            d3.json(`data/processed/zone_statistics.json?v=${timestamp}`)
+        ]).then(([samples, envelopeData, zoneStatsData]) => {
             // Parse samples
             allSamples = samples.map(d => ({
                 vehicle: +d.vehicle_number,
@@ -313,6 +342,7 @@
             }));
 
             envelopes = envelopeData;
+            zoneStats = zoneStatsData;
 
             // Populate driver dropdown
             const vehicles = Array.from(new Set(allSamples.map(d => d.vehicle))).sort((a, b) => a - b);
@@ -336,9 +366,14 @@
             // Draw initial chart
             updateChart();
 
-            // Add change listener
+            // Add change listeners
             select.on('change', function() {
                 currentDriver = +this.value;
+                updateChart();
+            });
+
+            d3.select('#raceSelect').on('change', function() {
+                currentRace = this.value;
                 updateChart();
             });
         }).catch(error => {
@@ -358,6 +393,40 @@
             d3.select('#maxGrip').text(maxGrip.toFixed(2) + 'g');
             d3.select('#sampleCount').text(driverData.length.toLocaleString());
             d3.select('#meanGrip').text(meanGrip.toFixed(2) + 'g');
+
+            // Update zone statistics table (per race)
+            const driverZones = (zoneStats[currentRace] && zoneStats[currentRace][currentDriver.toString()]) || [];
+            const tbody = d3.select('#zoneTableBody');
+            tbody.selectAll('*').remove();
+
+            if (driverZones.length > 0) {
+                driverZones.forEach(zone => {
+                    const row = tbody.append('tr');
+                    row.append('td')
+                        .style('padding', '8px')
+                        .style('border-bottom', '1px solid #3a3a3a')
+                        .text(zone.zone_name);
+                    row.append('td')
+                        .style('padding', '8px')
+                        .style('text-align', 'right')
+                        .style('border-bottom', '1px solid #3a3a3a')
+                        .style('color', '#4ec9b0')
+                        .text(zone.avg_total_g.toFixed(2) + 'g');
+                    row.append('td')
+                        .style('padding', '8px')
+                        .style('text-align', 'right')
+                        .style('border-bottom', '1px solid #3a3a3a')
+                        .style('color', '#858585')
+                        .text(zone.sample_count.toLocaleString());
+                });
+            } else {
+                tbody.append('tr')
+                    .append('td')
+                    .attr('colspan', '3')
+                    .style('padding', '8px')
+                    .style('text-align', 'center')
+                    .text('No zone data');
+            }
 
             // Clear previous chart
             d3.select('#chart').selectAll('*').remove();

@@ -107,7 +107,12 @@ def load_telemetry_chunked(telemetry_paths, needed_params, chunk_size=50000):
 
 
 def build_friction_circle_data(
-    telemetry_paths, output_samples_path, output_envelopes_path
+    telemetry_paths,
+    output_samples_path,
+    output_envelopes_path,
+    centerline_path,
+    turn_zones_path,
+    output_zone_stats_path,
 ):
     """
     Build friction circle data: raw samples and per-driver grip envelopes.
@@ -116,6 +121,9 @@ def build_friction_circle_data(
         telemetry_paths: List of (race_name, path) tuples
         output_samples_path: Path to save friction_circle_samples.csv
         output_envelopes_path: Path to save friction_envelopes.json
+        centerline_path: Path to track centerline CSV
+        turn_zones_path: Path to turn zones JSON
+        output_zone_stats_path: Path to save zone statistics JSON
     """
     print("\n=== Step 1: Load Telemetry Data ===")
 
@@ -204,6 +212,74 @@ def build_friction_circle_data(
         f"  ✓ Saved envelopes for {len(envelopes)} drivers to: {output_envelopes_path}"
     )
 
+    print("\n=== Step 7: Calculate Per-Zone Statistics ===")
+
+    # Load centerline and turn zones
+    from src.geometry import load_centerline, project_points_onto_centerline
+
+    centerline_x, centerline_y = load_centerline(centerline_path)
+    with open(turn_zones_path, "r") as f:
+        turn_zones = json.load(f)
+
+    # Project samples to track distance
+    print("  Projecting samples to centerline...")
+    track_distances = project_points_onto_centerline(
+        df["x_meters"].values, df["y_meters"].values, centerline_x, centerline_y
+    )
+    df["track_distance"] = track_distances
+
+    # Map samples to zones
+    def get_zone_id(track_dist):
+        for zone in turn_zones:
+            if zone["start_distance_m"] <= track_dist <= zone["end_distance_m"]:
+                return zone["zone_id"]
+        return None
+
+    df["zone_id"] = df["track_distance"].apply(get_zone_id)
+
+    # Calculate per-driver, per-race, per-zone statistics
+    zone_stats = {}
+
+    for race in df["race"].unique():
+        zone_stats[race] = {}
+        race_data = df[df["race"] == race].copy()
+
+        print(f"\n  Race {race}:")
+        for vehicle_num in sorted(race_data["vehicle_number"].unique()):
+            vehicle_data = race_data[race_data["vehicle_number"] == vehicle_num].copy()
+            zone_stats[race][str(vehicle_num)] = []
+
+            for zone in turn_zones:
+                zone_data = vehicle_data[vehicle_data["zone_id"] == zone["zone_id"]]
+
+                if len(zone_data) == 0:
+                    continue
+
+                avg_total_g = zone_data["total_g"].mean()
+                max_total_g = zone_data["total_g"].max()
+                sample_count = len(zone_data)
+
+                zone_stats[race][str(vehicle_num)].append(
+                    {
+                        "zone_id": zone["zone_id"],
+                        "zone_name": zone["name"],
+                        "avg_total_g": float(avg_total_g),
+                        "max_total_g": float(max_total_g),
+                        "sample_count": int(sample_count),
+                    }
+                )
+
+            print(
+                f"    Vehicle {vehicle_num}: {len(zone_stats[race][str(vehicle_num)])} zones with data"
+            )
+
+    # Save zone statistics
+    output_zone_stats_path = Path(output_zone_stats_path)
+    with open(output_zone_stats_path, "w") as f:
+        json.dump(zone_stats, f, indent=2)
+
+    print(f"  ✓ Saved zone statistics to: {output_zone_stats_path}")
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -220,6 +296,16 @@ def main():
         help="Path to R2 telemetry CSV",
     )
     parser.add_argument(
+        "--centerline",
+        default="data/processed/track_centerline.csv",
+        help="Path to track centerline CSV",
+    )
+    parser.add_argument(
+        "--turn-zones",
+        default="data/processed/turn_zones.json",
+        help="Path to turn zones JSON",
+    )
+    parser.add_argument(
         "--output-samples",
         default="data/processed/friction_circle_samples.csv",
         help="Output path for sample data CSV",
@@ -228,6 +314,11 @@ def main():
         "--output-envelopes",
         default="data/processed/friction_envelopes.json",
         help="Output path for envelope JSON",
+    )
+    parser.add_argument(
+        "--output-zone-stats",
+        default="data/processed/zone_statistics.json",
+        help="Output path for zone statistics JSON",
     )
 
     args = parser.parse_args()
@@ -238,8 +329,11 @@ def main():
     # Resolve paths relative to script directory
     r1_path = script_dir / args.r1_telemetry
     r2_path = script_dir / args.r2_telemetry
+    centerline_path = script_dir / args.centerline
+    turn_zones_path = script_dir / args.turn_zones
     output_samples_path = script_dir / args.output_samples
     output_envelopes_path = script_dir / args.output_envelopes
+    output_zone_stats_path = script_dir / args.output_zone_stats
 
     telemetry_paths = [("R1", r1_path), ("R2", r2_path)]
 
@@ -247,6 +341,9 @@ def main():
         telemetry_paths=telemetry_paths,
         output_samples_path=output_samples_path,
         output_envelopes_path=output_envelopes_path,
+        centerline_path=centerline_path,
+        turn_zones_path=turn_zones_path,
+        output_zone_stats_path=output_zone_stats_path,
     )
 
     print("\n✓ Friction circle data generation complete!")

@@ -4,6 +4,25 @@
 import numpy as np
 from scipy.interpolate import interp1d
 
+# Event detection thresholds
+WHEELSPIN_APS_TREND_THRESHOLD = 7  # % throttle increase over window
+WHEELSPIN_ACCX_TREND_THRESHOLD = -0.12  # g forward accel drop over window
+WHEELSPIN_ACCX_MIN = 0  # g minimum forward accel
+
+UNDERSTEER_STEER_TREND_THRESHOLD = 15  # degrees steering increase over window
+UNDERSTEER_STEER_ABS_MIN = 10  # degrees minimum absolute steering angle
+UNDERSTEER_RESPONSIVENESS_THRESHOLD = 0.005  # g/deg lateral response per steering
+UNDERSTEER_ACCY_ABS_MIN = 0.3  # g minimum lateral accel
+
+OVERSTEER_ACCY_SPIKE_THRESHOLD = 0.25  # g lateral accel spike
+OVERSTEER_ACCX_DROP_THRESHOLD = -0.2  # g forward accel drop
+OVERSTEER_ACCY_ABS_MIN = 0.5  # g minimum lateral accel
+
+# Zone-level macro-event thresholds
+MACRO_EVENT_COVERAGE_THRESHOLD = 0.08  # fraction of samples with events
+MACRO_EVENT_RUN_LENGTH_THRESHOLD = 6  # samples in longest contiguous event run
+OPTIMAL_UTILIZATION_THRESHOLD = 0.90  # utilization threshold for optimal classification
+
 
 def detect_events(df, window_size=10):
     """
@@ -48,26 +67,25 @@ def detect_events(df, window_size=10):
 
     # Detect wheelspin: throttle increasing but forward acceleration decreasing
     df["wheelspin_event"] = (
-        (aps_trend > 5)  # Throttle increasing by >5%
-        & (accx_trend < -0.1)  # Forward acceleration dropping by >0.1g
-        & (df["accx_can"] > 0)  # Must be in acceleration zone (not braking)
+        (aps_trend > WHEELSPIN_APS_TREND_THRESHOLD)
+        & (accx_trend < WHEELSPIN_ACCX_TREND_THRESHOLD)
+        & (df["accx_can"] > WHEELSPIN_ACCX_MIN)
     )
 
     # Detect understeer: steering increasing but lateral G not responding
     accy_responsiveness = accy_trend / (steer_trend + 0.001)  # Avoid division by zero
     df["understeer_event"] = (
-        (steer_trend > 10)  # Steering increasing by >10°
-        & (accy_responsiveness < 0.01)  # Lateral G not responding (<0.01g per degree)
-        & (df["accy_can"].abs() > 0.3)  # Must be in cornering zone
+        (steer_trend > UNDERSTEER_STEER_TREND_THRESHOLD)
+        & (df["Steering_Angle"].abs() >= UNDERSTEER_STEER_ABS_MIN)
+        & (accy_responsiveness < UNDERSTEER_RESPONSIVENESS_THRESHOLD)
+        & (df["accy_can"].abs() > UNDERSTEER_ACCY_ABS_MIN)
     )
 
     # Detect oversteer: sudden lateral G spike with forward acceleration drop
-    accy_spike = df["accy_can"].abs().diff() > 0.2
-    accx_drop = df["accx_can"].diff() < -0.15
+    accy_spike = df["accy_can"].abs().diff() > OVERSTEER_ACCY_SPIKE_THRESHOLD
+    accx_drop = df["accx_can"].diff() < OVERSTEER_ACCX_DROP_THRESHOLD
     df["oversteer_event"] = (
-        accy_spike
-        & accx_drop
-        & (df["accy_can"].abs() > 0.5)  # Must be in cornering zone
+        accy_spike & accx_drop & (df["accy_can"].abs() > OVERSTEER_ACCY_ABS_MIN)
     )
 
     # Fill NaN values (from rolling windows) with False
@@ -169,13 +187,37 @@ def classify_zone(zone_samples, envelope_data, zone_id):
     understeer_occurred = zone_samples["understeer_event"].any()
     oversteer_occurred = zone_samples["oversteer_event"].any()
 
-    # Classify
-    if wheelspin_occurred or understeer_occurred or oversteer_occurred:
+    # Compute event union and coverage
+    any_event = (
+        zone_samples["wheelspin_event"]
+        | zone_samples["understeer_event"]
+        | zone_samples["oversteer_event"]
+    )
+    event_coverage = any_event.sum() / len(zone_samples) if len(zone_samples) > 0 else 0
+
+    # Calculate maximum contiguous event run length
+    max_event_run_len = 0
+    current_run = 0
+    for has_event in any_event:
+        if has_event:
+            current_run += 1
+            max_event_run_len = max(max_event_run_len, current_run)
+        else:
+            current_run = 0
+
+    # Determine if this is a macro-event (sustained aggressive behavior)
+    is_macro_event = (
+        event_coverage >= MACRO_EVENT_COVERAGE_THRESHOLD
+        or max_event_run_len >= MACRO_EVENT_RUN_LENGTH_THRESHOLD
+    )
+
+    # Classify zone
+    if is_macro_event:
         classification = "Aggressive"
-    elif utilization < 0.95:
-        classification = "Conservative"
-    else:
+    elif utilization >= OPTIMAL_UTILIZATION_THRESHOLD:
         classification = "Optimal"
+    else:
+        classification = "Conservative"
 
     return {
         "classification": classification,
@@ -185,4 +227,6 @@ def classify_zone(zone_samples, envelope_data, zone_id):
         "understeer": understeer_occurred,
         "oversteer": oversteer_occurred,
         "sample_count": len(zone_samples),
+        "event_coverage": event_coverage,
+        "max_event_run_len": max_event_run_len,
     }

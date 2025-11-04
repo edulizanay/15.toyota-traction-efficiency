@@ -25,9 +25,9 @@ function rotateCoordinates(x, y, angleDegrees) {
     console.log(`  Outer: ${boundaries.outer.length} points`);
     console.log(`  Centerline: ${centerline.length} points`);
 
-    // Rotate all coordinates (negative = clockwise)
-    const rotationAngle = 40;
-    console.log(`Rotating track ${rotationAngle}° clockwise`);
+    // Rotate all coordinates around origin (negative = clockwise)
+    const rotationAngle = -45;
+    console.log(`Rotating track ${Math.abs(rotationAngle)}° clockwise`);
 
     // Rotate boundary points
     boundaries.inner = boundaries.inner.map(p => rotateCoordinates(p.x, p.y, rotationAngle));

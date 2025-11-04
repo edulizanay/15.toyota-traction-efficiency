@@ -15,6 +15,50 @@ sys.path.append(str(Path(__file__).parent.parent))
 from src.geometry import convert_gps_to_meters
 
 
+def fit_polynomial_envelope(accx_values, accy_values, degree=5):
+    """
+    Fit a polynomial r = f(theta) to envelope points in polar coordinates.
+
+    Args:
+        accx_values: Array of longitudinal G values (envelope points)
+        accy_values: Array of lateral G values (envelope points)
+        degree: Polynomial degree (default 5)
+
+    Returns:
+        coefficients: Polynomial coefficients [a0, a1, ..., an]
+    """
+    # Convert to polar coordinates
+    radii = np.sqrt(accx_values**2 + accy_values**2)
+    thetas = np.arctan2(accy_values, accx_values)
+
+    # Sort by theta
+    sort_idx = np.argsort(thetas)
+    thetas = thetas[sort_idx]
+    radii = radii[sort_idx]
+
+    # Fit polynomial
+    coeffs = np.polyfit(thetas, radii, degree)
+
+    return coeffs
+
+
+def evaluate_envelope(coeffs, accx, accy):
+    """
+    Evaluate the envelope polynomial at a given (accx, accy) point.
+
+    Args:
+        coeffs: Polynomial coefficients from fit_polynomial_envelope
+        accx: Longitudinal G value
+        accy: Lateral G value
+
+    Returns:
+        envelope_max: Maximum total G at this angle according to envelope
+    """
+    theta = np.arctan2(accy, accx)
+    envelope_r = np.polyval(coeffs, theta)
+    return envelope_r
+
+
 def load_telemetry_chunked(telemetry_paths, needed_params, chunk_size=50000):
     """
     Load telemetry from multiple files in chunks, pivot each chunk individually.
@@ -165,37 +209,55 @@ def build_friction_circle_data(
     for vehicle_num in sorted(df["vehicle_number"].unique()):
         vehicle_data = df[df["vehicle_number"] == vehicle_num].copy()
 
-        # Bin by abs_accy (lateral G) into 20 bins
-        accy_min, accy_max = (
-            vehicle_data["abs_accy"].min(),
-            vehicle_data["abs_accy"].max(),
-        )
-        bins = np.linspace(accy_min, accy_max, 21)  # 21 edges = 20 bins
-        vehicle_data["accy_bin"] = pd.cut(
-            vehicle_data["abs_accy"], bins=bins, labels=False, include_lowest=True
-        )
+        # Calculate 99.5th percentile envelope using angular binning
+        num_angle_bins = 72
+        angle_bins = {}
 
-        # For each bin, get 95th percentile of total_g
-        envelope_points = []
-        for bin_idx in range(20):
-            bin_data = vehicle_data[vehicle_data["accy_bin"] == bin_idx]
+        for _, row in vehicle_data.iterrows():
+            radius = row["total_g"]
+            angle = np.arctan2(row["abs_accy"], row["abs_accx"])
+            bin_key = int(np.floor(angle / (np.pi / 2) * num_angle_bins))
 
-            if len(bin_data) == 0:
-                continue
-
-            # Get representative accy for this bin (center)
-            bin_center_accy = (bins[bin_idx] + bins[bin_idx + 1]) / 2
-
-            # Get 95th percentile of total_g in this bin
-            max_total_g = np.percentile(bin_data["total_g"], 95)
-
-            envelope_points.append(
-                {"accy": float(bin_center_accy), "total_g_max": float(max_total_g)}
+            if bin_key not in angle_bins:
+                angle_bins[bin_key] = []
+            angle_bins[bin_key].append(
+                {
+                    "radius": radius,
+                    "accx": row["abs_accx"],
+                    "accy": row["abs_accy"],
+                    "angle": angle,
+                }
             )
 
-        envelopes[str(vehicle_num)] = envelope_points
+        # Extract 99.5th percentile per angular bin
+        envelope_points = []
+        for bin_idx, points in angle_bins.items():
+            points_sorted = sorted(points, key=lambda p: p["radius"], reverse=True)
+            p995_idx = int(len(points_sorted) * 0.005)  # top 0.5%
+            p995_point = points_sorted[p995_idx]
 
-        max_g = max(point["total_g_max"] for point in envelope_points)
+            envelope_points.append(
+                {
+                    "accx": float(p995_point["accx"]),
+                    "accy": float(p995_point["accy"]),
+                    "total_g": float(p995_point["radius"]),
+                }
+            )
+
+        # Sort by angle
+        envelope_points.sort(key=lambda p: np.arctan2(p["accy"], p["accx"]))
+
+        # Fit polynomial to envelope
+        accx_vals = np.array([p["accx"] for p in envelope_points])
+        accy_vals = np.array([p["accy"] for p in envelope_points])
+        poly_coeffs = fit_polynomial_envelope(accx_vals, accy_vals, degree=5)
+
+        envelopes[str(vehicle_num)] = {
+            "envelope_points": envelope_points,
+            "poly_coeffs": poly_coeffs.tolist(),
+        }
+
+        max_g = max(point["total_g"] for point in envelope_points)
         print(
             f"  Vehicle {vehicle_num}: {len(envelope_points)} envelope points, max grip = {max_g:.2f}g"
         )
@@ -249,14 +311,34 @@ def build_friction_circle_data(
             vehicle_data = race_data[race_data["vehicle_number"] == vehicle_num].copy()
             zone_stats[race][str(vehicle_num)] = []
 
+            # Get polynomial coefficients for this driver's envelope
+            poly_coeffs = np.array(envelopes[str(vehicle_num)]["poly_coeffs"])
+
             for zone in turn_zones:
                 zone_data = vehicle_data[vehicle_data["zone_id"] == zone["zone_id"]]
 
                 if len(zone_data) == 0:
                     continue
 
+                # Calculate envelope_max for each sample in this zone
+                envelope_maxes = []
+                utilizations = []
+
+                for _, row in zone_data.iterrows():
+                    envelope_max = evaluate_envelope(
+                        poly_coeffs, row["abs_accx"], row["abs_accy"]
+                    )
+                    envelope_maxes.append(envelope_max)
+
+                    # Calculate utilization (avoid division by zero)
+                    if envelope_max > 0.01:
+                        utilization = row["total_g"] / envelope_max
+                        utilizations.append(utilization)
+
                 avg_total_g = zone_data["total_g"].mean()
                 max_total_g = zone_data["total_g"].max()
+                avg_envelope_max = np.mean(envelope_maxes) if envelope_maxes else 0
+                avg_utilization = np.mean(utilizations) if utilizations else 0
                 sample_count = len(zone_data)
 
                 zone_stats[race][str(vehicle_num)].append(
@@ -265,6 +347,8 @@ def build_friction_circle_data(
                         "zone_name": zone["name"],
                         "avg_total_g": float(avg_total_g),
                         "max_total_g": float(max_total_g),
+                        "avg_envelope_max": float(avg_envelope_max),
+                        "avg_utilization": float(avg_utilization),
                         "sample_count": int(sample_count),
                     }
                 )

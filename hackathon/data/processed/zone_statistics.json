@@ -6,6 +6,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2273303952962706,
         "max_total_g": 2.0480673817040302,
+        "avg_envelope_max": 1.7554209600406894,
+        "avg_utilization": 0.6971937507541988,
         "sample_count": 2159
       },
       {
@@ -13,6 +15,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1694872026032397,
         "max_total_g": 1.8004899333237052,
+        "avg_envelope_max": 1.7254997695872478,
+        "avg_utilization": 0.6780646713667536,
         "sample_count": 4600
       },
       {
@@ -20,6 +24,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1994358829867826,
         "max_total_g": 1.579359996960794,
+        "avg_envelope_max": 1.6445394076926436,
+        "avg_utilization": 0.7310237118613543,
         "sample_count": 2524
       },
       {
@@ -27,6 +33,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.077269993552022,
         "max_total_g": 1.68779264129217,
+        "avg_envelope_max": 1.6891701223162705,
+        "avg_utilization": 0.6417765377582675,
         "sample_count": 1289
       },
       {
@@ -34,6 +42,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2093215416210734,
         "max_total_g": 1.8082657437445417,
+        "avg_envelope_max": 1.6808289360690893,
+        "avg_utilization": 0.7198815979027209,
         "sample_count": 2590
       },
       {
@@ -41,6 +51,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0027934801807963,
         "max_total_g": 1.7045679804572182,
+        "avg_envelope_max": 1.7652347120583427,
+        "avg_utilization": 0.5670857907891329,
         "sample_count": 1521
       },
       {
@@ -48,6 +60,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9847001750732635,
         "max_total_g": 1.9864000100684656,
+        "avg_envelope_max": 1.7371128660585824,
+        "avg_utilization": 0.5658008506998691,
         "sample_count": 895
       },
       {
@@ -55,6 +69,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3370588263855494,
         "max_total_g": 2.1480651759199483,
+        "avg_envelope_max": 1.723889716934836,
+        "avg_utilization": 0.7780986380398689,
         "sample_count": 1439
       },
       {
@@ -62,6 +78,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.200639617972534,
         "max_total_g": 1.9393921728211652,
+        "avg_envelope_max": 1.7520149554674604,
+        "avg_utilization": 0.6830154734164695,
         "sample_count": 2902
       },
       {
@@ -69,6 +87,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1108230387765368,
         "max_total_g": 1.617378434380773,
+        "avg_envelope_max": 1.668033315977753,
+        "avg_utilization": 0.6679642148685575,
         "sample_count": 2563
       },
       {
@@ -76,6 +96,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1488514627470627,
         "max_total_g": 1.9097434382659886,
+        "avg_envelope_max": 1.7369719555658913,
+        "avg_utilization": 0.6606801689626591,
         "sample_count": 2751
       }
     ],
@@ -85,6 +107,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2053026822681616,
         "max_total_g": 2.220656659639216,
+        "avg_envelope_max": 1.6995011908327158,
+        "avg_utilization": 0.7032886986026875,
         "sample_count": 2084
       },
       {
@@ -92,6 +116,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1792206683046491,
         "max_total_g": 1.5508720127721696,
+        "avg_envelope_max": 1.703778616421377,
+        "avg_utilization": 0.6933585271154366,
         "sample_count": 4308
       },
       {
@@ -99,6 +125,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.186131521093182,
         "max_total_g": 1.5672664100273446,
+        "avg_envelope_max": 1.5720003660037538,
+        "avg_utilization": 0.7590720002347088,
         "sample_count": 2621
       },
       {
@@ -106,6 +134,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0700285759153185,
         "max_total_g": 1.536133457743825,
+        "avg_envelope_max": 1.5695281744305798,
+        "avg_utilization": 0.6902903942979429,
         "sample_count": 1349
       },
       {
@@ -113,6 +143,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1883796603235803,
         "max_total_g": 1.8987430052537388,
+        "avg_envelope_max": 1.6406793511558295,
+        "avg_utilization": 0.7260621457144127,
         "sample_count": 2555
       },
       {
@@ -120,6 +152,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0490351230175576,
         "max_total_g": 1.7817589623739793,
+        "avg_envelope_max": 1.7600827502332177,
+        "avg_utilization": 0.5938456439386346,
         "sample_count": 1432
       },
       {
@@ -127,6 +161,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9972168694689335,
         "max_total_g": 1.901440506563379,
+        "avg_envelope_max": 1.650092093527427,
+        "avg_utilization": 0.6050666491294755,
         "sample_count": 960
       },
       {
@@ -134,6 +170,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3316281183078882,
         "max_total_g": 2.277003513392107,
+        "avg_envelope_max": 1.7188033969541168,
+        "avg_utilization": 0.7772523633025735,
         "sample_count": 1449
       },
       {
@@ -141,6 +179,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1879601642753845,
         "max_total_g": 1.809814355120436,
+        "avg_envelope_max": 1.7277332053344905,
+        "avg_utilization": 0.6845980618289677,
         "sample_count": 2962
       },
       {
@@ -148,6 +188,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.132043222646741,
         "max_total_g": 1.685444155111643,
+        "avg_envelope_max": 1.674602920750342,
+        "avg_utilization": 0.678667785140776,
         "sample_count": 2432
       },
       {
@@ -155,6 +197,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.124289170624899,
         "max_total_g": 1.8448766896462212,
+        "avg_envelope_max": 1.6985669614075078,
+        "avg_utilization": 0.6585240852011066,
         "sample_count": 2799
       }
     ],
@@ -164,6 +208,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2184221402435051,
         "max_total_g": 2.1625008670518495,
+        "avg_envelope_max": 1.716491210037293,
+        "avg_utilization": 0.7054552861530847,
         "sample_count": 2105
       },
       {
@@ -171,6 +217,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1718284063823936,
         "max_total_g": 1.5904295017384453,
+        "avg_envelope_max": 1.6734355004680908,
+        "avg_utilization": 0.7005733536019576,
         "sample_count": 4370
       },
       {
@@ -178,6 +226,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1895150512246842,
         "max_total_g": 1.5967924098015998,
+        "avg_envelope_max": 1.5939364919300805,
+        "avg_utilization": 0.7490540025424637,
         "sample_count": 2528
       },
       {
@@ -185,6 +235,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0525806075531403,
         "max_total_g": 1.6235864621263632,
+        "avg_envelope_max": 1.6331293609191067,
+        "avg_utilization": 0.6491245304854666,
         "sample_count": 1349
       },
       {
@@ -192,6 +244,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1720772583286063,
         "max_total_g": 1.7642871081544522,
+        "avg_envelope_max": 1.6346454258412624,
+        "avg_utilization": 0.7177467442249073,
         "sample_count": 2601
       },
       {
@@ -199,6 +253,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0360666721723137,
         "max_total_g": 1.7385076933968395,
+        "avg_envelope_max": 1.7522631183384094,
+        "avg_utilization": 0.5891126044749915,
         "sample_count": 1440
       },
       {
@@ -206,6 +262,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0224758208972644,
         "max_total_g": 1.6022047309878973,
+        "avg_envelope_max": 1.6737115538072938,
+        "avg_utilization": 0.6096694149260983,
         "sample_count": 957
       },
       {
@@ -213,6 +271,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3130011871038072,
         "max_total_g": 2.1212534030615013,
+        "avg_envelope_max": 1.717447125466066,
+        "avg_utilization": 0.7673819216298561,
         "sample_count": 1465
       },
       {
@@ -220,6 +280,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2211831171460152,
         "max_total_g": 1.8515053335056857,
+        "avg_envelope_max": 1.7062290083810412,
+        "avg_utilization": 0.7123202856824962,
         "sample_count": 2882
       },
       {
@@ -227,6 +289,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1093427027061349,
         "max_total_g": 1.6298272914637306,
+        "avg_envelope_max": 1.6299164422057228,
+        "avg_utilization": 0.6818972529294643,
         "sample_count": 2509
       },
       {
@@ -234,6 +298,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1490458019027663,
         "max_total_g": 1.8018490502814046,
+        "avg_envelope_max": 1.656507856677173,
+        "avg_utilization": 0.6919936983444851,
         "sample_count": 2742
       }
     ],
@@ -243,6 +309,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.199115501442033,
         "max_total_g": 1.8687905179553967,
+        "avg_envelope_max": 1.625312650179873,
+        "avg_utilization": 0.7352834252701473,
         "sample_count": 2130
       },
       {
@@ -250,6 +318,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.187427273895039,
         "max_total_g": 2.0222487482997735,
+        "avg_envelope_max": 1.6262613035614786,
+        "avg_utilization": 0.7302009932214185,
         "sample_count": 4400
       },
       {
@@ -257,6 +327,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.176913925311351,
         "max_total_g": 1.4727090683498896,
+        "avg_envelope_max": 1.595538667814602,
+        "avg_utilization": 0.7380451041587799,
         "sample_count": 2617
       },
       {
@@ -264,6 +336,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0689702780852137,
         "max_total_g": 1.437228235180481,
+        "avg_envelope_max": 1.5726098052689126,
+        "avg_utilization": 0.6828005942261317,
         "sample_count": 1375
       },
       {
@@ -271,6 +345,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1743928404534099,
         "max_total_g": 1.7457952342700445,
+        "avg_envelope_max": 1.6073830022311992,
+        "avg_utilization": 0.729747996921259,
         "sample_count": 2655
       },
       {
@@ -278,6 +354,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0513260332822187,
         "max_total_g": 1.776029279037933,
+        "avg_envelope_max": 1.645125061876438,
+        "avg_utilization": 0.6369052061569122,
         "sample_count": 1407
       },
       {
@@ -285,6 +363,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9533993624377629,
         "max_total_g": 1.4526389778606383,
+        "avg_envelope_max": 1.622131747773383,
+        "avg_utilization": 0.58755505902761,
         "sample_count": 943
       },
       {
@@ -292,6 +372,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.353701952306323,
         "max_total_g": 1.9990022511242953,
+        "avg_envelope_max": 1.6055053093264529,
+        "avg_utilization": 0.8457076599561504,
         "sample_count": 1476
       },
       {
@@ -299,6 +381,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1768231394953974,
         "max_total_g": 1.7562736119409186,
+        "avg_envelope_max": 1.6378548735147525,
+        "avg_utilization": 0.7160801954483268,
         "sample_count": 2952
       },
       {
@@ -306,6 +390,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.127545065300149,
         "max_total_g": 1.6648282193667912,
+        "avg_envelope_max": 1.612035928040913,
+        "avg_utilization": 0.6994839303712684,
         "sample_count": 2501
       },
       {
@@ -313,6 +399,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1564099897663656,
         "max_total_g": 1.7731553795423571,
+        "avg_envelope_max": 1.6257749798361651,
+        "avg_utilization": 0.7095840161354234,
         "sample_count": 2650
       }
     ],
@@ -322,6 +410,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2461119882892016,
         "max_total_g": 2.1370804851479037,
+        "avg_envelope_max": 1.702006802250974,
+        "avg_utilization": 0.7297433615147874,
         "sample_count": 2135
       },
       {
@@ -329,6 +419,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1763534599802508,
         "max_total_g": 1.5717607960500861,
+        "avg_envelope_max": 1.6796088146041692,
+        "avg_utilization": 0.7007651636293506,
         "sample_count": 4534
       },
       {
@@ -336,6 +428,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.208830862520816,
         "max_total_g": 1.5106157684864805,
+        "avg_envelope_max": 1.5823385984986125,
+        "avg_utilization": 0.7657116674204905,
         "sample_count": 2502
       },
       {
@@ -343,6 +437,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0344846952226874,
         "max_total_g": 1.6636493019864493,
+        "avg_envelope_max": 1.6580740340416256,
+        "avg_utilization": 0.6260939532442,
         "sample_count": 1302
       },
       {
@@ -350,6 +446,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.218466417382703,
         "max_total_g": 1.784876746444975,
+        "avg_envelope_max": 1.6211026139741955,
+        "avg_utilization": 0.751428659235204,
         "sample_count": 2628
       },
       {
@@ -357,6 +455,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0294234709856926,
         "max_total_g": 1.3936097014587692,
+        "avg_envelope_max": 1.7219394480005605,
+        "avg_utilization": 0.5983988124940458,
         "sample_count": 1478
       },
       {
@@ -364,6 +464,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0126420667274278,
         "max_total_g": 2.0470683916274024,
+        "avg_envelope_max": 1.7145518526270787,
+        "avg_utilization": 0.5894621552555218,
         "sample_count": 898
       },
       {
@@ -371,6 +473,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3600188501757258,
         "max_total_g": 2.163803364448812,
+        "avg_envelope_max": 1.6781558624077482,
+        "avg_utilization": 0.8135951332000189,
         "sample_count": 1454
       },
       {
@@ -378,6 +482,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.182923655714337,
         "max_total_g": 1.8491427743687074,
+        "avg_envelope_max": 1.72785300998739,
+        "avg_utilization": 0.6804130227763993,
         "sample_count": 2943
       },
       {
@@ -385,6 +491,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1136637502499473,
         "max_total_g": 1.614238210426206,
+        "avg_envelope_max": 1.6634425922051694,
+        "avg_utilization": 0.6694484702225879,
         "sample_count": 2481
       },
       {
@@ -392,6 +500,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.125835135150914,
         "max_total_g": 1.5791902988557143,
+        "avg_envelope_max": 1.6871755696919921,
+        "avg_utilization": 0.6666184487042504,
         "sample_count": 2781
       }
     ],
@@ -401,6 +511,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2380195268100513,
         "max_total_g": 1.974268978634877,
+        "avg_envelope_max": 1.7437857954573524,
+        "avg_utilization": 0.7086322759324879,
         "sample_count": 2144
       },
       {
@@ -408,6 +520,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1799623060425597,
         "max_total_g": 1.663800769323058,
+        "avg_envelope_max": 1.7125108327318328,
+        "avg_utilization": 0.6894010733101733,
         "sample_count": 4538
       },
       {
@@ -415,6 +529,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1876860741504816,
         "max_total_g": 1.515402586773561,
+        "avg_envelope_max": 1.5997968879069222,
+        "avg_utilization": 0.7478967191167034,
         "sample_count": 2587
       },
       {
@@ -422,6 +538,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0297454653767775,
         "max_total_g": 1.678220784044817,
+        "avg_envelope_max": 1.6100597169950481,
+        "avg_utilization": 0.6510179224613304,
         "sample_count": 1289
       },
       {
@@ -429,6 +547,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2106342233519414,
         "max_total_g": 1.915814709203372,
+        "avg_envelope_max": 1.687290970437043,
+        "avg_utilization": 0.7182061285285317,
         "sample_count": 2566
       },
       {
@@ -436,6 +556,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0414355586096686,
         "max_total_g": 1.7306059632394661,
+        "avg_envelope_max": 1.7524456539861368,
+        "avg_utilization": 0.593215599279271,
         "sample_count": 1470
       },
       {
@@ -443,6 +565,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9615546084636438,
         "max_total_g": 1.866917245086134,
+        "avg_envelope_max": 1.6912827047099832,
+        "avg_utilization": 0.5648478958844082,
         "sample_count": 993
       },
       {
@@ -450,6 +574,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.2966533080525329,
         "max_total_g": 2.3286064502186714,
+        "avg_envelope_max": 1.726615160155603,
+        "avg_utilization": 0.7488683339580843,
         "sample_count": 1468
       },
       {
@@ -457,6 +583,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.20226127416962,
         "max_total_g": 1.885179301817204,
+        "avg_envelope_max": 1.7253443832686417,
+        "avg_utilization": 0.6963164277437944,
         "sample_count": 2854
       },
       {
@@ -464,6 +592,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0982973560231626,
         "max_total_g": 1.4832440797117648,
+        "avg_envelope_max": 1.7112706819715882,
+        "avg_utilization": 0.6422586549915493,
         "sample_count": 2504
       },
       {
@@ -471,6 +601,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1586001955864829,
         "max_total_g": 1.7102426728391502,
+        "avg_envelope_max": 1.7222188070073794,
+        "avg_utilization": 0.6712060636216004,
         "sample_count": 2723
       }
     ],
@@ -480,6 +612,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2595999267762692,
         "max_total_g": 1.9877474688702284,
+        "avg_envelope_max": 1.7383751624425923,
+        "avg_utilization": 0.7222185539595294,
         "sample_count": 2112
       },
       {
@@ -487,6 +621,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1950170066677124,
         "max_total_g": 1.6130892721731183,
+        "avg_envelope_max": 1.7110398925370793,
+        "avg_utilization": 0.6990598887229751,
         "sample_count": 4517
       },
       {
@@ -494,6 +630,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1897354411607601,
         "max_total_g": 1.5472145940366515,
+        "avg_envelope_max": 1.6195734408403362,
+        "avg_utilization": 0.7369422041174866,
         "sample_count": 2683
       },
       {
@@ -501,6 +639,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.058018916583801,
         "max_total_g": 1.6045239169298788,
+        "avg_envelope_max": 1.6673643696014648,
+        "avg_utilization": 0.6371164458709168,
         "sample_count": 1267
       },
       {
@@ -508,6 +648,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2341605311274517,
         "max_total_g": 1.8936340723592824,
+        "avg_envelope_max": 1.6598044930468379,
+        "avg_utilization": 0.7433935575941719,
         "sample_count": 2603
       },
       {
@@ -515,6 +657,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.023447707932971,
         "max_total_g": 1.6742263885150062,
+        "avg_envelope_max": 1.738405785681285,
+        "avg_utilization": 0.5871829881050048,
         "sample_count": 1498
       },
       {
@@ -522,6 +666,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9963600870043655,
         "max_total_g": 1.8860129904112537,
+        "avg_envelope_max": 1.7355498896767718,
+        "avg_utilization": 0.570530945655227,
         "sample_count": 945
       },
       {
@@ -529,6 +675,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3530956114991566,
         "max_total_g": 2.229214211330979,
+        "avg_envelope_max": 1.7034008118928012,
+        "avg_utilization": 0.7961495978133625,
         "sample_count": 1449
       },
       {
@@ -536,6 +684,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2044649896290864,
         "max_total_g": 1.9485589547149966,
+        "avg_envelope_max": 1.7460699125842807,
+        "avg_utilization": 0.6855018034930583,
         "sample_count": 2914
       },
       {
@@ -543,6 +693,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1325372172117856,
         "max_total_g": 1.629332685488142,
+        "avg_envelope_max": 1.693808674853246,
+        "avg_utilization": 0.6690705397097051,
         "sample_count": 2471
       },
       {
@@ -550,6 +702,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1435659195841592,
         "max_total_g": 1.8257987293236897,
+        "avg_envelope_max": 1.7020602870895365,
+        "avg_utilization": 0.6699376565360209,
         "sample_count": 2769
       }
     ],
@@ -559,6 +713,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.0530728896228694,
         "max_total_g": 2.4923860054172993,
+        "avg_envelope_max": 1.5765410818198784,
+        "avg_utilization": 0.6595363061584326,
         "sample_count": 2214
       },
       {
@@ -566,6 +722,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.091458708784963,
         "max_total_g": 1.5867703047385278,
+        "avg_envelope_max": 1.5787812925907514,
+        "avg_utilization": 0.6932531669585639,
         "sample_count": 4554
       },
       {
@@ -573,6 +731,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.176187293504082,
         "max_total_g": 1.443781839475757,
+        "avg_envelope_max": 1.4876678869799869,
+        "avg_utilization": 0.7936537499400871,
         "sample_count": 2535
       },
       {
@@ -580,6 +740,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 0.935443198880167,
         "max_total_g": 1.4268209418143538,
+        "avg_envelope_max": 1.4890225495507452,
+        "avg_utilization": 0.6293040445924809,
         "sample_count": 1327
       },
       {
@@ -587,6 +749,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1411725254563365,
         "max_total_g": 1.7700341804609312,
+        "avg_envelope_max": 1.4853305123708898,
+        "avg_utilization": 0.7690102411449689,
         "sample_count": 2576
       },
       {
@@ -594,6 +758,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 0.9467069796334364,
         "max_total_g": 1.6683069261979344,
+        "avg_envelope_max": 1.656757104070834,
+        "avg_utilization": 0.5693361816418961,
         "sample_count": 1539
       },
       {
@@ -601,6 +767,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9292565849849499,
         "max_total_g": 1.5094903113302847,
+        "avg_envelope_max": 1.5371863320378116,
+        "avg_utilization": 0.60159920031065,
         "sample_count": 856
       },
       {
@@ -608,6 +776,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.2188396578723582,
         "max_total_g": 2.049147383669608,
+        "avg_envelope_max": 1.605471148577325,
+        "avg_utilization": 0.761236439519208,
         "sample_count": 1482
       },
       {
@@ -615,6 +785,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1383109988039375,
         "max_total_g": 1.768113118553222,
+        "avg_envelope_max": 1.6130148378124896,
+        "avg_utilization": 0.7047948170227957,
         "sample_count": 2867
       },
       {
@@ -622,6 +794,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0573249827066513,
         "max_total_g": 1.556546497859926,
+        "avg_envelope_max": 1.548291805679117,
+        "avg_utilization": 0.6807642560405759,
         "sample_count": 2423
       },
       {
@@ -629,6 +803,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0961637601485825,
         "max_total_g": 1.93713654655525,
+        "avg_envelope_max": 1.5852891863233491,
+        "avg_utilization": 0.6883592849067957,
         "sample_count": 2740
       }
     ],
@@ -638,6 +814,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1786713136228475,
         "max_total_g": 1.8196290830825934,
+        "avg_envelope_max": 1.6936549383044965,
+        "avg_utilization": 0.6923294100342305,
         "sample_count": 2143
       },
       {
@@ -645,6 +823,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.208304513189907,
         "max_total_g": 2.1649286362372315,
+        "avg_envelope_max": 1.711692025072998,
+        "avg_utilization": 0.7066703872519278,
         "sample_count": 4338
       },
       {
@@ -652,6 +832,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1712711478511622,
         "max_total_g": 1.5415031625008107,
+        "avg_envelope_max": 1.547980458131614,
+        "avg_utilization": 0.7604428389875207,
         "sample_count": 2671
       },
       {
@@ -659,6 +841,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0499080550731443,
         "max_total_g": 1.628895331198417,
+        "avg_envelope_max": 1.6180563928751195,
+        "avg_utilization": 0.6561811570000379,
         "sample_count": 1347
       },
       {
@@ -666,6 +850,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2211682022461938,
         "max_total_g": 1.8306332237780456,
+        "avg_envelope_max": 1.6274270578434304,
+        "avg_utilization": 0.7515017405474169,
         "sample_count": 2575
       },
       {
@@ -673,6 +859,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.062978440332655,
         "max_total_g": 1.643153675101632,
+        "avg_envelope_max": 1.7459563100067892,
+        "avg_utilization": 0.6074186008510601,
         "sample_count": 1477
       },
       {
@@ -680,6 +868,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0181409663343874,
         "max_total_g": 1.7746495428675488,
+        "avg_envelope_max": 1.7223037381746868,
+        "avg_utilization": 0.589076626676923,
         "sample_count": 923
       },
       {
@@ -687,6 +877,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3792913338533646,
         "max_total_g": 2.2761346620971263,
+        "avg_envelope_max": 1.707615927685476,
+        "avg_utilization": 0.8097863030634551,
         "sample_count": 1422
       },
       {
@@ -694,6 +886,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2084088312466796,
         "max_total_g": 2.041441157613905,
+        "avg_envelope_max": 1.7236014690660098,
+        "avg_utilization": 0.6965996637554837,
         "sample_count": 2951
       },
       {
@@ -701,6 +895,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.139834644662652,
         "max_total_g": 1.6240671168396952,
+        "avg_envelope_max": 1.68357584964341,
+        "avg_utilization": 0.6773294290761787,
         "sample_count": 2452
       },
       {
@@ -708,6 +904,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1034433486087414,
         "max_total_g": 1.6405297924755893,
+        "avg_envelope_max": 1.6781973924578417,
+        "avg_utilization": 0.6547433940213918,
         "sample_count": 2816
       }
     ],
@@ -717,6 +915,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1969003802589502,
         "max_total_g": 1.8280823285618182,
+        "avg_envelope_max": 1.7035421986118742,
+        "avg_utilization": 0.7001303599436031,
         "sample_count": 2117
       },
       {
@@ -724,6 +924,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2114872230218119,
         "max_total_g": 1.6038269856814358,
+        "avg_envelope_max": 1.7005706759436132,
+        "avg_utilization": 0.7141560654476157,
         "sample_count": 4376
       },
       {
@@ -731,6 +933,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1397751330062942,
         "max_total_g": 1.5384371940381576,
+        "avg_envelope_max": 1.5530862907115017,
+        "avg_utilization": 0.7379308800253971,
         "sample_count": 2632
       },
       {
@@ -738,6 +942,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0850714205707903,
         "max_total_g": 1.6331184892713693,
+        "avg_envelope_max": 1.630360402643391,
+        "avg_utilization": 0.6719862631346,
         "sample_count": 1317
       },
       {
@@ -745,6 +951,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.240869923814195,
         "max_total_g": 1.9294592506710269,
+        "avg_envelope_max": 1.626194392399617,
+        "avg_utilization": 0.7646514821533748,
         "sample_count": 2583
       },
       {
@@ -752,6 +960,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0781211743250745,
         "max_total_g": 1.6458544893155045,
+        "avg_envelope_max": 1.7126795657342797,
+        "avg_utilization": 0.6270656931893398,
         "sample_count": 1346
       },
       {
@@ -759,6 +969,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9762407316731843,
         "max_total_g": 1.9500487173401593,
+        "avg_envelope_max": 1.7303269375746377,
+        "avg_utilization": 0.5628877990914575,
         "sample_count": 929
       },
       {
@@ -766,6 +978,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3410405113526467,
         "max_total_g": 2.2163054843590495,
+        "avg_envelope_max": 1.7186348752887257,
+        "avg_utilization": 0.7790934764774629,
         "sample_count": 1468
       },
       {
@@ -773,6 +987,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2123487462219742,
         "max_total_g": 1.915977557279834,
+        "avg_envelope_max": 1.7185972146431554,
+        "avg_utilization": 0.7010489685873939,
         "sample_count": 2946
       },
       {
@@ -780,6 +996,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1326168443843756,
         "max_total_g": 1.8448766896462212,
+        "avg_envelope_max": 1.6541089245671567,
+        "avg_utilization": 0.6881228056274423,
         "sample_count": 2500
       },
       {
@@ -787,6 +1005,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.097335307131551,
         "max_total_g": 2.2732929859567155,
+        "avg_envelope_max": 1.6880056953354576,
+        "avg_utilization": 0.6466477507456663,
         "sample_count": 2779
       }
     ],
@@ -796,6 +1016,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2328325111790563,
         "max_total_g": 2.2534624469912963,
+        "avg_envelope_max": 1.7185994694111768,
+        "avg_utilization": 0.7126082602460008,
         "sample_count": 2027
       },
       {
@@ -803,6 +1025,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1568891996583557,
         "max_total_g": 1.53512507633743,
+        "avg_envelope_max": 1.6845012382651634,
+        "avg_utilization": 0.6871981406275435,
         "sample_count": 4335
       },
       {
@@ -810,6 +1034,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2321993564061906,
         "max_total_g": 1.7210473555367383,
+        "avg_envelope_max": 1.5855591609693007,
+        "avg_utilization": 0.7793946058297369,
         "sample_count": 2427
       },
       {
@@ -817,6 +1043,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.057723748820806,
         "max_total_g": 1.6424204699162757,
+        "avg_envelope_max": 1.6634928790866677,
+        "avg_utilization": 0.6425840238508603,
         "sample_count": 1301
       },
       {
@@ -824,6 +1052,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1772435881718712,
         "max_total_g": 1.826901475175933,
+        "avg_envelope_max": 1.6323639427596124,
+        "avg_utilization": 0.7226690745676806,
         "sample_count": 2613
       },
       {
@@ -831,6 +1061,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.005658361437426,
         "max_total_g": 1.6880239927204828,
+        "avg_envelope_max": 1.7378071342494616,
+        "avg_utilization": 0.577091734225493,
         "sample_count": 1481
       },
       {
@@ -838,6 +1070,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0057292028482443,
         "max_total_g": 1.8147619678624523,
+        "avg_envelope_max": 1.718108296374593,
+        "avg_utilization": 0.5836094087459407,
         "sample_count": 939
       },
       {
@@ -845,6 +1079,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.287289479608281,
         "max_total_g": 2.1152515216871963,
+        "avg_envelope_max": 1.6917364798880983,
+        "avg_utilization": 0.762718498762238,
         "sample_count": 1454
       },
       {
@@ -852,6 +1088,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1715165889619763,
         "max_total_g": 1.836710374555553,
+        "avg_envelope_max": 1.7190038278803055,
+        "avg_utilization": 0.6767334076949318,
         "sample_count": 2887
       },
       {
@@ -859,6 +1097,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0838466286880988,
         "max_total_g": 1.6797086056813544,
+        "avg_envelope_max": 1.6555013582549638,
+        "avg_utilization": 0.6559028675912367,
         "sample_count": 2525
       },
       {
@@ -866,6 +1106,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1075858130845138,
         "max_total_g": 1.84988675329059,
+        "avg_envelope_max": 1.6634622960479488,
+        "avg_utilization": 0.661494014718599,
         "sample_count": 2728
       }
     ],
@@ -875,6 +1117,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2341586449010626,
         "max_total_g": 1.8231316463711555,
+        "avg_envelope_max": 1.7180088072786042,
+        "avg_utilization": 0.7149542833615797,
         "sample_count": 2152
       },
       {
@@ -882,6 +1126,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1557851455302737,
         "max_total_g": 1.8874707944760365,
+        "avg_envelope_max": 1.719592499755752,
+        "avg_utilization": 0.6725180658659256,
         "sample_count": 4519
       },
       {
@@ -889,6 +1135,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1885657995048111,
         "max_total_g": 1.448456074584245,
+        "avg_envelope_max": 1.59918898483459,
+        "avg_utilization": 0.7471111109903227,
         "sample_count": 2564
       },
       {
@@ -896,6 +1144,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0543045008588299,
         "max_total_g": 1.5846923991740478,
+        "avg_envelope_max": 1.6133280258355824,
+        "avg_utilization": 0.6619303408787934,
         "sample_count": 1292
       },
       {
@@ -903,6 +1153,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1959358448418986,
         "max_total_g": 1.8055760853533698,
+        "avg_envelope_max": 1.649098833031598,
+        "avg_utilization": 0.7266514294520986,
         "sample_count": 2579
       },
       {
@@ -910,6 +1162,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0054385618505397,
         "max_total_g": 1.5102983149033835,
+        "avg_envelope_max": 1.7631663492827323,
+        "avg_utilization": 0.5668575948276607,
         "sample_count": 1469
       },
       {
@@ -917,6 +1171,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9975585152058903,
         "max_total_g": 1.9945397965445564,
+        "avg_envelope_max": 1.7481665725882072,
+        "avg_utilization": 0.566848518445583,
         "sample_count": 911
       },
       {
@@ -924,6 +1180,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3383998474831773,
         "max_total_g": 2.191146047163447,
+        "avg_envelope_max": 1.7291813909068914,
+        "avg_utilization": 0.775515771838885,
         "sample_count": 1422
       },
       {
@@ -931,6 +1189,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1848847399155757,
         "max_total_g": 1.899685237085344,
+        "avg_envelope_max": 1.7624146721063578,
+        "avg_utilization": 0.6690489861567245,
         "sample_count": 2944
       },
       {
@@ -938,6 +1198,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0898011352928993,
         "max_total_g": 1.6169168191344911,
+        "avg_envelope_max": 1.6787534626909169,
+        "avg_utilization": 0.6517715826758677,
         "sample_count": 2517
       },
       {
@@ -945,6 +1207,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1471843188775497,
         "max_total_g": 1.620064504888617,
+        "avg_envelope_max": 1.677265418491038,
+        "avg_utilization": 0.6818641865090217,
         "sample_count": 2780
       }
     ],
@@ -954,6 +1218,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2985807074381641,
         "max_total_g": 1.9127699809438665,
+        "avg_envelope_max": 1.736694857522201,
+        "avg_utilization": 0.7453464733909575,
         "sample_count": 2130
       },
       {
@@ -961,6 +1227,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1625567382313717,
         "max_total_g": 1.9430257332315495,
+        "avg_envelope_max": 1.6744862496707578,
+        "avg_utilization": 0.6942821629965122,
         "sample_count": 4573
       },
       {
@@ -968,6 +1236,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2320785773746652,
         "max_total_g": 1.4451249080961825,
+        "avg_envelope_max": 1.5519416749632227,
+        "avg_utilization": 0.7976860659707953,
         "sample_count": 2576
       },
       {
@@ -975,6 +1245,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0193993088018503,
         "max_total_g": 1.536169261507338,
+        "avg_envelope_max": 1.634219248073301,
+        "avg_utilization": 0.6322598549315984,
         "sample_count": 1307
       },
       {
@@ -982,6 +1254,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2096238174130571,
         "max_total_g": 1.8979383551633071,
+        "avg_envelope_max": 1.6135998854783942,
+        "avg_utilization": 0.7514943925335226,
         "sample_count": 2597
       },
       {
@@ -989,6 +1263,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0153478389186303,
         "max_total_g": 1.545882919240652,
+        "avg_envelope_max": 1.7459948019242462,
+        "avg_utilization": 0.5815487765691083,
         "sample_count": 1236
       },
       {
@@ -996,6 +1272,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0438969206644226,
         "max_total_g": 1.902846551879578,
+        "avg_envelope_max": 1.7077792220388581,
+        "avg_utilization": 0.6091788929044976,
         "sample_count": 970
       },
       {
@@ -1003,6 +1281,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3116523451178508,
         "max_total_g": 2.0393136100168605,
+        "avg_envelope_max": 1.712050021953003,
+        "avg_utilization": 0.7657226693408409,
         "sample_count": 1458
       },
       {
@@ -1010,6 +1290,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.189396451657999,
         "max_total_g": 1.9060128541014616,
+        "avg_envelope_max": 1.7322964555403717,
+        "avg_utilization": 0.6808899483524414,
         "sample_count": 2875
       },
       {
@@ -1017,6 +1299,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0891515626683699,
         "max_total_g": 1.4310950352789293,
+        "avg_envelope_max": 1.6146512632670604,
+        "avg_utilization": 0.6768875691982013,
         "sample_count": 2541
       },
       {
@@ -1024,6 +1308,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1749266461661463,
         "max_total_g": 1.6622153891719327,
+        "avg_envelope_max": 1.6870376485056384,
+        "avg_utilization": 0.69378468990809,
         "sample_count": 2743
       }
     ],
@@ -1033,6 +1319,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2251404631481235,
         "max_total_g": 2.099000952834467,
+        "avg_envelope_max": 1.715465738241038,
+        "avg_utilization": 0.7122558997525171,
         "sample_count": 2115
       },
       {
@@ -1040,6 +1328,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1797158161497716,
         "max_total_g": 1.7512238577634784,
+        "avg_envelope_max": 1.6971730179848654,
+        "avg_utilization": 0.6952814822013258,
         "sample_count": 4483
       },
       {
@@ -1047,6 +1337,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1717079072451844,
         "max_total_g": 2.174198013061368,
+        "avg_envelope_max": 1.5984470056279314,
+        "avg_utilization": 0.7349767986779856,
         "sample_count": 2680
       },
       {
@@ -1054,6 +1346,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0406277932079528,
         "max_total_g": 1.5566415772424942,
+        "avg_envelope_max": 1.623799004470337,
+        "avg_utilization": 0.6445152083190403,
         "sample_count": 1309
       },
       {
@@ -1061,6 +1355,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1955982740785114,
         "max_total_g": 1.69,
+        "avg_envelope_max": 1.6282228356221309,
+        "avg_utilization": 0.7344222292771799,
         "sample_count": 2594
       },
       {
@@ -1068,6 +1364,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0268078788773216,
         "max_total_g": 1.6426137707933657,
+        "avg_envelope_max": 1.7219608146399679,
+        "avg_utilization": 0.5949227436795457,
         "sample_count": 1404
       },
       {
@@ -1075,6 +1373,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9548244958058014,
         "max_total_g": 1.7953300532214125,
+        "avg_envelope_max": 1.698266591459425,
+        "avg_utilization": 0.5583053783395496,
         "sample_count": 986
       },
       {
@@ -1082,6 +1382,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.338532963282875,
         "max_total_g": 2.0585859224234486,
+        "avg_envelope_max": 1.694205902662549,
+        "avg_utilization": 0.7924910364472797,
         "sample_count": 1465
       },
       {
@@ -1089,6 +1391,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1874888891623017,
         "max_total_g": 2.2121880571054535,
+        "avg_envelope_max": 1.7103694667214773,
+        "avg_utilization": 0.6903642458001408,
         "sample_count": 2922
       },
       {
@@ -1096,6 +1400,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1231146803433287,
         "max_total_g": 1.6702769231477754,
+        "avg_envelope_max": 1.6810831800605748,
+        "avg_utilization": 0.6684607289919997,
         "sample_count": 2469
       },
       {
@@ -1103,6 +1409,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1322423189755721,
         "max_total_g": 1.806101049221776,
+        "avg_envelope_max": 1.6827063556757271,
+        "avg_utilization": 0.670527838630583,
         "sample_count": 2788
       }
     ],
@@ -1112,6 +1420,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1767436183258708,
         "max_total_g": 2.932270280857479,
+        "avg_envelope_max": 1.6733025805554818,
+        "avg_utilization": 0.700744262202444,
         "sample_count": 2067
       },
       {
@@ -1119,6 +1429,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.159329075980914,
         "max_total_g": 1.5618104878633643,
+        "avg_envelope_max": 1.6326799278423039,
+        "avg_utilization": 0.7107221226543886,
         "sample_count": 4383
       },
       {
@@ -1126,6 +1438,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1403326167308017,
         "max_total_g": 1.4060131578331692,
+        "avg_envelope_max": 1.554040389489076,
+        "avg_utilization": 0.734283734328158,
         "sample_count": 2745
       },
       {
@@ -1133,6 +1447,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0540374346811434,
         "max_total_g": 1.6509164121783997,
+        "avg_envelope_max": 1.6851601994820689,
+        "avg_utilization": 0.6262697206836793,
         "sample_count": 1360
       },
       {
@@ -1140,6 +1456,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.172958327081174,
         "max_total_g": 1.865495644594219,
+        "avg_envelope_max": 1.5865828909039423,
+        "avg_utilization": 0.7398243868081016,
         "sample_count": 2564
       },
       {
@@ -1147,6 +1465,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 0.9914177811067018,
         "max_total_g": 1.6533653558726817,
+        "avg_envelope_max": 1.6562160812346243,
+        "avg_utilization": 0.5971766124841278,
         "sample_count": 1487
       },
       {
@@ -1154,6 +1474,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9295828998531465,
         "max_total_g": 1.7378423403749836,
+        "avg_envelope_max": 1.7140054322232243,
+        "avg_utilization": 0.5401540831999371,
         "sample_count": 948
       },
       {
@@ -1161,6 +1483,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3230071828706371,
         "max_total_g": 2.041740678930603,
+        "avg_envelope_max": 1.6450185708221334,
+        "avg_utilization": 0.8077672469027842,
         "sample_count": 1425
       },
       {
@@ -1168,6 +1492,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1907810264589915,
         "max_total_g": 1.7909609152630885,
+        "avg_envelope_max": 1.7018070823142215,
+        "avg_utilization": 0.6958535286004255,
         "sample_count": 2857
       },
       {
@@ -1175,6 +1501,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.114876864631294,
         "max_total_g": 1.7078422058258194,
+        "avg_envelope_max": 1.6172511043160034,
+        "avg_utilization": 0.6896383054052929,
         "sample_count": 2422
       },
       {
@@ -1182,6 +1510,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1282347646420645,
         "max_total_g": 1.9087084638571705,
+        "avg_envelope_max": 1.642313469970249,
+        "avg_utilization": 0.6851064354042397,
         "sample_count": 2689
       }
     ],
@@ -1191,6 +1521,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1181012184404584,
         "max_total_g": 1.7838410803656248,
+        "avg_envelope_max": 1.580484470539442,
+        "avg_utilization": 0.7052822577884997,
         "sample_count": 2166
       },
       {
@@ -1198,6 +1530,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1747690196158986,
         "max_total_g": 1.6177283455512548,
+        "avg_envelope_max": 1.5641976697605875,
+        "avg_utilization": 0.7512173676071766,
         "sample_count": 4391
       },
       {
@@ -1205,6 +1539,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1701080549851337,
         "max_total_g": 1.4426711336961033,
+        "avg_envelope_max": 1.514499116039831,
+        "avg_utilization": 0.7733284282488491,
         "sample_count": 2548
       },
       {
@@ -1212,6 +1548,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.020393865378073,
         "max_total_g": 1.4785188534475981,
+        "avg_envelope_max": 1.5859247196178812,
+        "avg_utilization": 0.6440879475525023,
         "sample_count": 1396
       },
       {
@@ -1219,6 +1557,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1855317026733607,
         "max_total_g": 1.8078199578497856,
+        "avg_envelope_max": 1.5356226418918644,
+        "avg_utilization": 0.7726117577237754,
         "sample_count": 2649
       },
       {
@@ -1226,6 +1566,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0362126533677896,
         "max_total_g": 1.4944433746381962,
+        "avg_envelope_max": 1.5971971585771805,
+        "avg_utilization": 0.647770766324619,
         "sample_count": 1428
       },
       {
@@ -1233,6 +1575,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.987189636680456,
         "max_total_g": 1.633126143321452,
+        "avg_envelope_max": 1.660809326494658,
+        "avg_utilization": 0.5944022578564183,
         "sample_count": 824
       },
       {
@@ -1240,6 +1584,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.306543334520275,
         "max_total_g": 2.047898923286987,
+        "avg_envelope_max": 1.582762877542861,
+        "avg_utilization": 0.8265142211482588,
         "sample_count": 1383
       },
       {
@@ -1247,6 +1593,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1670593643521916,
         "max_total_g": 1.8312624061013212,
+        "avg_envelope_max": 1.6397185818125184,
+        "avg_utilization": 0.7053945481248607,
         "sample_count": 2868
       },
       {
@@ -1254,6 +1602,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.130632652704123,
         "max_total_g": 1.6111933465602446,
+        "avg_envelope_max": 1.553739214128269,
+        "avg_utilization": 0.728050277120486,
         "sample_count": 2375
       },
       {
@@ -1261,6 +1611,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1022569601725805,
         "max_total_g": 1.497854799371421,
+        "avg_envelope_max": 1.5611509372174788,
+        "avg_utilization": 0.7065093750866013,
         "sample_count": 2712
       }
     ],
@@ -1270,6 +1622,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1963342072710388,
         "max_total_g": 1.9650254451278741,
+        "avg_envelope_max": 1.7009486640732658,
+        "avg_utilization": 0.698184746241318,
         "sample_count": 1053
       },
       {
@@ -1277,6 +1631,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1763649401126943,
         "max_total_g": 2.4370566263425233,
+        "avg_envelope_max": 1.6939431186802438,
+        "avg_utilization": 0.6937285163338947,
         "sample_count": 2205
       },
       {
@@ -1284,6 +1640,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1710411625216617,
         "max_total_g": 1.4680217982032828,
+        "avg_envelope_max": 1.5668788326001637,
+        "avg_utilization": 0.7506937735575933,
         "sample_count": 1328
       },
       {
@@ -1291,6 +1649,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.051318598638458,
         "max_total_g": 1.5992398194142117,
+        "avg_envelope_max": 1.6398821915389874,
+        "avg_utilization": 0.6465597035642383,
         "sample_count": 693
       },
       {
@@ -1298,6 +1658,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.1883312074122883,
         "max_total_g": 1.7375580565840096,
+        "avg_envelope_max": 1.6338529202896264,
+        "avg_utilization": 0.727327040638885,
         "sample_count": 1304
       },
       {
@@ -1305,6 +1667,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0043642900396836,
         "max_total_g": 1.8157414463518753,
+        "avg_envelope_max": 1.715896999167745,
+        "avg_utilization": 0.5808137811917643,
         "sample_count": 711
       },
       {
@@ -1312,6 +1676,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0084973186236559,
         "max_total_g": 1.9052225591777985,
+        "avg_envelope_max": 1.6951228721158476,
+        "avg_utilization": 0.5961990370443726,
         "sample_count": 472
       },
       {
@@ -1319,6 +1685,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3297242357806718,
         "max_total_g": 2.1012865106881544,
+        "avg_envelope_max": 1.7028913032040947,
+        "avg_utilization": 0.7848954384853979,
         "sample_count": 747
       },
       {
@@ -1326,6 +1694,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1090913618678278,
         "max_total_g": 1.9050002624671736,
+        "avg_envelope_max": 1.683978303510195,
+        "avg_utilization": 0.6518009030407738,
         "sample_count": 1586
       },
       {
@@ -1333,6 +1703,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0248435247298273,
         "max_total_g": 1.5320737580155859,
+        "avg_envelope_max": 1.6594214843255324,
+        "avg_utilization": 0.6136157630288195,
         "sample_count": 1380
       },
       {
@@ -1340,6 +1712,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 0.9882049346343126,
         "max_total_g": 1.8348956373592475,
+        "avg_envelope_max": 1.667520596752388,
+        "avg_utilization": 0.5871574947368374,
         "sample_count": 1552
       }
     ],
@@ -1349,6 +1723,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2307192436049093,
         "max_total_g": 2.0907917160731246,
+        "avg_envelope_max": 1.6760017746422062,
+        "avg_utilization": 0.7308157306255192,
         "sample_count": 2087
       },
       {
@@ -1356,6 +1732,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.241774713605633,
         "max_total_g": 1.7122350889991713,
+        "avg_envelope_max": 1.7019737834076083,
+        "avg_utilization": 0.7310280067416596,
         "sample_count": 4383
       },
       {
@@ -1363,6 +1741,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1798197173657112,
         "max_total_g": 1.4363565017084023,
+        "avg_envelope_max": 1.6281416547622576,
+        "avg_utilization": 0.7282001561275852,
         "sample_count": 2600
       },
       {
@@ -1370,6 +1750,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0178212973110894,
         "max_total_g": 1.669687994806215,
+        "avg_envelope_max": 1.6802612496695741,
+        "avg_utilization": 0.6059298848942122,
         "sample_count": 1359
       },
       {
@@ -1377,6 +1759,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2468452481390717,
         "max_total_g": 1.9255391452785375,
+        "avg_envelope_max": 1.6113009297925558,
+        "avg_utilization": 0.775407149269944,
         "sample_count": 2584
       },
       {
@@ -1384,6 +1768,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.091285345998172,
         "max_total_g": 1.8386269333391154,
+        "avg_envelope_max": 1.6833884968487887,
+        "avg_utilization": 0.6463866223324917,
         "sample_count": 1397
       },
       {
@@ -1391,6 +1777,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9604480014480744,
         "max_total_g": 1.6392351875188624,
+        "avg_envelope_max": 1.6805916915348451,
+        "avg_utilization": 0.5716213343161284,
         "sample_count": 961
       },
       {
@@ -1398,6 +1786,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.2958040803942845,
         "max_total_g": 2.2544615765188816,
+        "avg_envelope_max": 1.701311101802269,
+        "avg_utilization": 0.7599740777623907,
         "sample_count": 1484
       },
       {
@@ -1405,6 +1795,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2581842170650466,
         "max_total_g": 1.9476164920230061,
+        "avg_envelope_max": 1.7133254466585461,
+        "avg_utilization": 0.7322427689078173,
         "sample_count": 2860
       },
       {
@@ -1412,6 +1804,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1747108536555986,
         "max_total_g": 1.5383003607878403,
+        "avg_envelope_max": 1.6939782528638219,
+        "avg_utilization": 0.6944077928808067,
         "sample_count": 2491
       },
       {
@@ -1419,6 +1813,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1867561302952179,
         "max_total_g": 1.7851624575931457,
+        "avg_envelope_max": 1.6459780291349282,
+        "avg_utilization": 0.7172444156272443,
         "sample_count": 2699
       }
     ],
@@ -1428,6 +1824,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2368795955778402,
         "max_total_g": 2.1417686616439227,
+        "avg_envelope_max": 1.6942094882333298,
+        "avg_utilization": 0.7263821291168421,
         "sample_count": 2059
       },
       {
@@ -1435,6 +1833,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1715401707056579,
         "max_total_g": 1.58020410074142,
+        "avg_envelope_max": 1.6800230005567036,
+        "avg_utilization": 0.6974892196692138,
         "sample_count": 4328
       },
       {
@@ -1442,6 +1842,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1945568711063976,
         "max_total_g": 2.657522342333174,
+        "avg_envelope_max": 1.5492240464958638,
+        "avg_utilization": 0.775361451662502,
         "sample_count": 2436
       },
       {
@@ -1449,6 +1851,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0446107841580248,
         "max_total_g": 1.6435647233985038,
+        "avg_envelope_max": 1.6298809676645298,
+        "avg_utilization": 0.6488152454653258,
         "sample_count": 1329
       },
       {
@@ -1456,6 +1860,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2260846554819838,
         "max_total_g": 1.8350762926919415,
+        "avg_envelope_max": 1.6278405111596006,
+        "avg_utilization": 0.7543245270024971,
         "sample_count": 2511
       },
       {
@@ -1463,6 +1869,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0474299472885111,
         "max_total_g": 1.5624829599070833,
+        "avg_envelope_max": 1.746958702279173,
+        "avg_utilization": 0.596716038984862,
         "sample_count": 1398
       },
       {
@@ -1470,6 +1878,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.029614141927678,
         "max_total_g": 1.7932186146702804,
+        "avg_envelope_max": 1.7439809128285326,
+        "avg_utilization": 0.5877753646994558,
         "sample_count": 818
       },
       {
@@ -1477,6 +1887,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3402246073855766,
         "max_total_g": 1.9886095644947501,
+        "avg_envelope_max": 1.7103694440556516,
+        "avg_utilization": 0.783466676285297,
         "sample_count": 1387
       },
       {
@@ -1484,6 +1896,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1895159153349746,
         "max_total_g": 1.90930615669672,
+        "avg_envelope_max": 1.7249904506084348,
+        "avg_utilization": 0.6850653275761711,
         "sample_count": 2795
       },
       {
@@ -1491,6 +1905,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1124726587519482,
         "max_total_g": 1.6461470165206995,
+        "avg_envelope_max": 1.6401913207283683,
+        "avg_utilization": 0.6805883264960602,
         "sample_count": 2392
       },
       {
@@ -1498,6 +1914,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1473645147291591,
         "max_total_g": 1.7418372484247775,
+        "avg_envelope_max": 1.6776228703589642,
+        "avg_utilization": 0.6812033291768049,
         "sample_count": 2691
       }
     ],
@@ -1507,6 +1925,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2046385363515746,
         "max_total_g": 1.9582535586588372,
+        "avg_envelope_max": 1.6621425750208183,
+        "avg_utilization": 0.7202795901289505,
         "sample_count": 2089
       },
       {
@@ -1514,6 +1934,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1875458603615845,
         "max_total_g": 1.6102450124127075,
+        "avg_envelope_max": 1.6517549891198136,
+        "avg_utilization": 0.7199801975023992,
         "sample_count": 4340
       },
       {
@@ -1521,6 +1943,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1862174038502395,
         "max_total_g": 1.4348466817050525,
+        "avg_envelope_max": 1.4920440421554486,
+        "avg_utilization": 0.798211266221296,
         "sample_count": 2557
       },
       {
@@ -1528,6 +1952,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0403576651191857,
         "max_total_g": 1.6079157316227737,
+        "avg_envelope_max": 1.6164188304365927,
+        "avg_utilization": 0.6480608830090535,
         "sample_count": 1326
       },
       {
@@ -1535,6 +1961,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2054869954166214,
         "max_total_g": 1.7561469186830583,
+        "avg_envelope_max": 1.5730363086684827,
+        "avg_utilization": 0.7673273522189846,
         "sample_count": 2617
       },
       {
@@ -1542,6 +1970,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0110304229266611,
         "max_total_g": 1.6472027804736125,
+        "avg_envelope_max": 1.693810421071942,
+        "avg_utilization": 0.5953858488591314,
         "sample_count": 1063
       },
       {
@@ -1549,6 +1979,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0413729307033852,
         "max_total_g": 1.6502805822041293,
+        "avg_envelope_max": 1.6711419499253028,
+        "avg_utilization": 0.6211912412411962,
         "sample_count": 995
       },
       {
@@ -1556,6 +1988,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3743786725962281,
         "max_total_g": 2.103788962800214,
+        "avg_envelope_max": 1.6792431688089773,
+        "avg_utilization": 0.8198676587509259,
         "sample_count": 1432
       },
       {
@@ -1563,6 +1997,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.1973443171276545,
         "max_total_g": 2.4734196975038425,
+        "avg_envelope_max": 1.6748521737637785,
+        "avg_utilization": 0.7116550226224889,
         "sample_count": 2924
       },
       {
@@ -1570,6 +2006,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.105143316570814,
         "max_total_g": 1.6009778262049728,
+        "avg_envelope_max": 1.6232639644168223,
+        "avg_utilization": 0.6825034227843697,
         "sample_count": 2488
       },
       {
@@ -1577,6 +2015,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1225551101683755,
         "max_total_g": 1.7286971973136303,
+        "avg_envelope_max": 1.633926380688309,
+        "avg_utilization": 0.684966815585822,
         "sample_count": 2767
       }
     ]
@@ -1588,6 +2028,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.3099842282091796,
         "max_total_g": 2.2432541095471104,
+        "avg_envelope_max": 1.7653845164449462,
+        "avg_utilization": 0.7398946177152467,
         "sample_count": 2030
       },
       {
@@ -1595,6 +2037,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2175551931498332,
         "max_total_g": 2.1012577186056927,
+        "avg_envelope_max": 1.7234059468736966,
+        "avg_utilization": 0.7063387671173759,
         "sample_count": 4440
       },
       {
@@ -1602,6 +2046,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1978238071187934,
         "max_total_g": 1.66939899365011,
+        "avg_envelope_max": 1.631788026922252,
+        "avg_utilization": 0.7359487045508857,
         "sample_count": 2786
       },
       {
@@ -1609,6 +2055,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.1336072440090335,
         "max_total_g": 1.5667807759862258,
+        "avg_envelope_max": 1.6899875654895355,
+        "avg_utilization": 0.6753094389971815,
         "sample_count": 1314
       },
       {
@@ -1616,6 +2064,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2598947515891115,
         "max_total_g": 1.802323222954196,
+        "avg_envelope_max": 1.6842418681735396,
+        "avg_utilization": 0.7483231831216642,
         "sample_count": 2526
       },
       {
@@ -1623,6 +2073,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0907727878481137,
         "max_total_g": 1.7750633791501642,
+        "avg_envelope_max": 1.7671539530427505,
+        "avg_utilization": 0.6173641798744209,
         "sample_count": 1404
       },
       {
@@ -1630,6 +2082,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9843375059118368,
         "max_total_g": 1.9158705593019585,
+        "avg_envelope_max": 1.7502542543629376,
+        "avg_utilization": 0.561627125836835,
         "sample_count": 953
       },
       {
@@ -1637,6 +2091,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3628572697319665,
         "max_total_g": 2.27600922669483,
+        "avg_envelope_max": 1.7463376971014675,
+        "avg_utilization": 0.7793394135192633,
         "sample_count": 1483
       },
       {
@@ -1644,6 +2100,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2702710715219776,
         "max_total_g": 2.9643323025598867,
+        "avg_envelope_max": 1.7455080135885166,
+        "avg_utilization": 0.7255867162736609,
         "sample_count": 2978
       },
       {
@@ -1651,6 +2109,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1653108486994384,
         "max_total_g": 1.677434052354965,
+        "avg_envelope_max": 1.6952391162298373,
+        "avg_utilization": 0.6878908201593374,
         "sample_count": 2500
       },
       {
@@ -1658,6 +2118,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1837812714534701,
         "max_total_g": 2.089365932525942,
+        "avg_envelope_max": 1.7292262044114153,
+        "avg_utilization": 0.6828164864555288,
         "sample_count": 2900
       }
     ],
@@ -1667,6 +2129,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2675980486381078,
         "max_total_g": 2.2156364774032764,
+        "avg_envelope_max": 1.710350400116647,
+        "avg_utilization": 0.7364772385774658,
         "sample_count": 2064
       },
       {
@@ -1674,6 +2138,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.194836298152857,
         "max_total_g": 1.6275312593004168,
+        "avg_envelope_max": 1.6915870229163188,
+        "avg_utilization": 0.7073544510057205,
         "sample_count": 4387
       },
       {
@@ -1681,6 +2147,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.193287048958433,
         "max_total_g": 1.654623824317781,
+        "avg_envelope_max": 1.5576423302066322,
+        "avg_utilization": 0.7707332069631936,
         "sample_count": 2835
       },
       {
@@ -1688,6 +2156,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0979957392083592,
         "max_total_g": 1.5970050093847545,
+        "avg_envelope_max": 1.5939489463833796,
+        "avg_utilization": 0.6992605321604577,
         "sample_count": 1355
       },
       {
@@ -1695,6 +2165,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2290020962805324,
         "max_total_g": 1.828682859327992,
+        "avg_envelope_max": 1.639731913404976,
+        "avg_utilization": 0.7507939822575682,
         "sample_count": 2484
       },
       {
@@ -1702,6 +2174,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.1085138140779696,
         "max_total_g": 1.7916218909133699,
+        "avg_envelope_max": 1.7666493893748165,
+        "avg_utilization": 0.6281723756471327,
         "sample_count": 1411
       },
       {
@@ -1709,6 +2183,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0323984220958229,
         "max_total_g": 2.210701698556366,
+        "avg_envelope_max": 1.6612830886319818,
+        "avg_utilization": 0.621495101119019,
         "sample_count": 980
       },
       {
@@ -1716,6 +2192,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3614893734386664,
         "max_total_g": 2.1895579462530788,
+        "avg_envelope_max": 1.6938004228806074,
+        "avg_utilization": 0.808429806222364,
         "sample_count": 1501
       },
       {
@@ -1723,6 +2201,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.241652384213932,
         "max_total_g": 1.8056073770341103,
+        "avg_envelope_max": 1.740056648614812,
+        "avg_utilization": 0.7128845783187238,
         "sample_count": 2974
       },
       {
@@ -1730,6 +2210,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1626304005735788,
         "max_total_g": 1.6615077490038979,
+        "avg_envelope_max": 1.6801269661899414,
+        "avg_utilization": 0.6943078024161481,
         "sample_count": 2359
       },
       {
@@ -1737,6 +2219,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1706347984053767,
         "max_total_g": 1.9106313092797365,
+        "avg_envelope_max": 1.7095340449589662,
+        "avg_utilization": 0.6822719945623312,
         "sample_count": 2773
       }
     ],
@@ -1746,6 +2230,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.28861299474493,
         "max_total_g": 2.223629690393614,
+        "avg_envelope_max": 1.7320929946676082,
+        "avg_utilization": 0.7403405174923786,
         "sample_count": 2088
       },
       {
@@ -1753,6 +2239,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1803722905373304,
         "max_total_g": 1.6311851519677343,
+        "avg_envelope_max": 1.6485776582318508,
+        "avg_utilization": 0.7154343641392465,
         "sample_count": 4489
       },
       {
@@ -1760,6 +2248,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1957103166669538,
         "max_total_g": 1.6310993225429284,
+        "avg_envelope_max": 1.5841004323107684,
+        "avg_utilization": 0.7576142482220727,
         "sample_count": 2734
       },
       {
@@ -1767,6 +2257,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.1182812043300323,
         "max_total_g": 1.6496987603802096,
+        "avg_envelope_max": 1.6512798697620739,
+        "avg_utilization": 0.6846908397674119,
         "sample_count": 1351
       },
       {
@@ -1774,6 +2266,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2201599235235223,
         "max_total_g": 1.8568265939500113,
+        "avg_envelope_max": 1.645254956523718,
+        "avg_utilization": 0.7420328819664295,
         "sample_count": 2520
       },
       {
@@ -1781,6 +2275,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0773386896444705,
         "max_total_g": 1.781290824093584,
+        "avg_envelope_max": 1.7520822033718193,
+        "avg_utilization": 0.6144468418284396,
         "sample_count": 1252
       },
       {
@@ -1788,6 +2284,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0561777654292772,
         "max_total_g": 1.611139348411552,
+        "avg_envelope_max": 1.7068006119869352,
+        "avg_utilization": 0.6180613957148241,
         "sample_count": 959
       },
       {
@@ -1795,6 +2293,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3395311955464089,
         "max_total_g": 2.0605351246702885,
+        "avg_envelope_max": 1.6753827381702542,
+        "avg_utilization": 0.8042583536933124,
         "sample_count": 1463
       },
       {
@@ -1802,6 +2302,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.262251128601431,
         "max_total_g": 1.9179616784492852,
+        "avg_envelope_max": 1.7218024696499847,
+        "avg_utilization": 0.731611030444959,
         "sample_count": 2874
       },
       {
@@ -1809,6 +2311,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1386872573250961,
         "max_total_g": 1.7320233832139795,
+        "avg_envelope_max": 1.627144696714295,
+        "avg_utilization": 0.7013756640875276,
         "sample_count": 2445
       },
       {
@@ -1816,6 +2320,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1717076419850303,
         "max_total_g": 1.875089864513165,
+        "avg_envelope_max": 1.6593594751407064,
+        "avg_utilization": 0.7041125782986752,
         "sample_count": 2766
       }
     ],
@@ -1825,6 +2331,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2442586848930073,
         "max_total_g": 1.8225709862718653,
+        "avg_envelope_max": 1.6090012584610938,
+        "avg_utilization": 0.7708784225610942,
         "sample_count": 2147
       },
       {
@@ -1832,6 +2340,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2206986367740893,
         "max_total_g": 1.6251209185780608,
+        "avg_envelope_max": 1.6262592936494866,
+        "avg_utilization": 0.7505703642604152,
         "sample_count": 4425
       },
       {
@@ -1839,6 +2349,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1902937361692676,
         "max_total_g": 1.4689196710508032,
+        "avg_envelope_max": 1.5632133200198852,
+        "avg_utilization": 0.7619326027320071,
         "sample_count": 2845
       },
       {
@@ -1846,6 +2358,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.112326914289806,
         "max_total_g": 1.5321840620499876,
+        "avg_envelope_max": 1.5776363712764505,
+        "avg_utilization": 0.7067484728467339,
         "sample_count": 1390
       },
       {
@@ -1853,6 +2367,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2312645874148818,
         "max_total_g": 1.799262348852996,
+        "avg_envelope_max": 1.5982043442194176,
+        "avg_utilization": 0.7701219954686082,
         "sample_count": 2555
       },
       {
@@ -1860,6 +2376,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.111014483301168,
         "max_total_g": 1.5458137015824382,
+        "avg_envelope_max": 1.6562431084645086,
+        "avg_utilization": 0.6708418370981732,
         "sample_count": 1331
       },
       {
@@ -1867,6 +2385,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0325975001518564,
         "max_total_g": 1.7237844992921825,
+        "avg_envelope_max": 1.607062833091625,
+        "avg_utilization": 0.6420788040410799,
         "sample_count": 861
       },
       {
@@ -1874,6 +2394,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3932578389227348,
         "max_total_g": 2.1441597421834038,
+        "avg_envelope_max": 1.5986944099243836,
+        "avg_utilization": 0.8728068413496796,
         "sample_count": 1515
       },
       {
@@ -1881,6 +2403,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2221351217315806,
         "max_total_g": 1.8518666258669925,
+        "avg_envelope_max": 1.654538054002726,
+        "avg_utilization": 0.7366038119856372,
         "sample_count": 3028
       },
       {
@@ -1888,6 +2412,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1633393232617508,
         "max_total_g": 1.4524465566760107,
+        "avg_envelope_max": 1.5973464531172143,
+        "avg_utilization": 0.72869590008315,
         "sample_count": 2436
       },
       {
@@ -1895,6 +2421,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.171854563853011,
         "max_total_g": 1.7197898127387543,
+        "avg_envelope_max": 1.625366574030932,
+        "avg_utilization": 0.7193955180787773,
         "sample_count": 2778
       }
     ],
@@ -1904,6 +2432,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2784009232773292,
         "max_total_g": 2.072295587024206,
+        "avg_envelope_max": 1.696255235097196,
+        "avg_utilization": 0.7508655864123486,
         "sample_count": 2059
       },
       {
@@ -1911,6 +2441,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2080058589567055,
         "max_total_g": 1.6770885486461353,
+        "avg_envelope_max": 1.6661352975917805,
+        "avg_utilization": 0.7253520295557215,
         "sample_count": 4502
       },
       {
@@ -1918,6 +2450,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.189252370349483,
         "max_total_g": 2.707596905006356,
+        "avg_envelope_max": 1.5697121384635309,
+        "avg_utilization": 0.7590413187676506,
         "sample_count": 2706
       },
       {
@@ -1925,6 +2459,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0795462985779967,
         "max_total_g": 1.833689450261412,
+        "avg_envelope_max": 1.6334543214552282,
+        "avg_utilization": 0.663687709693487,
         "sample_count": 1339
       },
       {
@@ -1932,6 +2468,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.232802889105915,
         "max_total_g": 1.9427861436606964,
+        "avg_envelope_max": 1.615209549038926,
+        "avg_utilization": 0.7632139957670705,
         "sample_count": 2648
       },
       {
@@ -1939,6 +2477,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.090191768969547,
         "max_total_g": 1.7487952996277178,
+        "avg_envelope_max": 1.7087871583216239,
+        "avg_utilization": 0.6383130582894213,
         "sample_count": 1472
       },
       {
@@ -1946,6 +2486,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0634584322421041,
         "max_total_g": 1.9698692850034492,
+        "avg_envelope_max": 1.6795482444256977,
+        "avg_utilization": 0.6324725164717913,
         "sample_count": 952
       },
       {
@@ -1953,6 +2495,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.356733646772858,
         "max_total_g": 2.1565446900076055,
+        "avg_envelope_max": 1.6743247275643312,
+        "avg_utilization": 0.8122972810451053,
         "sample_count": 1488
       },
       {
@@ -1960,6 +2504,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2550879055558577,
         "max_total_g": 2.009758691982697,
+        "avg_envelope_max": 1.7346644393134085,
+        "avg_utilization": 0.7209670975622877,
         "sample_count": 2999
       },
       {
@@ -1967,6 +2513,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1458826318713382,
         "max_total_g": 1.5604332731648605,
+        "avg_envelope_max": 1.6459916585747028,
+        "avg_utilization": 0.6965890246699692,
         "sample_count": 2429
       },
       {
@@ -1974,6 +2522,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1589444558617572,
         "max_total_g": 1.76987739688375,
+        "avg_envelope_max": 1.679353361799956,
+        "avg_utilization": 0.6891879167741835,
         "sample_count": 2771
       }
     ],
@@ -1983,6 +2533,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.3013146902517219,
         "max_total_g": 1.9803396173383998,
+        "avg_envelope_max": 1.7499282462396242,
+        "avg_utilization": 0.7425472107434108,
         "sample_count": 2037
       },
       {
@@ -1990,6 +2542,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2206882983899008,
         "max_total_g": 1.7544577509874668,
+        "avg_envelope_max": 1.7117873075687757,
+        "avg_utilization": 0.7134197384853693,
         "sample_count": 4405
       },
       {
@@ -1997,6 +2551,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2021352708075002,
         "max_total_g": 1.557653684231511,
+        "avg_envelope_max": 1.5793538246339984,
+        "avg_utilization": 0.7658548008547165,
         "sample_count": 2764
       },
       {
@@ -2004,6 +2560,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0805373927750808,
         "max_total_g": 1.6237056383470496,
+        "avg_envelope_max": 1.6229364972440163,
+        "avg_utilization": 0.6751720963875737,
         "sample_count": 1297
       },
       {
@@ -2011,6 +2569,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2762040924285063,
         "max_total_g": 1.9397427664512632,
+        "avg_envelope_max": 1.6867985611915228,
+        "avg_utilization": 0.7573689420959543,
         "sample_count": 2476
       },
       {
@@ -2018,6 +2578,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.1047150501333936,
         "max_total_g": 1.5103178473420753,
+        "avg_envelope_max": 1.7591406814798332,
+        "avg_utilization": 0.6279982595850149,
         "sample_count": 1444
       },
       {
@@ -2025,6 +2587,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0265902770430437,
         "max_total_g": 1.8766984307554584,
+        "avg_envelope_max": 1.7118631286235304,
+        "avg_utilization": 0.5978280306243796,
         "sample_count": 1000
       },
       {
@@ -2032,6 +2596,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3669038130359221,
         "max_total_g": 2.2814085561336883,
+        "avg_envelope_max": 1.7284105345489542,
+        "avg_utilization": 0.790022415207676,
         "sample_count": 1477
       },
       {
@@ -2039,6 +2605,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2665762501316953,
         "max_total_g": 1.8487739180332463,
+        "avg_envelope_max": 1.725325972582079,
+        "avg_utilization": 0.7345020048684552,
         "sample_count": 2980
       },
       {
@@ -2046,6 +2614,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1586260337419363,
         "max_total_g": 1.476133462800705,
+        "avg_envelope_max": 1.7132225308154896,
+        "avg_utilization": 0.677025402148355,
         "sample_count": 2488
       },
       {
@@ -2053,6 +2623,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1879941008974384,
         "max_total_g": 1.7622905549312804,
+        "avg_envelope_max": 1.7251857530592127,
+        "avg_utilization": 0.6866288532779108,
         "sample_count": 2858
       }
     ],
@@ -2062,6 +2634,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2994885029116263,
         "max_total_g": 1.8357954679103008,
+        "avg_envelope_max": 1.7321707049254398,
+        "avg_utilization": 0.747614031355529,
         "sample_count": 2035
       },
       {
@@ -2069,6 +2643,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2429723857537143,
         "max_total_g": 1.6133347451784457,
+        "avg_envelope_max": 1.7064078032130745,
+        "avg_utilization": 0.7289320092628122,
         "sample_count": 4320
       },
       {
@@ -2076,6 +2652,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.190253017592441,
         "max_total_g": 1.5055420950607792,
+        "avg_envelope_max": 1.6024712730786812,
+        "avg_utilization": 0.744759547200499,
         "sample_count": 2847
       },
       {
@@ -2083,6 +2661,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.1177669342900634,
         "max_total_g": 1.6854023258557584,
+        "avg_envelope_max": 1.6880144354114703,
+        "avg_utilization": 0.6655684942931777,
         "sample_count": 1281
       },
       {
@@ -2090,6 +2670,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2989041040724747,
         "max_total_g": 2.0191428874648767,
+        "avg_envelope_max": 1.6588276322017532,
+        "avg_utilization": 0.7830205418229983,
         "sample_count": 2471
       },
       {
@@ -2097,6 +2679,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0938761173954272,
         "max_total_g": 1.8037840779871632,
+        "avg_envelope_max": 1.7415849524093374,
+        "avg_utilization": 0.6287882702847726,
         "sample_count": 1356
       },
       {
@@ -2104,6 +2688,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0403080957916042,
         "max_total_g": 1.9015788177196338,
+        "avg_envelope_max": 1.7473904874825543,
+        "avg_utilization": 0.5929881352090057,
         "sample_count": 936
       },
       {
@@ -2111,6 +2697,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.4139573610320215,
         "max_total_g": 2.2694078522821766,
+        "avg_envelope_max": 1.7151123897481155,
+        "avg_utilization": 0.827214076264468,
         "sample_count": 1433
       },
       {
@@ -2118,6 +2706,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.275875971288813,
         "max_total_g": 1.9485799957918073,
+        "avg_envelope_max": 1.7494035552044835,
+        "avg_utilization": 0.7268290681319335,
         "sample_count": 2877
       },
       {
@@ -2125,6 +2715,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.183359260688853,
         "max_total_g": 1.6162317284350038,
+        "avg_envelope_max": 1.7098465024626484,
+        "avg_utilization": 0.6929485985342064,
         "sample_count": 2387
       },
       {
@@ -2132,6 +2724,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.178788632256382,
         "max_total_g": 1.6205940268926085,
+        "avg_envelope_max": 1.7005613315591537,
+        "avg_utilization": 0.6911061598440064,
         "sample_count": 2762
       }
     ],
@@ -2141,6 +2735,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1469436280665088,
         "max_total_g": 2.2046736719977402,
+        "avg_envelope_max": 1.5993613613277162,
+        "avg_utilization": 0.7092900992820041,
         "sample_count": 2162
       },
       {
@@ -2148,6 +2744,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1085022070242743,
         "max_total_g": 1.5481424353075526,
+        "avg_envelope_max": 1.5793024404239846,
+        "avg_utilization": 0.7054234883365398,
         "sample_count": 4508
       },
       {
@@ -2155,6 +2753,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1875013114663007,
         "max_total_g": 1.4431666570427686,
+        "avg_envelope_max": 1.4607130472841914,
+        "avg_utilization": 0.8166377836338415,
         "sample_count": 2568
       },
       {
@@ -2162,6 +2762,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0059069379485877,
         "max_total_g": 1.460965434224917,
+        "avg_envelope_max": 1.4737465654444135,
+        "avg_utilization": 0.68551060849801,
         "sample_count": 1340
       },
       {
@@ -2169,6 +2771,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2185848728588164,
         "max_total_g": 1.8777893918115525,
+        "avg_envelope_max": 1.5221606646761103,
+        "avg_utilization": 0.7993096252830612,
         "sample_count": 2568
       },
       {
@@ -2176,6 +2780,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0554477521538108,
         "max_total_g": 1.9066436478796975,
+        "avg_envelope_max": 1.633019140714335,
+        "avg_utilization": 0.6470504944735697,
         "sample_count": 1344
       },
       {
@@ -2183,6 +2789,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0041940317707394,
         "max_total_g": 1.6052414148656893,
+        "avg_envelope_max": 1.52913395221865,
+        "avg_utilization": 0.6534587964266605,
         "sample_count": 929
       },
       {
@@ -2190,6 +2798,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.2163090552726485,
         "max_total_g": 1.9992531105390334,
+        "avg_envelope_max": 1.60838984461053,
+        "avg_utilization": 0.7504742134334229,
         "sample_count": 1597
       },
       {
@@ -2197,6 +2807,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2049518232474232,
         "max_total_g": 1.8183959964760152,
+        "avg_envelope_max": 1.6043036518093017,
+        "avg_utilization": 0.7493489616179038,
         "sample_count": 2904
       },
       {
@@ -2204,6 +2816,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.098507318973461,
         "max_total_g": 1.5648466378530517,
+        "avg_envelope_max": 1.557608669836637,
+        "avg_utilization": 0.7058083616032909,
         "sample_count": 2469
       },
       {
@@ -2211,6 +2825,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1384947040006137,
         "max_total_g": 1.9203129953213356,
+        "avg_envelope_max": 1.5814171304511457,
+        "avg_utilization": 0.7150199581264385,
         "sample_count": 2787
       }
     ],
@@ -2220,6 +2836,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.245369033946957,
         "max_total_g": 1.9021590364635657,
+        "avg_envelope_max": 1.7000147555382241,
+        "avg_utilization": 0.7295669772634727,
         "sample_count": 2075
       },
       {
@@ -2227,6 +2845,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2354946712480122,
         "max_total_g": 2.1233758499144706,
+        "avg_envelope_max": 1.7015722784704168,
+        "avg_utilization": 0.7265135492800318,
         "sample_count": 4322
       },
       {
@@ -2234,6 +2854,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1949145445350415,
         "max_total_g": 1.518095188056401,
+        "avg_envelope_max": 1.5512518467513488,
+        "avg_utilization": 0.774248054819936,
         "sample_count": 2846
       },
       {
@@ -2241,6 +2863,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0892924018785288,
         "max_total_g": 1.924279605462782,
+        "avg_envelope_max": 1.6222906755815893,
+        "avg_utilization": 0.677465485867015,
         "sample_count": 1335
       },
       {
@@ -2248,6 +2872,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2982185191614322,
         "max_total_g": 1.977504740828704,
+        "avg_envelope_max": 1.6376689761643293,
+        "avg_utilization": 0.7936364636384078,
         "sample_count": 2508
       },
       {
@@ -2255,6 +2881,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.108360028275109,
         "max_total_g": 1.594682413523144,
+        "avg_envelope_max": 1.753530131261909,
+        "avg_utilization": 0.6319127280164096,
         "sample_count": 1462
       },
       {
@@ -2262,6 +2890,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0567182699262803,
         "max_total_g": 1.9961307572401163,
+        "avg_envelope_max": 1.7198421096877148,
+        "avg_utilization": 0.6136377456395983,
         "sample_count": 984
       },
       {
@@ -2269,6 +2899,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3908578557679923,
         "max_total_g": 2.27593694991755,
+        "avg_envelope_max": 1.6796698681831896,
+        "avg_utilization": 0.8307189713083879,
         "sample_count": 1512
       },
       {
@@ -2276,6 +2908,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.272832664295248,
         "max_total_g": 1.9741025809212651,
+        "avg_envelope_max": 1.7301051833155656,
+        "avg_utilization": 0.7329971244585429,
         "sample_count": 3038
       },
       {
@@ -2283,6 +2917,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1831614993218464,
         "max_total_g": 1.6330241884307777,
+        "avg_envelope_max": 1.6929145981991272,
+        "avg_utilization": 0.698949686338342,
         "sample_count": 2397
       },
       {
@@ -2290,6 +2926,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1639503410176237,
         "max_total_g": 1.6020315227859907,
+        "avg_envelope_max": 1.6826567576141953,
+        "avg_utilization": 0.6892690247580322,
         "sample_count": 2850
       }
     ],
@@ -2299,6 +2937,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2333961125099062,
         "max_total_g": 2.0163581031156146,
+        "avg_envelope_max": 1.7143019355389335,
+        "avg_utilization": 0.7153262512064814,
         "sample_count": 2010
       },
       {
@@ -2306,6 +2946,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2416787377528868,
         "max_total_g": 1.646628373373907,
+        "avg_envelope_max": 1.6693434280039068,
+        "avg_utilization": 0.7448489289251365,
         "sample_count": 4248
       },
       {
@@ -2313,6 +2955,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1562060002897228,
         "max_total_g": 1.5702821402537823,
+        "avg_envelope_max": 1.5197267996773949,
+        "avg_utilization": 0.7636726756345196,
         "sample_count": 2673
       },
       {
@@ -2320,6 +2964,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.1200124657439048,
         "max_total_g": 1.6408622733185136,
+        "avg_envelope_max": 1.647199502116913,
+        "avg_utilization": 0.6868657445206344,
         "sample_count": 1266
       },
       {
@@ -2327,6 +2973,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.277412796819117,
         "max_total_g": 1.9402608072112368,
+        "avg_envelope_max": 1.6116627299540127,
+        "avg_utilization": 0.7946651703984847,
         "sample_count": 2410
       },
       {
@@ -2334,6 +2982,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.1220873553049058,
         "max_total_g": 1.6067660066107945,
+        "avg_envelope_max": 1.722582997723142,
+        "avg_utilization": 0.6511900003642525,
         "sample_count": 1219
       },
       {
@@ -2341,6 +2991,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0242299703298645,
         "max_total_g": 1.9518919027446167,
+        "avg_envelope_max": 1.7374172773091898,
+        "avg_utilization": 0.5912758986108192,
         "sample_count": 899
       },
       {
@@ -2348,6 +3000,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.314513829727429,
         "max_total_g": 2.28801398597124,
+        "avg_envelope_max": 1.6899281412791827,
+        "avg_utilization": 0.7760471618192264,
         "sample_count": 1486
       },
       {
@@ -2355,6 +3009,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2514142078669737,
         "max_total_g": 2.5809618362153284,
+        "avg_envelope_max": 1.7457449239055667,
+        "avg_utilization": 0.7125692506806247,
         "sample_count": 2839
       },
       {
@@ -2362,6 +3018,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1156881231839462,
         "max_total_g": 1.6867317510499407,
+        "avg_envelope_max": 1.6199071255830684,
+        "avg_utilization": 0.6899548776136599,
         "sample_count": 2418
       },
       {
@@ -2369,6 +3027,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0852065627754237,
         "max_total_g": 2.0816294098614194,
+        "avg_envelope_max": 1.6817232037449301,
+        "avg_utilization": 0.6386787831430587,
         "sample_count": 2745
       }
     ],
@@ -2378,6 +3038,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.3270814023659374,
         "max_total_g": 2.295566596725087,
+        "avg_envelope_max": 1.740452718016066,
+        "avg_utilization": 0.7593390248500177,
         "sample_count": 2039
       },
       {
@@ -2385,6 +3047,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1748051740409025,
         "max_total_g": 1.5874762990356739,
+        "avg_envelope_max": 1.6689112746871755,
+        "avg_utilization": 0.7039315904253698,
         "sample_count": 4382
       },
       {
@@ -2392,6 +3056,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2230569221621652,
         "max_total_g": 1.5134520144358723,
+        "avg_envelope_max": 1.5810345406133424,
+        "avg_utilization": 0.7751923770081427,
         "sample_count": 2687
       },
       {
@@ -2399,6 +3065,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0995921109157738,
         "max_total_g": 1.602210972375361,
+        "avg_envelope_max": 1.639733023658404,
+        "avg_utilization": 0.6765334248103557,
         "sample_count": 1282
       },
       {
@@ -2406,6 +3074,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2242437159591177,
         "max_total_g": 1.8151771263433218,
+        "avg_envelope_max": 1.6355298957345277,
+        "avg_utilization": 0.7490400528561524,
         "sample_count": 2568
       },
       {
@@ -2413,6 +3083,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0712699346859353,
         "max_total_g": 1.5865286004355548,
+        "avg_envelope_max": 1.7404688615817525,
+        "avg_utilization": 0.616105301620715,
         "sample_count": 1384
       },
       {
@@ -2420,6 +3092,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0609020526524453,
         "max_total_g": 1.850599902734246,
+        "avg_envelope_max": 1.7426609125525558,
+        "avg_utilization": 0.6076434635287272,
         "sample_count": 880
       },
       {
@@ -2427,6 +3101,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.328879515258454,
         "max_total_g": 2.2265457552001937,
+        "avg_envelope_max": 1.6979996273294375,
+        "avg_utilization": 0.7837635365849211,
         "sample_count": 1391
       },
       {
@@ -2434,6 +3110,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2392293399157193,
         "max_total_g": 1.8573123054564626,
+        "avg_envelope_max": 1.733673657065491,
+        "avg_utilization": 0.7127772352973955,
         "sample_count": 2781
       },
       {
@@ -2441,6 +3119,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1200581421677511,
         "max_total_g": 1.774655177773981,
+        "avg_envelope_max": 1.6481432385760968,
+        "avg_utilization": 0.6799780677866134,
         "sample_count": 2448
       },
       {
@@ -2448,6 +3128,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.2129043298053874,
         "max_total_g": 1.837971980199916,
+        "avg_envelope_max": 1.6779923980497988,
+        "avg_utilization": 0.7195562938830741,
         "sample_count": 2693
       }
     ],
@@ -2457,6 +3139,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.307666197181611,
         "max_total_g": 2.036218308531774,
+        "avg_envelope_max": 1.728833565362577,
+        "avg_utilization": 0.7546084387763758,
         "sample_count": 1947
       },
       {
@@ -2464,6 +3148,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1855762692923415,
         "max_total_g": 1.563831832391194,
+        "avg_envelope_max": 1.7223986679241403,
+        "avg_utilization": 0.6891118676514776,
         "sample_count": 4397
       },
       {
@@ -2471,6 +3157,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1910749718070326,
         "max_total_g": 1.6507119676067052,
+        "avg_envelope_max": 1.5887778144741471,
+        "avg_utilization": 0.7530520252323264,
         "sample_count": 2558
       },
       {
@@ -2478,6 +3166,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.1050323294834368,
         "max_total_g": 1.815177401798513,
+        "avg_envelope_max": 1.6207455741242347,
+        "avg_utilization": 0.6906767316531731,
         "sample_count": 1287
       },
       {
@@ -2485,6 +3175,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2267018166067418,
         "max_total_g": 1.8968481752633761,
+        "avg_envelope_max": 1.657969227215597,
+        "avg_utilization": 0.7408963527043138,
         "sample_count": 2497
       },
       {
@@ -2492,6 +3184,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0804583721494854,
         "max_total_g": 1.7119115047221336,
+        "avg_envelope_max": 1.7936532660127242,
+        "avg_utilization": 0.6024734899331977,
         "sample_count": 1336
       },
       {
@@ -2499,6 +3193,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0449801891530976,
         "max_total_g": 2.0204873174558657,
+        "avg_envelope_max": 1.7628932709335634,
+        "avg_utilization": 0.5898953634638382,
         "sample_count": 858
       },
       {
@@ -2506,6 +3202,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3403489758877536,
         "max_total_g": 2.300860708517576,
+        "avg_envelope_max": 1.7493735709739062,
+        "avg_utilization": 0.7661691123968015,
         "sample_count": 1406
       },
       {
@@ -2513,6 +3211,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2575315229674282,
         "max_total_g": 1.9890040221176024,
+        "avg_envelope_max": 1.7480777895045234,
+        "avg_utilization": 0.71920113469996,
         "sample_count": 2872
       },
       {
@@ -2520,6 +3220,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1218626388175246,
         "max_total_g": 1.7337580569387414,
+        "avg_envelope_max": 1.6834830623020949,
+        "avg_utilization": 0.66617243477448,
         "sample_count": 2462
       },
       {
@@ -2527,6 +3229,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1936790896326823,
         "max_total_g": 1.7877787894479564,
+        "avg_envelope_max": 1.6796390548488795,
+        "avg_utilization": 0.7077901806675991,
         "sample_count": 2705
       }
     ],
@@ -2536,6 +3240,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.309527402014437,
         "max_total_g": 2.0488484570606973,
+        "avg_envelope_max": 1.710874424667782,
+        "avg_utilization": 0.7625200076138339,
         "sample_count": 2070
       },
       {
@@ -2543,6 +3249,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1990222896294265,
         "max_total_g": 1.6421382402221805,
+        "avg_envelope_max": 1.6758882442646883,
+        "avg_utilization": 0.7154499317717585,
         "sample_count": 4426
       },
       {
@@ -2550,6 +3258,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2225714822317084,
         "max_total_g": 1.4850417502548539,
+        "avg_envelope_max": 1.5245267217215166,
+        "avg_utilization": 0.8054641191073034,
         "sample_count": 2810
       },
       {
@@ -2557,6 +3267,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0786036367798706,
         "max_total_g": 1.6454388472380248,
+        "avg_envelope_max": 1.64140882093361,
+        "avg_utilization": 0.6642435204379145,
         "sample_count": 1328
       },
       {
@@ -2564,6 +3276,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2409932968786388,
         "max_total_g": 1.9364338356886865,
+        "avg_envelope_max": 1.609747200585082,
+        "avg_utilization": 0.7727153657816785,
         "sample_count": 2539
       },
       {
@@ -2571,6 +3285,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 0.9305463987172267,
         "max_total_g": 1.7721444636372057,
+        "avg_envelope_max": 1.7082149513122988,
+        "avg_utilization": 0.5358395652925461,
         "sample_count": 1489
       },
       {
@@ -2578,6 +3294,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0663237630175229,
         "max_total_g": 1.9917150900668499,
+        "avg_envelope_max": 1.7304497333211686,
+        "avg_utilization": 0.6148600762338982,
         "sample_count": 962
       },
       {
@@ -2585,6 +3303,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.337531071692909,
         "max_total_g": 2.115137820568674,
+        "avg_envelope_max": 1.7212040659286478,
+        "avg_utilization": 0.7765639282183704,
         "sample_count": 1438
       },
       {
@@ -2592,6 +3312,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2500111669440879,
         "max_total_g": 2.4435404641626053,
+        "avg_envelope_max": 1.7395191062668003,
+        "avg_utilization": 0.7169411874646993,
         "sample_count": 2883
       },
       {
@@ -2599,6 +3321,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1285694715665535,
         "max_total_g": 1.8383332124508875,
+        "avg_envelope_max": 1.616149956775025,
+        "avg_utilization": 0.6998704294439773,
         "sample_count": 2419
       },
       {
@@ -2606,6 +3330,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.179681467769051,
         "max_total_g": 1.7200886605056147,
+        "avg_envelope_max": 1.6674141399223334,
+        "avg_utilization": 0.704589661803166,
         "sample_count": 2813
       }
     ],
@@ -2615,6 +3341,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2526666714306944,
         "max_total_g": 2.094909067238958,
+        "avg_envelope_max": 1.6977146244016197,
+        "avg_utilization": 0.7356997411008891,
         "sample_count": 2065
       },
       {
@@ -2622,6 +3350,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2166468591342663,
         "max_total_g": 1.5902106778663008,
+        "avg_envelope_max": 1.6959936378265188,
+        "avg_utilization": 0.718027908075011,
         "sample_count": 4458
       },
       {
@@ -2629,6 +3359,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1695609879320759,
         "max_total_g": 1.4357611221926856,
+        "avg_envelope_max": 1.5846248489849104,
+        "avg_utilization": 0.7393266177850601,
         "sample_count": 2723
       },
       {
@@ -2636,6 +3368,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0786552662619657,
         "max_total_g": 1.5909597732186695,
+        "avg_envelope_max": 1.6452787321814486,
+        "avg_utilization": 0.6588842163312005,
         "sample_count": 1331
       },
       {
@@ -2643,6 +3377,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2474870143457082,
         "max_total_g": 1.8046451174676976,
+        "avg_envelope_max": 1.62955411751931,
+        "avg_utilization": 0.7655633276462547,
         "sample_count": 2579
       },
       {
@@ -2650,6 +3386,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.1088814762718904,
         "max_total_g": 1.7191672402648905,
+        "avg_envelope_max": 1.7301458389937603,
+        "avg_utilization": 0.6413971950763668,
         "sample_count": 1366
       },
       {
@@ -2657,6 +3395,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0032914516524927,
         "max_total_g": 1.8547549703397481,
+        "avg_envelope_max": 1.7015264728945187,
+        "avg_utilization": 0.5862010365519459,
         "sample_count": 1046
       },
       {
@@ -2664,6 +3404,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3862371062434278,
         "max_total_g": 2.0807061301394776,
+        "avg_envelope_max": 1.6896124803134,
+        "avg_utilization": 0.8220199792384338,
         "sample_count": 1472
       },
       {
@@ -2671,6 +3413,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2601534754762678,
         "max_total_g": 1.9449053961568414,
+        "avg_envelope_max": 1.7250785907591506,
+        "avg_utilization": 0.728430956103788,
         "sample_count": 2989
       },
       {
@@ -2678,6 +3422,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1465974966095003,
         "max_total_g": 1.4546934384948604,
+        "avg_envelope_max": 1.6686446834946391,
+        "avg_utilization": 0.6872517681685968,
         "sample_count": 2505
       },
       {
@@ -2685,6 +3431,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.142240016214314,
         "max_total_g": 1.6322671349996605,
+        "avg_envelope_max": 1.6799507393107673,
+        "avg_utilization": 0.6775999098613571,
         "sample_count": 2812
       }
     ],
@@ -2694,6 +3442,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1874853959474303,
         "max_total_g": 1.986090884123886,
+        "avg_envelope_max": 1.6513972157333563,
+        "avg_utilization": 0.7146458022880577,
         "sample_count": 2073
       },
       {
@@ -2701,6 +3451,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1900254389309715,
         "max_total_g": 1.6191862153563439,
+        "avg_envelope_max": 1.6185483227195432,
+        "avg_utilization": 0.7357258188069471,
         "sample_count": 4287
       },
       {
@@ -2708,6 +3460,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.128081783034338,
         "max_total_g": 1.4332689908038896,
+        "avg_envelope_max": 1.5374411036428977,
+        "avg_utilization": 0.7345032916993387,
         "sample_count": 2719
       },
       {
@@ -2715,6 +3469,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0809852818746284,
         "max_total_g": 1.668496928375956,
+        "avg_envelope_max": 1.6601731241997921,
+        "avg_utilization": 0.6533806778071689,
         "sample_count": 1262
       },
       {
@@ -2722,6 +3478,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.20656300585751,
         "max_total_g": 1.731588865753069,
+        "avg_envelope_max": 1.5774714019023999,
+        "avg_utilization": 0.765467165398927,
         "sample_count": 2376
       },
       {
@@ -2729,6 +3487,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0540970793543099,
         "max_total_g": 1.6672207412337454,
+        "avg_envelope_max": 1.6533047845476043,
+        "avg_utilization": 0.6380581209099389,
         "sample_count": 1302
       },
       {
@@ -2736,6 +3496,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9903894418764024,
         "max_total_g": 2.012968454795057,
+        "avg_envelope_max": 1.733316302478448,
+        "avg_utilization": 0.5695709657084972,
         "sample_count": 942
       },
       {
@@ -2743,6 +3505,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3490410894310998,
         "max_total_g": 2.0876477193243117,
+        "avg_envelope_max": 1.6259981097715666,
+        "avg_utilization": 0.8338688434208146,
         "sample_count": 1425
       },
       {
@@ -2750,6 +3514,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.204839162836794,
         "max_total_g": 1.8330010911071493,
+        "avg_envelope_max": 1.6861462543218795,
+        "avg_utilization": 0.7115395289937017,
         "sample_count": 2897
       },
       {
@@ -2757,6 +3523,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0988824697958601,
         "max_total_g": 1.6651066031939215,
+        "avg_envelope_max": 1.6062131326314886,
+        "avg_utilization": 0.6829100928399807,
         "sample_count": 2381
       },
       {
@@ -2764,6 +3532,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0745650424990696,
         "max_total_g": 1.8630024154573712,
+        "avg_envelope_max": 1.6296612678689437,
+        "avg_utilization": 0.6548641962576112,
         "sample_count": 2816
       }
     ],
@@ -2773,6 +3543,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.1870654526207276,
         "max_total_g": 1.8355386130506761,
+        "avg_envelope_max": 1.5909310439200517,
+        "avg_utilization": 0.7433265808656692,
         "sample_count": 2048
       },
       {
@@ -2780,6 +3552,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1898917530188882,
         "max_total_g": 1.6093256351652392,
+        "avg_envelope_max": 1.5534066193018121,
+        "avg_utilization": 0.7661237817594653,
         "sample_count": 4441
       },
       {
@@ -2787,6 +3561,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1546774737838148,
         "max_total_g": 1.4977092508227356,
+        "avg_envelope_max": 1.5120762320202337,
+        "avg_utilization": 0.7639991107006107,
         "sample_count": 2553
       },
       {
@@ -2794,6 +3570,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.062251803228922,
         "max_total_g": 1.6382679878457005,
+        "avg_envelope_max": 1.6048248478842817,
+        "avg_utilization": 0.6637366858789051,
         "sample_count": 1330
       },
       {
@@ -2801,6 +3579,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2013992250031245,
         "max_total_g": 1.9705291167602674,
+        "avg_envelope_max": 1.5190615344006226,
+        "avg_utilization": 0.7912789563111982,
         "sample_count": 2546
       },
       {
@@ -2808,6 +3588,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0819318151153243,
         "max_total_g": 1.4643783664067151,
+        "avg_envelope_max": 1.5979667734742526,
+        "avg_utilization": 0.6766045658025381,
         "sample_count": 1307
       },
       {
@@ -2815,6 +3597,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0228312766809835,
         "max_total_g": 1.6212248456028548,
+        "avg_envelope_max": 1.6605657759216816,
+        "avg_utilization": 0.614987380046674,
         "sample_count": 875
       },
       {
@@ -2822,6 +3606,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3226467614318105,
         "max_total_g": 2.057713293926051,
+        "avg_envelope_max": 1.5782041100696405,
+        "avg_utilization": 0.8394159177191933,
         "sample_count": 1418
       },
       {
@@ -2829,6 +3615,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.24026138160327,
         "max_total_g": 1.8469393601307003,
+        "avg_envelope_max": 1.6636951632505848,
+        "avg_utilization": 0.7418958533513389,
         "sample_count": 2834
       },
       {
@@ -2836,6 +3624,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0710930890283168,
         "max_total_g": 1.4736166394283148,
+        "avg_envelope_max": 1.5253369717758032,
+        "avg_utilization": 0.700175761114399,
         "sample_count": 2504
       },
       {
@@ -2843,6 +3633,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0661784510134404,
         "max_total_g": 1.57912665736476,
+        "avg_envelope_max": 1.5594212830198515,
+        "avg_utilization": 0.6813690340298482,
         "sample_count": 2790
       }
     ],
@@ -2852,6 +3644,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2876187038377176,
         "max_total_g": 2.3423996243169096,
+        "avg_envelope_max": 1.7166885355168675,
+        "avg_utilization": 0.7467968742987119,
         "sample_count": 2042
       },
       {
@@ -2859,6 +3653,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2085627194174995,
         "max_total_g": 1.607643306209434,
+        "avg_envelope_max": 1.692732991248998,
+        "avg_utilization": 0.7144082934586568,
         "sample_count": 4407
       },
       {
@@ -2866,6 +3662,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.2023204889030503,
         "max_total_g": 1.4781911243137675,
+        "avg_envelope_max": 1.5257793572465541,
+        "avg_utilization": 0.7919064304719929,
         "sample_count": 2846
       },
       {
@@ -2873,6 +3671,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.110578590380601,
         "max_total_g": 1.800055554698243,
+        "avg_envelope_max": 1.6399878324612918,
+        "avg_utilization": 0.6827878689808013,
         "sample_count": 1321
       },
       {
@@ -2880,6 +3680,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.246846939141986,
         "max_total_g": 1.841710346390007,
+        "avg_envelope_max": 1.6289543978024723,
+        "avg_utilization": 0.7660671405014311,
         "sample_count": 2525
       },
       {
@@ -2887,6 +3689,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0920741848226285,
         "max_total_g": 1.6698940086125227,
+        "avg_envelope_max": 1.7593919011789838,
+        "avg_utilization": 0.6210555435988231,
         "sample_count": 1422
       },
       {
@@ -2894,6 +3698,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.086812574481564,
         "max_total_g": 1.919412670584416,
+        "avg_envelope_max": 1.6890727505697962,
+        "avg_utilization": 0.6435629985348096,
         "sample_count": 844
       },
       {
@@ -2901,6 +3707,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3845555890387147,
         "max_total_g": 2.128127815710325,
+        "avg_envelope_max": 1.677970640348853,
+        "avg_utilization": 0.8311519583580342,
         "sample_count": 1472
       },
       {
@@ -2908,6 +3716,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2333614932750276,
         "max_total_g": 2.5492024242888207,
+        "avg_envelope_max": 1.7278845417269513,
+        "avg_utilization": 0.7110857569126802,
         "sample_count": 3001
       },
       {
@@ -2915,6 +3725,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.151673821575675,
         "max_total_g": 1.5942258309286048,
+        "avg_envelope_max": 1.6548155755246692,
+        "avg_utilization": 0.6970875692684321,
         "sample_count": 2380
       },
       {
@@ -2922,6 +3734,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1692793190883761,
         "max_total_g": 1.6836323826774062,
+        "avg_envelope_max": 1.668007684487751,
+        "avg_utilization": 0.7001645038921535,
         "sample_count": 2783
       }
     ],
@@ -2931,6 +3745,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.2220766735486583,
         "max_total_g": 2.0673899003332683,
+        "avg_envelope_max": 1.6307525686167392,
+        "avg_utilization": 0.7443857123063677,
         "sample_count": 1857
       },
       {
@@ -2938,6 +3754,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1894584674747541,
         "max_total_g": 1.6764366972838551,
+        "avg_envelope_max": 1.6677997752958489,
+        "avg_utilization": 0.7113177326798144,
         "sample_count": 3980
       },
       {
@@ -2945,6 +3763,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.186426486258954,
         "max_total_g": 1.4917211535672477,
+        "avg_envelope_max": 1.6214795866348672,
+        "avg_utilization": 0.7350514938040906,
         "sample_count": 2344
       },
       {
@@ -2952,6 +3772,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0250624867680498,
         "max_total_g": 1.7076592165886026,
+        "avg_envelope_max": 1.7117697365084905,
+        "avg_utilization": 0.6001741108842871,
         "sample_count": 1180
       },
       {
@@ -2959,6 +3781,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.2543488088778814,
         "max_total_g": 1.7926396737771926,
+        "avg_envelope_max": 1.6097301194829396,
+        "avg_utilization": 0.7813284377797702,
         "sample_count": 2217
       },
       {
@@ -2966,6 +3790,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.116365953875788,
         "max_total_g": 1.6916350079139415,
+        "avg_envelope_max": 1.69758786951502,
+        "avg_utilization": 0.6564780755453735,
         "sample_count": 1179
       },
       {
@@ -2973,6 +3799,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 0.9704773108248348,
         "max_total_g": 1.6207297738981659,
+        "avg_envelope_max": 1.7176255497379704,
+        "avg_utilization": 0.5649273532943377,
         "sample_count": 753
       },
       {
@@ -2980,6 +3808,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.2866608885952404,
         "max_total_g": 2.128286869761687,
+        "avg_envelope_max": 1.6932861555894476,
+        "avg_utilization": 0.7590592755597727,
         "sample_count": 1308
       },
       {
@@ -2987,6 +3817,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2411183897342608,
         "max_total_g": 1.7690545497524943,
+        "avg_envelope_max": 1.711530120314224,
+        "avg_utilization": 0.7234036114758837,
         "sample_count": 2527
       },
       {
@@ -2994,6 +3826,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0658105021626691,
         "max_total_g": 1.762930514796315,
+        "avg_envelope_max": 1.6498349011520153,
+        "avg_utilization": 0.6442912820092438,
         "sample_count": 2260
       },
       {
@@ -3001,6 +3835,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0792746378507014,
         "max_total_g": 1.6982873726198402,
+        "avg_envelope_max": 1.6091664855111076,
+        "avg_utilization": 0.6532887881078472,
         "sample_count": 2519
       }
     ],
@@ -3010,6 +3846,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.224351500485375,
         "max_total_g": 2.2402187393198907,
+        "avg_envelope_max": 1.6831244606719893,
+        "avg_utilization": 0.7213982924931985,
         "sample_count": 2091
       },
       {
@@ -3017,6 +3855,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.1946066620956555,
         "max_total_g": 1.8255862072222173,
+        "avg_envelope_max": 1.6869326573507737,
+        "avg_utilization": 0.7089960343708271,
         "sample_count": 4374
       },
       {
@@ -3024,6 +3864,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1852421922479337,
         "max_total_g": 1.7417247199256258,
+        "avg_envelope_max": 1.5132625825147927,
+        "avg_utilization": 0.7862290177696605,
         "sample_count": 2786
       },
       {
@@ -3031,6 +3873,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0975025605978115,
         "max_total_g": 1.6506204893917924,
+        "avg_envelope_max": 1.6441330928793794,
+        "avg_utilization": 0.6765178127078465,
         "sample_count": 1302
       },
       {
@@ -3038,6 +3882,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.247332264714095,
         "max_total_g": 1.8258852647414623,
+        "avg_envelope_max": 1.6135595781783925,
+        "avg_utilization": 0.7745598530438653,
         "sample_count": 2402
       },
       {
@@ -3045,6 +3891,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.1106972904761812,
         "max_total_g": 1.6227587621085273,
+        "avg_envelope_max": 1.7522580765050313,
+        "avg_utilization": 0.6336081591591469,
         "sample_count": 1331
       },
       {
@@ -3052,6 +3900,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.070899356975991,
         "max_total_g": 1.8692011662739783,
+        "avg_envelope_max": 1.727444202509784,
+        "avg_utilization": 0.61834955900067,
         "sample_count": 980
       },
       {
@@ -3059,6 +3909,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.3534555643811115,
         "max_total_g": 2.0430156631802903,
+        "avg_envelope_max": 1.6903055472681365,
+        "avg_utilization": 0.8010319530908674,
         "sample_count": 1453
       },
       {
@@ -3066,6 +3918,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2491222001780846,
         "max_total_g": 1.9158590762370806,
+        "avg_envelope_max": 1.7342611119007045,
+        "avg_utilization": 0.7196015667531527,
         "sample_count": 2914
       },
       {
@@ -3073,6 +3927,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.1079873865766614,
         "max_total_g": 1.6835159636902763,
+        "avg_envelope_max": 1.631418248754425,
+        "avg_utilization": 0.679294074512598,
         "sample_count": 2404
       },
       {
@@ -3080,6 +3936,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.1138813393178448,
         "max_total_g": 1.8488493719067545,
+        "avg_envelope_max": 1.662301110749171,
+        "avg_utilization": 0.6662633713163679,
         "sample_count": 2895
       }
     ],
@@ -3089,6 +3947,8 @@
         "zone_name": "Turn 1",
         "avg_total_g": 1.270093511476397,
         "max_total_g": 2.1115160430363775,
+        "avg_envelope_max": 1.6506379387472045,
+        "avg_utilization": 0.764158573142703,
         "sample_count": 1854
       },
       {
@@ -3096,6 +3956,8 @@
         "zone_name": "Turn 2",
         "avg_total_g": 1.2112932292886265,
         "max_total_g": 1.6301656357560725,
+        "avg_envelope_max": 1.6395341631806575,
+        "avg_utilization": 0.7398297426094268,
         "sample_count": 3946
       },
       {
@@ -3103,6 +3965,8 @@
         "zone_name": "Turn 3",
         "avg_total_g": 1.1531826482805323,
         "max_total_g": 1.454098346055039,
+        "avg_envelope_max": 1.4782088909822921,
+        "avg_utilization": 0.7833993290207867,
         "sample_count": 2590
       },
       {
@@ -3110,6 +3974,8 @@
         "zone_name": "Turn 4",
         "avg_total_g": 1.0912700557152164,
         "max_total_g": 1.7411076933952132,
+        "avg_envelope_max": 1.6116960740593258,
+        "avg_utilization": 0.6846040655689726,
         "sample_count": 1183
       },
       {
@@ -3117,6 +3983,8 @@
         "zone_name": "Turn 5",
         "avg_total_g": 1.248692040918062,
         "max_total_g": 1.8326169812593138,
+        "avg_envelope_max": 1.5662461631989917,
+        "avg_utilization": 0.7981068726747901,
         "sample_count": 2283
       },
       {
@@ -3124,6 +3992,8 @@
         "zone_name": "Turn 6",
         "avg_total_g": 1.0669157264169784,
         "max_total_g": 1.6132913562032123,
+        "avg_envelope_max": 1.6997377025480858,
+        "avg_utilization": 0.6290319681704476,
         "sample_count": 1058
       },
       {
@@ -3131,6 +4001,8 @@
         "zone_name": "Turn 7",
         "avg_total_g": 1.0442697029577115,
         "max_total_g": 1.8962700229661387,
+        "avg_envelope_max": 1.6600139299580048,
+        "avg_utilization": 0.6263225538144073,
         "sample_count": 864
       },
       {
@@ -3138,6 +4010,8 @@
         "zone_name": "Turn 8",
         "avg_total_g": 1.351283762048599,
         "max_total_g": 2.229102958591191,
+        "avg_envelope_max": 1.6456782156275527,
+        "avg_utilization": 0.822485467681965,
         "sample_count": 1349
       },
       {
@@ -3145,6 +4019,8 @@
         "zone_name": "Turn 9",
         "avg_total_g": 1.2110598906153291,
         "max_total_g": 1.9458995349195187,
+        "avg_envelope_max": 1.7111290686967193,
+        "avg_utilization": 0.7040387493159639,
         "sample_count": 2734
       },
       {
@@ -3152,6 +4028,8 @@
         "zone_name": "Turn 10",
         "avg_total_g": 1.0510640061421792,
         "max_total_g": 1.4978441173900574,
+        "avg_envelope_max": 1.5871093651557229,
+        "avg_utilization": 0.6593577207205058,
         "sample_count": 2417
       },
       {
@@ -3159,6 +4037,8 @@
         "zone_name": "Turn 11",
         "avg_total_g": 1.0456274709623203,
         "max_total_g": 1.7496342474928868,
+        "avg_envelope_max": 1.6172380070357377,
+        "avg_utilization": 0.6390768543131919,
         "sample_count": 2762
       }
     ]

@@ -34,6 +34,34 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+        }
+
+        .driver-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #2d2d2d;
+            padding: 15px;
+            border-left: 4px solid #4ec9b0;
+            border-radius: 4px;
+            min-width: 200px;
+            z-index: 100;
+        }
+
+        .driver-overlay label {
+            margin-bottom: 8px;
+        }
+
+        .driver-overlay select {
+            width: 100%;
+        }
+
+        .driver-overlay .stats {
+            margin: 15px 0 0 0;
+            padding: 15px;
+            background: #1e1e1e;
+            border-left: 4px solid #ce9178;
         }
 
         h1 {
@@ -145,44 +173,20 @@
                 </select>
             </div>
 
-            <div class="controls">
-                <label for="driverSelect">Select Driver:</label>
-                <select id="driverSelect">
-                    <option value="">Loading...</option>
-                </select>
-            </div>
-
-            <div class="stats">
-                <strong>Driver Statistics</strong>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Max Grip</div>
-                        <div class="stat-value" id="maxGrip">--</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Samples</div>
-                        <div class="stat-value" id="sampleCount">--</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Mean Total G</div>
-                        <div class="stat-value" id="meanGrip">--</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="stats" style="margin-top: 20px;">
                 <strong>Turn Zone Statistics</strong>
-                <div id="zoneTable" style="margin-top: 10px; max-height: 300px; overflow-y: auto;">
+                <div id="zoneTable" style="margin-top: 10px;">
                     <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
                         <thead style="position: sticky; top: 0; background: #2d2d2d;">
                             <tr>
                                 <th style="padding: 8px; text-align: left; border-bottom: 1px solid #4ec9b0;">Zone</th>
                                 <th style="padding: 8px; text-align: right; border-bottom: 1px solid #4ec9b0;">Avg G</th>
+                                <th style="padding: 8px; text-align: right; border-bottom: 1px solid #4ec9b0;">Util %</th>
                                 <th style="padding: 8px; text-align: right; border-bottom: 1px solid #4ec9b0;">Samples</th>
                             </tr>
                         </thead>
                         <tbody id="zoneTableBody">
-                            <tr><td colspan="3" style="padding: 8px; text-align: center;">--</td></tr>
+                            <tr><td colspan="4" style="padding: 8px; text-align: center;">--</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -192,6 +196,30 @@
         </div>
 
         <div class="chart-container">
+            <div class="driver-overlay">
+                <label for="driverSelect">Select Driver:</label>
+                <select id="driverSelect">
+                    <option value="">Loading...</option>
+                </select>
+
+                <div class="stats">
+                    <strong>Driver Statistics</strong>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Max Grip</div>
+                            <div class="stat-value" id="maxGrip">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Samples</div>
+                            <div class="stat-value" id="sampleCount">--</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Mean Total G</div>
+                            <div class="stat-value" id="meanGrip">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="chart"></div>
         </div>
     </div>
@@ -384,10 +412,13 @@
         function updateChart() {
             // Filter data for current driver
             const driverData = allSamples.filter(d => d.vehicle === currentDriver);
-            const envelope = envelopes[currentDriver.toString()] || [];
+            const envelopeData = envelopes[currentDriver.toString()] || null;
 
             // Update stats
-            const maxGrip = d3.max(envelope, d => d.total_g_max) || 0;
+            let maxGrip = 0;
+            if (envelopeData && envelopeData.envelope_points) {
+                maxGrip = d3.max(envelopeData.envelope_points, d => d.total_g) || 0;
+            }
             const meanGrip = d3.mean(driverData, d => Math.sqrt(d.accx ** 2 + d.accy ** 2)) || 0;
 
             d3.select('#maxGrip').text(maxGrip.toFixed(2) + 'g');
@@ -416,13 +447,19 @@
                         .style('padding', '8px')
                         .style('text-align', 'right')
                         .style('border-bottom', '1px solid #3a3a3a')
+                        .style('color', '#ce9178')
+                        .text((zone.avg_utilization * 100).toFixed(1) + '%');
+                    row.append('td')
+                        .style('padding', '8px')
+                        .style('text-align', 'right')
+                        .style('border-bottom', '1px solid #3a3a3a')
                         .style('color', '#858585')
                         .text(zone.sample_count.toLocaleString());
                 });
             } else {
                 tbody.append('tr')
                     .append('td')
-                    .attr('colspan', '3')
+                    .attr('colspan', '4')
                     .style('padding', '8px')
                     .style('text-align', 'center')
                     .text('No zone data');
@@ -490,101 +527,51 @@
                 .attr('fill', d => colorScale(d.length))
                 .attr('opacity', 0.8);
 
-            // Compute envelopes using angular binning (like Python correction)
-            const numAngleBins = 72; // 1.25° per bin for smoother envelope
-            const angleBins = new Map(); // Map of angle bin -> array of {radius, accx, accy}
-
-            // Convert to polar and collect by angle bin
-            driverData.forEach(d => {
-                const radius = Math.sqrt(d.accx ** 2 + d.accy ** 2);
-                const angle = Math.atan2(d.accy, d.accx); // radians, 0 to π/2
-                const binKey = Math.floor(angle / (Math.PI / 2) * numAngleBins);
-
-                if (!angleBins.has(binKey)) {
-                    angleBins.set(binKey, []);
-                }
-                angleBins.get(binKey).push({ radius, accx: d.accx, accy: d.accy, angle });
-            });
-
-            // Compute 99.5th percentile radius for each angular bin
-            const p995EnvelopePoints = [];
-
-            angleBins.forEach((points, binIdx) => {
-                // Sort by radius descending
-                points.sort((a, b) => b.radius - a.radius);
-
-                if (points.length === 0) return;
-
-                // Get 99.5th percentile radius
-                const p995Index = Math.floor(points.length * 0.005); // top 0.5%
-                const p995Radius = points[p995Index].radius;
-
-                // Find representative angle for this bin
-                const avgAngle = points.reduce((sum, p) => sum + p.angle, 0) / points.length;
-
-                // Convert back to cartesian
-                const p995Accx = p995Radius * Math.cos(avgAngle);
-                const p995Accy = p995Radius * Math.sin(avgAngle);
-
-                p995EnvelopePoints.push({ accx: p995Accx, accy: p995Accy });
-            });
-
-            // Sort by angle for proper rendering
-            p995EnvelopePoints.sort((a, b) => Math.atan2(a.accy, a.accx) - Math.atan2(b.accy, b.accx));
-
-            // Fit polynomial in polar coordinates: r = f(theta)
-            // Convert envelope points to polar coordinates
-            const polarPoints = p995EnvelopePoints.map(d => {
-                const r = Math.sqrt(d.accx * d.accx + d.accy * d.accy);
-                const theta = Math.atan2(d.accy, d.accx);
-                return { r, theta, accx: d.accx, accy: d.accy };
-            });
-
-            // Sort by theta for fitting
-            polarPoints.sort((a, b) => a.theta - b.theta);
-
-            // Extract theta and r arrays for polynomial fitting
-            const thetas = polarPoints.map(p => p.theta);
-            const radii = polarPoints.map(p => p.r);
-
-            // Fit 5th degree polynomial: r = a0 + a1*theta + a2*theta² + a3*theta³ + a4*theta⁴ + a5*theta⁵
-            const degree = 5;
-            const coeffs = polynomialFit(thetas, radii, degree);
+            // Use pre-computed envelope points and polynomial coefficients
+            const p995EnvelopePoints = envelopeData && envelopeData.envelope_points ?
+                envelopeData.envelope_points : [];
+            // Python np.polyfit returns descending order [a5,a4,...,a0], JavaScript polyEval expects ascending [a0,a1,...,a5]
+            const coeffs = envelopeData && envelopeData.poly_coeffs ?
+                envelopeData.poly_coeffs.slice().reverse() : null;
 
             // Generate smooth curve points using the polynomial
-            const curvePoints = [];
-            for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) { // 1° increments
-                const r = polyEval(coeffs, theta);
-                curvePoints.push({
-                    accx: r * Math.cos(theta),
-                    accy: r * Math.sin(theta)
-                });
+            if (coeffs) {
+                const curvePoints = [];
+                for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) { // 1° increments
+                    const r = polyEval(coeffs, theta);
+                    curvePoints.push({
+                        accx: r * Math.cos(theta),
+                        accy: r * Math.sin(theta)
+                    });
+                }
+
+                // Draw fitted curve in cyan
+                const lineGenerator = d3.line()
+                    .x(d => xScale(d.accx))
+                    .y(d => yScale(d.accy))
+                    .curve(d3.curveLinear);
+
+                svg.append('path')
+                    .datum(curvePoints)
+                    .attr('fill', 'none')
+                    .attr('stroke', 'cyan')
+                    .attr('stroke-width', 2)
+                    .attr('d', lineGenerator);
             }
 
-            // Draw fitted curve in cyan
-            const lineGenerator = d3.line()
-                .x(d => xScale(d.accx))
-                .y(d => yScale(d.accy))
-                .curve(d3.curveLinear);
-
-            svg.append('path')
-                .datum(curvePoints)
-                .attr('fill', 'none')
-                .attr('stroke', 'cyan')
-                .attr('stroke-width', 2)
-                .attr('d', lineGenerator);
-
             // Draw 99.5th percentile envelope in blue
-            svg.append('g')
-                .selectAll('circle')
-                .data(p995EnvelopePoints)
-                .enter()
-                .append('circle')
-                .attr('cx', d => xScale(d.accx))
-                .attr('cy', d => yScale(d.accy))
-                .attr('r', 3)
-                .attr('fill', 'blue')
-                .attr('opacity', 0.9);
+            if (p995EnvelopePoints.length > 0) {
+                svg.append('g')
+                    .selectAll('circle')
+                    .data(p995EnvelopePoints)
+                    .enter()
+                    .append('circle')
+                    .attr('cx', d => xScale(d.accx))
+                    .attr('cy', d => yScale(d.accy))
+                    .attr('r', 3)
+                    .attr('fill', 'blue')
+                    .attr('opacity', 0.9);
+            }
 
             // Add axes
             svg.append('g')

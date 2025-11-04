@@ -42,6 +42,7 @@ Using both races for envelope construction provides better statistical confidenc
 - **GPS coordinates for spatial assignment** (not Laptrigger_lapdist_dls)
 - **Rotation only in rendering** (store data in raw UTM)
 - **Pre-compute heavy analysis in Python** (browser just renders)
+- **Data Quality**: Some vehicles had duplicate timestamps across parameters. Added sequence numbering during pivot to recover 99.9% of lost data.
 
 ## License
 

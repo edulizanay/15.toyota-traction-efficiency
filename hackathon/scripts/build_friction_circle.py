@@ -42,15 +42,24 @@ def load_telemetry_chunked(telemetry_paths, needed_params, chunk_size=50000):
             if len(chunk_filtered) == 0:
                 continue
 
+            # Add sequence number to handle timestamp duplicates
+            # Group by (vehicle, lap, timestamp, telemetry_name) and add row number
+            chunk_filtered["seq"] = chunk_filtered.groupby(
+                ["vehicle_number", "lap", "timestamp", "telemetry_name"]
+            ).cumcount()
+
             # Pivot this chunk immediately (small pivot = low memory)
             try:
                 chunk_wide = chunk_filtered.pivot_table(
-                    index=["vehicle_number", "lap", "timestamp"],
+                    index=["vehicle_number", "lap", "timestamp", "seq"],
                     columns="telemetry_name",
                     values="telemetry_value",
                     aggfunc="first",
                 ).reset_index()
                 chunk_wide.columns.name = None
+
+                # Drop seq column
+                chunk_wide = chunk_wide.drop(columns=["seq"])
 
                 # Add race column
                 chunk_wide["race"] = race_name

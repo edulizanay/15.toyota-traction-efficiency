@@ -873,6 +873,36 @@ function rotateCoordinates(x, y, angleDegrees) {
         .innerRadius(0)
         .outerRadius(9); // 3x the original point radius (3 * 3 = 9)
 
+    // Load turn zones early to calculate centerline positions
+    const turnZonesEarly = await d3.json('data/processed/turn_zones.json');
+
+    // Calculate centerline position for each zone (at midpoint distance)
+    const zoneCenterlinePositions = new Map();
+
+    turnZonesEarly.forEach(zone => {
+        const midDistance = (zone.start_distance_m + zone.end_distance_m) / 2;
+
+        // Find closest centerline point to this distance
+        let closestIdx = 0;
+        let minDiff = Math.abs(centerlineWithDistance[0].distance - midDistance);
+
+        for (let i = 1; i < centerlineWithDistance.length; i++) {
+            const diff = Math.abs(centerlineWithDistance[i].distance - midDistance);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestIdx = i;
+            }
+        }
+
+        const centerPoint = centerlineWithDistance[closestIdx];
+        zoneCenterlinePositions.set(zone.zone_id, {
+            x: centerPoint.x,
+            y: centerPoint.y
+        });
+    });
+
+    console.log(`Calculated centerline positions for ${zoneCenterlinePositions.size} zones`);
+
     // Current state
     let currentRace = 'R1';
     let selectedDrivers = new Set();
@@ -943,7 +973,7 @@ function rotateCoordinates(x, y, angleDegrees) {
         });
 
         // Aggregate by zone
-        const zoneAggregates = aggregateEventsByZone(filteredPoints);
+        const zoneAggregates = aggregateEventsByZone(filteredPoints, zoneCenterlinePositions);
 
         console.log(`Rendering ${zoneAggregates.length} pie charts from ${filteredPoints.length} points (race: ${currentRace}, drivers: ${selectedDrivers.size})`);
 
@@ -965,7 +995,7 @@ function rotateCoordinates(x, y, angleDegrees) {
         // Position each group at zone centroid
         allGroups.attr('transform', d => `translate(${xScale(d.centroid_x)}, ${yScale(d.centroid_y)})`);
 
-        // For each zone, create pie slices
+        // For each zone, create pie slices and labels
         allGroups.each(function(zoneData) {
             const group = d3.select(this);
 
@@ -976,22 +1006,52 @@ function rotateCoordinates(x, y, angleDegrees) {
                 { classification: 'Aggressive', value: zoneData.Aggressive }
             ].filter(d => d.value > 0); // Only include non-zero slices
 
-            // Data join for pie slices
-            const slices = group.selectAll('path')
-                .data(pie(pieData), d => d.data.classification);
+            const pieSlices = pie(pieData);
+
+            // Data join for pie slices (paths)
+            const slices = group.selectAll('path.slice')
+                .data(pieSlices, d => d.data.classification);
 
             // Exit
             slices.exit().remove();
 
-            // Enter
+            // Enter + Update
             slices.enter()
                 .append('path')
+                .attr('class', 'slice')
                 .attr('fill', d => classificationColors[d.data.classification])
                 .attr('fill-opacity', 0.7)
                 .attr('stroke', d => classificationColors[d.data.classification])
                 .attr('stroke-width', 0.5)
                 .merge(slices)
                 .attr('d', arc);
+
+            // Data join for labels (text)
+            const labels = group.selectAll('text.label')
+                .data(pieSlices, d => d.data.classification);
+
+            // Exit
+            labels.exit().remove();
+
+            // Enter + Update
+            labels.enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('text-anchor', 'middle')
+                .attr('dy', '0.35em')
+                .style('fill', 'white')
+                .style('font-size', '8px')
+                .style('font-weight', '600')
+                .style('pointer-events', 'none')
+                .merge(labels)
+                .attr('transform', d => {
+                    const [x, y] = arc.centroid(d);
+                    return `translate(${x}, ${y})`;
+                })
+                .text(d => {
+                    const percentage = Math.round((d.data.value / zoneData.total) * 100);
+                    return percentage >= 5 ? `${percentage}%` : ''; // Only show if >= 5%
+                });
         });
     }
 
@@ -1074,9 +1134,9 @@ function rotateCoordinates(x, y, angleDegrees) {
     // Zone Navigation System
     // ========================================
 
-    // Load turn zones and calculate bounding boxes
-    const turnZones = await d3.json('data/processed/turn_zones.json');
-    console.log(`Loaded ${turnZones.length} turn zones`);
+    // Use already-loaded turn zones
+    const turnZones = turnZonesEarly;
+    console.log(`Using ${turnZones.length} turn zones for navigation`);
 
     // Calculate bounding box for each zone from classified points
     const ZONE_DATA = [];

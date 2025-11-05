@@ -291,3 +291,30 @@ body {
     font-weight: 500;
     color: #aaa;
 }
+
+/* Track chevron animations */
+.track-chevrons {
+    pointer-events: none;
+}
+
+.track-chevron {
+    opacity: 0;
+}
+
+@keyframes chevronPulse {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    30% {
+        opacity: 0.5;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}

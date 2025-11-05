@@ -196,7 +196,133 @@ function rotateCoordinates(x, y, angleDegrees) {
         }
     }
 
-    // Direction triangles removed
+    // Calculate chevron positions along centerline
+    function calculateChevronPositions(centerlineData, spacing_m = 75.0) {
+        const positions = [];
+        const totalDistance = centerlineData[centerlineData.length - 1].distance;
+
+        // Sample positions every spacing_m meters
+        for (let targetDist = 0; targetDist < totalDistance; targetDist += spacing_m) {
+            // Find closest centerline point
+            let closestIdx = 0;
+            let minDiff = Math.abs(centerlineData[0].distance - targetDist);
+
+            for (let i = 1; i < centerlineData.length; i++) {
+                const diff = Math.abs(centerlineData[i].distance - targetDist);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestIdx = i;
+                }
+            }
+
+            // Calculate tangent using central difference with wraparound
+            const n = centerlineData.length;
+            const prevIdx = (closestIdx - 5 + n) % n;
+            const nextIdx = (closestIdx + 5) % n;
+
+            const prev = centerlineData[prevIdx];
+            const next = centerlineData[nextIdx];
+            const curr = centerlineData[closestIdx];
+
+            // Tangent vector
+            let tx = next.x - prev.x;
+            let ty = next.y - prev.y;
+            const magnitude = Math.sqrt(tx * tx + ty * ty);
+
+            if (magnitude > 1e-6) {
+                tx /= magnitude;
+                ty /= magnitude;
+
+                // Calculate angle in degrees
+                const angle = Math.atan2(ty, tx) * 180 / Math.PI;
+
+                positions.push({
+                    x: curr.x,
+                    y: curr.y,
+                    angle: angle,
+                    distance: curr.distance
+                });
+            }
+        }
+
+        return positions;
+    }
+
+    // Create simple triangle arrow pointing in track direction
+    function createChevronPath(x, y, angle, length_m = 4.0, width_m = 2.0) {
+        const angleRad = angle * Math.PI / 180;
+        const cos = Math.cos(angleRad);
+        const sin = Math.sin(angleRad);
+
+        // Chevron tip (front)
+        const tipX = x + (length_m / 2) * cos;
+        const tipY = y + (length_m / 2) * sin;
+
+        // Base center (back)
+        const baseX = x - (length_m / 2) * cos;
+        const baseY = y - (length_m / 2) * sin;
+
+        // Normal vector (perpendicular)
+        const nx = -sin;
+        const ny = cos;
+
+        // Left and right base points
+        const leftX = baseX + (width_m / 2) * nx;
+        const leftY = baseY + (width_m / 2) * ny;
+        const rightX = baseX - (width_m / 2) * nx;
+        const rightY = baseY - (width_m / 2) * ny;
+
+        // Return 3 points forming triangle
+        return [
+            { x: tipX, y: tipY },
+            { x: leftX, y: leftY },
+            { x: rightX, y: rightY }
+        ];
+    }
+
+    // Add animated chevrons
+    const markPositions = calculateChevronPositions(centerlineWithDistance, 80.0);
+    console.log(`Calculated ${markPositions.length} chevron positions`);
+
+    // Create chevrons group
+    const marksGroup = g.append('g').attr('class', 'track-chevrons');
+
+    // Animation settings
+    const animationDuration = 3.0; // seconds
+    const delayPerMark = animationDuration / markPositions.length;
+
+    // Create chevrons at each position with staggered animations
+    markPositions.forEach((pos, idx) => {
+        // Create group of 3 chevrons at this position
+        for (let chevIdx = 0; chevIdx < 3; chevIdx++) {
+            const offset = chevIdx * 6; // 6m spacing between chevrons in a group
+
+            // Calculate offset position along tangent
+            const angleRad = pos.angle * Math.PI / 180;
+            const offsetX = pos.x - offset * Math.cos(angleRad); // Negative offset for spacing behind
+            const offsetY = pos.y - offset * Math.sin(angleRad);
+
+            const points = createChevronPath(offsetX, offsetY, pos.angle, 4.0, 1.8);
+
+            const pathData = `M ${xScale(points[0].x)},${yScale(points[0].y)} ` +
+                           `L ${xScale(points[1].x)},${yScale(points[1].y)} ` +
+                           `L ${xScale(points[2].x)},${yScale(points[2].y)} Z`;
+
+            // Calculate animation delay for this chevron
+            const animDelay = idx * delayPerMark;
+
+            marksGroup.append('path')
+                .attr('d', pathData)
+                .attr('class', 'track-chevron')
+                .attr('fill', '#444')
+                .attr('stroke', 'none')
+                .style('animation', `chevronPulse ${animationDuration}s linear infinite`)
+                .style('animation-delay', `${animDelay}s`)
+                .style('opacity', 0);
+        }
+    });
+
+    console.log(`Track chevrons rendered (${markPositions.length * 3} total)`);
 
     // Draw checkered start/finish marker
     // Calculate track direction at start/finish using ±5 points

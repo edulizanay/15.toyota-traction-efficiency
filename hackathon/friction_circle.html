@@ -537,6 +537,10 @@
             const fieldCoeffs = fieldEnvelopeData && fieldEnvelopeData.poly_coeffs ?
                 fieldEnvelopeData.poly_coeffs.slice().reverse() : null;
 
+            console.log('Field envelope data:', fieldEnvelopeData ? 'exists' : 'missing');
+            console.log('Field coeffs:', fieldCoeffs ? 'exists' : 'missing');
+            console.log('Field envelope points:', fieldEnvelopePoints.length);
+
             if (fieldCoeffs) {
                 const fieldCurvePoints = [];
                 for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) {
@@ -557,9 +561,9 @@
                     .datum(fieldCurvePoints)
                     .attr('fill', 'none')
                     .attr('stroke', '#ff8c42')  // orange
-                    .attr('stroke-width', 3)
-                    .attr('stroke-dasharray', '5,5')  // dashed line
-                    .attr('opacity', 0.6)
+                    .attr('stroke-width', 4)
+                    .attr('stroke-dasharray', '8,4')  // dashed line
+                    .attr('opacity', 0.8)
                     .attr('d', lineGenerator);
             }
 
@@ -649,10 +653,10 @@
                 .attr('y', -45)
                 .text('Lateral G (|accy|)');
 
-            // Add legend
+            // Add legend at bottom-right
             const legend = svg.append('g')
                 .attr('class', 'legend')
-                .attr('transform', `translate(${width - 180}, 10)`);
+                .attr('transform', `translate(${width - 180}, ${height - 60})`);
 
             // Field envelope legend item
             legend.append('line')
@@ -661,9 +665,9 @@
                 .attr('y1', 0)
                 .attr('y2', 0)
                 .attr('stroke', '#ff8c42')
-                .attr('stroke-width', 3)
-                .attr('stroke-dasharray', '5,5')
-                .attr('opacity', 0.6);
+                .attr('stroke-width', 4)
+                .attr('stroke-dasharray', '8,4')
+                .attr('opacity', 0.8);
 
             legend.append('text')
                 .attr('x', 35)

@@ -50,20 +50,16 @@ function rotateCoordinates(x, y, angleDegrees) {
         return { x: rotated.x, y: rotated.y };
     });
 
-    // Rotate pit lane connectors
-    if (pitLane.connectors) {
-        if (pitLane.connectors.pit_out) {
-            pitLane.connectors.pit_out = pitLane.connectors.pit_out.map(p => {
-                const rotated = rotateCoordinates(p.x_meters, p.y_meters, rotationAngle);
-                return { x: rotated.x, y: rotated.y };
-            });
-        }
-        if (pitLane.connectors.pit_in) {
-            pitLane.connectors.pit_in = pitLane.connectors.pit_in.map(p => {
-                const rotated = rotateCoordinates(p.x_meters, p.y_meters, rotationAngle);
-                return { x: rotated.x, y: rotated.y };
-            });
-        }
+    // Rotate pit lane boundaries
+    if (pitLane.boundaries) {
+        pitLane.boundaries.inner = pitLane.boundaries.inner.map(p => {
+            const rotated = rotateCoordinates(p.x_meters, p.y_meters, rotationAngle);
+            return { x: rotated.x, y: rotated.y };
+        });
+        pitLane.boundaries.outer = pitLane.boundaries.outer.map(p => {
+            const rotated = rotateCoordinates(p.x_meters, p.y_meters, rotationAngle);
+            return { x: rotated.x, y: rotated.y };
+        });
     }
 
     // Set up SVG
@@ -108,13 +104,34 @@ function rotateCoordinates(x, y, angleDegrees) {
     // Combine into single polygon path
     const trackPolygon = [...outerClosed, ...innerClosed];
 
-    // Line generator
+    // Line generator with curve smoothing for track
     const line = d3.line()
         .x(d => xScale(d.x))
         .y(d => yScale(d.y))
-        .curve(d3.curveLinear);
+        .curve(d3.curveCatmullRom.alpha(0.5));
 
-    // Draw track surface as filled polygon
+    // Smoother line generator for pit lane (higher alpha = smoother)
+    const smoothLine = d3.line()
+        .x(d => xScale(d.x))
+        .y(d => yScale(d.y))
+        .curve(d3.curveCatmullRom.alpha(0.8));
+
+    // Draw pit lane FIRST (so it appears behind track)
+    if (pitLane.boundaries) {
+        const pitOuter = pitLane.boundaries.outer;
+        const pitInnerReversed = [...pitLane.boundaries.inner].reverse();
+        const pitLanePolygon = [...pitOuter, ...pitInnerReversed];
+
+        g.append('path')
+            .datum(pitLanePolygon)
+            .attr('class', 'pit-lane-surface')
+            .attr('d', smoothLine)
+            .style('fill', '#2a2a2a')
+            .style('stroke', '#444')
+            .style('stroke-width', 1);
+    }
+
+    // Draw track surface SECOND (so it appears on top)
     g.append('path')
         .datum(trackPolygon)
         .attr('class', 'track-surface')
@@ -122,38 +139,6 @@ function rotateCoordinates(x, y, angleDegrees) {
         .style('fill', '#2a2a2a')
         .style('stroke', '#444')
         .style('stroke-width', 1);
-
-    // Draw pit lane centerline
-    g.append('path')
-        .datum(pitLane.centerline)
-        .attr('class', 'pit-lane-centerline')
-        .attr('d', line)
-        .style('fill', 'none')
-        .style('stroke', '#888')
-        .style('stroke-width', 2)
-        .style('stroke-dasharray', '5,3');
-
-    // Draw pit lane connectors
-    if (pitLane.connectors) {
-        if (pitLane.connectors.pit_out) {
-            g.append('path')
-                .datum(pitLane.connectors.pit_out)
-                .attr('class', 'pit-connector-out')
-                .attr('d', line)
-                .style('fill', 'none')
-                .style('stroke', '#666')
-                .style('stroke-width', 1.5);
-        }
-        if (pitLane.connectors.pit_in) {
-            g.append('path')
-                .datum(pitLane.connectors.pit_in)
-                .attr('class', 'pit-connector-in')
-                .attr('d', line)
-                .style('fill', 'none')
-                .style('stroke', '#666')
-                .style('stroke-width', 1.5);
-        }
-    }
 
     // Load corner labels
     const cornerLabels = await d3.json('data/assets/corner_labels.json');

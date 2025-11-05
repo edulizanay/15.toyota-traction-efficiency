@@ -20,7 +20,7 @@ OVERSTEER_ACCY_ABS_MIN = 0.5  # g minimum lateral accel
 
 # Zone-level macro-event thresholds
 MACRO_EVENT_COVERAGE_THRESHOLD = (
-    0.11  # fraction of samples with events (raised from 0.08)
+    0.10  # fraction of samples with events (balanced tweak from 0.11)
 )
 MACRO_EVENT_RUN_LENGTH_THRESHOLD = (
     7  # samples in longest contiguous event run (raised from 6)

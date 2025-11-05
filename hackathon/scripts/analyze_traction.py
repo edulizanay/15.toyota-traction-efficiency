@@ -64,15 +64,24 @@ def load_telemetry_chunked(
             if len(chunk_filtered) == 0:
                 continue
 
+            # Add sequence number to handle timestamp duplicates
+            # Group by (vehicle, lap, timestamp, telemetry_name) and add row number
+            chunk_filtered["seq"] = chunk_filtered.groupby(
+                ["vehicle_number", "lap", "timestamp", "telemetry_name"]
+            ).cumcount()
+
             # Pivot this chunk immediately (small pivot = low memory)
             try:
                 chunk_wide = chunk_filtered.pivot_table(
-                    index=["vehicle_number", "lap", "timestamp"],
+                    index=["vehicle_number", "lap", "timestamp", "seq"],
                     columns="telemetry_name",
                     values="telemetry_value",
                     aggfunc="first",
                 ).reset_index()
                 chunk_wide.columns.name = None
+
+                # Drop seq column
+                chunk_wide = chunk_wide.drop(columns=["seq"])
 
                 # Add race column
                 chunk_wide["race"] = race_name
@@ -339,6 +348,7 @@ def classify_laps_step(
 
     # Process each race separately
     all_results = []
+    all_classified_points = []  # Collect individual telemetry points with classifications
 
     for race_name in df["race"].unique():
         print(f"\n=== Processing {race_name} ===")
@@ -392,6 +402,26 @@ def classify_laps_step(
                     }
                     all_results.append(result)
 
+                    # Find median position along track (stays on racing line, not inside curves)
+                    median_distance = zone_samples["track_distance_m"].median()
+                    closest_idx = (
+                        (zone_samples["track_distance_m"] - median_distance)
+                        .abs()
+                        .idxmin()
+                    )
+                    median_sample = zone_samples.loc[closest_idx]
+
+                    zone_point = {
+                        "race": race_name,
+                        "vehicle_number": driver,
+                        "lap": lap_num,
+                        "zone_id": zone_id,
+                        "classification": classification_result["classification"],
+                        "x_meters": median_sample["x_meters"],
+                        "y_meters": median_sample["y_meters"],
+                    }
+                    all_classified_points.append(zone_point)
+
     # Convert to DataFrame and save
     print("\n=== Saving Results ===")
     results_df = pd.DataFrame(all_results)
@@ -412,6 +442,17 @@ def classify_laps_step(
 
     print("\nAverage Utilization by Classification:")
     print(results_df.groupby("classification")["avg_utilization"].mean())
+
+    # Save classified telemetry points for visualization
+    print("\n=== Saving Classified Telemetry Points ===")
+    if all_classified_points:
+        points_df = pd.DataFrame(all_classified_points)
+        points_output = output_path.parent / "classified_telemetry_points.csv"
+        points_df.to_csv(points_output, index=False)
+        print(f"  Saved {len(points_df):,} classified points to: {points_output}")
+        print(f"  File size: {points_output.stat().st_size / 1024 / 1024:.1f} MB")
+    else:
+        print("  No classified points to save")
 
 
 def main():

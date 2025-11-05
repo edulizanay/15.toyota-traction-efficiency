@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traction Efficiency Analysis - Barber Motorsports Park</title>
+    <link rel="stylesheet" href="track.css">
+</head>
+<body>
+    <div id="header">
+        <h1>Barber Motorsports Park</h1>
+        <p>← → Navigate zones with arrow keys</p>
+    </div>
+
+    <div id="controls-panel">
+        <div class="control-section">
+            <div id="race-selector">
+                <button class="race-btn active" data-race="R1">R1</button>
+                <button class="race-btn" data-race="R2">R2</button>
+            </div>
+        </div>
+        <div class="control-section">
+            <div id="driver-list">
+                <!-- Drivers will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="button-panel">
+        <button id="toggle-corners" class="control-btn active">Corners</button>
+        <button id="toggle-avg-events" class="control-btn active">Events</button>
+    </div>
+
+    <div id="legend-panel">
+        <div class="legend-item">
+            <div class="legend-color optimal"></div>
+            <span>Optimal</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color conservative"></div>
+            <span>Conservative</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color aggressive"></div>
+            <span>Aggressive</span>
+        </div>
+    </div>
+
+    <div id="track-container">
+        <svg id="track-svg"></svg>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="track.js"></script>
+</body>
+</html>

@@ -14,7 +14,8 @@ driver_finish_times = {}
 
 # Process both race files
 for race_path in [race1_path, race2_path]:
-    race_name = "Race 1" if "Race 1" in race_path else "Race 2"
+    # Normalize to R1/R2 keys for downstream consumers
+    race_name = "R1" if "Race 1" in race_path else "R2"
 
     with open(race_path, "r") as f:
         reader = csv.DictReader(f, delimiter=";")
@@ -45,24 +46,10 @@ for race_path in [race1_path, race2_path]:
                 driver_finish_times[driver_num] = {}
             driver_finish_times[driver_num][race_name] = lap_data["elapsed"]
 
-# For display, use the better (faster) of the two races
-driver_times = {}
-for driver_num, races in driver_finish_times.items():
-    # If driver has both races, pick the faster one (shorter time)
-    # Otherwise just use whatever race they have
-    if len(races) == 2:
-        # Compare times - they're in format MM:SS.SSS
-        time1 = races.get("Race 1", "99:99.999")
-        time2 = races.get("Race 2", "99:99.999")
-        driver_times[driver_num] = time1 if time1 < time2 else time2
-    else:
-        # Only one race available
-        driver_times[driver_num] = list(races.values())[0]
+# Save total (per-race) times to JSON for UI consumption
+total_times_output_path = "../data/processed/driver_total_times.json"
+with open(total_times_output_path, "w") as f:
+    json.dump(driver_finish_times, f, indent=2)
 
-# Save to JSON
-output_path = "../data/processed/driver_best_laps.json"
-with open(output_path, "w") as f:
-    json.dump(driver_times, f, indent=2)
-
-print(f"Extracted race finish times for {len(driver_times)} drivers")
-print(f"Saved to {output_path}")
+print(f"Extracted race finish times for {len(driver_finish_times)} drivers")
+print(f"Saved to {total_times_output_path}")

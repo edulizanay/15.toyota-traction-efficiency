@@ -1,0 +1,293 @@
+/* ABOUTME: Styling for traction efficiency analysis dashboard */
+/* ABOUTME: Clean layout with full-screen track visualization */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
+    background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+    z-index: 1000;
+    pointer-events: none;
+    text-align: center;
+}
+
+#header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+#header p {
+    font-size: 14px;
+    color: #999;
+    font-weight: 400;
+}
+
+#track-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#track-svg {
+    width: 100%;
+    height: 100%;
+    cursor: move;
+}
+
+.track-surface {
+    fill: #2a2a2a;
+    stroke: #444;
+    stroke-width: 1;
+    stroke-linejoin: round;
+}
+
+.track-surface:hover {
+    fill: #333;
+}
+
+#controls-panel {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 14px;
+    width: 180px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.control-section {
+    margin-bottom: 24px;
+}
+
+.control-section:last-child {
+    margin-bottom: 0;
+}
+
+.control-section h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+
+#button-panel {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: transparent;
+    padding: 16px;
+    width: 180px;
+    z-index: 1000;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    background: transparent;
+    border: 1px solid #d4a017;
+    border-radius: 4px;
+    color: #d4a017;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-btn:last-child {
+    margin-bottom: 0;
+}
+
+.control-btn:hover {
+    background: rgba(212, 160, 23, 0.1);
+}
+
+.control-btn.active {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: #d4a017;
+}
+
+#race-selector {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.race-btn {
+    flex: 1;
+    padding: 6px 10px;
+    background: transparent;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #888;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.race-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #666;
+}
+
+.race-btn.active {
+    background: rgba(212, 160, 23, 0.15);
+    border-color: #d4a017;
+    color: #d4a017;
+}
+
+#driver-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.driver-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 6px;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.driver-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.driver-item.active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.driver-item:not(.active) .driver-color {
+    opacity: 0.3;
+}
+
+.driver-item.active .driver-color {
+    opacity: 1;
+}
+
+.driver-item:not(.active) .driver-label {
+    color: #666;
+}
+
+.driver-item.active .driver-label {
+    color: #ffffff;
+}
+
+.driver-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+}
+
+.driver-label {
+    font-size: 12px;
+    font-weight: 500;
+    flex: 1;
+    transition: color 0.2s ease;
+}
+
+.driver-time {
+    font-size: 10px;
+    font-weight: 400;
+    color: #888;
+    transition: color 0.2s ease;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.driver-item.active .driver-time {
+    color: #bbb;
+}
+
+.driver-item:not(.active) .driver-time {
+    color: #555;
+}
+
+#legend-panel {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 16px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+.legend-color.optimal {
+    background: #22c55e;
+}
+
+.legend-color.conservative {
+    background: #eab308;
+}
+
+.legend-color.aggressive {
+    background: #ef4444;
+}
+
+.legend-item span {
+    font-size: 10px;
+    font-weight: 500;
+    color: #aaa;
+}

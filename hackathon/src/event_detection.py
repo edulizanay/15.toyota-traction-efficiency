@@ -19,9 +19,18 @@ OVERSTEER_ACCX_DROP_THRESHOLD = -0.2  # g forward accel drop
 OVERSTEER_ACCY_ABS_MIN = 0.5  # g minimum lateral accel
 
 # Zone-level macro-event thresholds
-MACRO_EVENT_COVERAGE_THRESHOLD = 0.08  # fraction of samples with events
-MACRO_EVENT_RUN_LENGTH_THRESHOLD = 6  # samples in longest contiguous event run
-OPTIMAL_UTILIZATION_THRESHOLD = 0.90  # utilization threshold for optimal classification
+MACRO_EVENT_COVERAGE_THRESHOLD = (
+    0.11  # fraction of samples with events (raised from 0.08)
+)
+MACRO_EVENT_RUN_LENGTH_THRESHOLD = (
+    7  # samples in longest contiguous event run (raised from 6)
+)
+OPTIMAL_UTILIZATION_THRESHOLD = (
+    0.81  # utilization threshold for optimal classification (lowered from 0.90)
+)
+AGGRESSIVE_HIGH_UTIL_THRESHOLD = (
+    0.85  # require high utilization for aggressive classification
+)
 
 
 def detect_events(df, window_size=10):
@@ -206,9 +215,12 @@ def classify_zone(zone_samples, envelope_data, zone_id):
             current_run = 0
 
     # Determine if this is a macro-event (sustained aggressive behavior)
+    # Changed to AND logic: both conditions must be met for sustained issue
+    # Also requires high utilization to be "aggressive" (near-limit mistakes)
     is_macro_event = (
         event_coverage >= MACRO_EVENT_COVERAGE_THRESHOLD
-        or max_event_run_len >= MACRO_EVENT_RUN_LENGTH_THRESHOLD
+        and max_event_run_len >= MACRO_EVENT_RUN_LENGTH_THRESHOLD
+        and utilization >= AGGRESSIVE_HIGH_UTIL_THRESHOLD
     )
 
     # Classify zone

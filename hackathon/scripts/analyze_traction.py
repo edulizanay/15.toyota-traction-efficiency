@@ -362,8 +362,8 @@ def classify_laps_step(
             # Detect events using rolling window
             driver_data = detect_events(driver_data, window_size=10)
 
-            # Get envelope for this driver
-            driver_envelope = envelopes.get(str(driver), {})
+            # Use shared field-wide envelope (same for all drivers - competitive comparison)
+            driver_envelope = envelopes.get("all", {})
 
             # Process each lap
             laps = driver_data["lap"].unique()

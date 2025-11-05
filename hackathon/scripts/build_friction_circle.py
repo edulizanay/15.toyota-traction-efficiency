@@ -202,10 +202,66 @@ def build_friction_circle_data(
     samples_df.to_csv(output_samples_path, index=False)
     print(f"  ✓ Saved {len(samples_df):,} samples to: {output_samples_path}")
 
-    print("\n=== Step 5: Build Friction Envelopes (per driver) ===")
+    print("\n=== Step 5: Build Field-Wide Friction Envelope (all drivers) ===")
 
+    # Build shared envelope from ALL drivers' data combined
+    num_angle_bins = 72
+    angle_bins = {}
+
+    for _, row in df.iterrows():
+        radius = row["total_g"]
+        angle = np.arctan2(row["abs_accy"], row["abs_accx"])
+        bin_key = int(np.floor(angle / (np.pi / 2) * num_angle_bins))
+
+        if bin_key not in angle_bins:
+            angle_bins[bin_key] = []
+        angle_bins[bin_key].append(
+            {
+                "radius": radius,
+                "accx": row["abs_accx"],
+                "accy": row["abs_accy"],
+                "angle": angle,
+            }
+        )
+
+    # Extract 99.5th percentile per angular bin
+    envelope_points = []
+    for bin_idx, points in angle_bins.items():
+        points_sorted = sorted(points, key=lambda p: p["radius"], reverse=True)
+        p995_idx = int(len(points_sorted) * 0.005)  # top 0.5%
+        p995_point = points_sorted[p995_idx]
+
+        envelope_points.append(
+            {
+                "accx": float(p995_point["accx"]),
+                "accy": float(p995_point["accy"]),
+                "total_g": float(p995_point["radius"]),
+            }
+        )
+
+    # Sort by angle
+    envelope_points.sort(key=lambda p: np.arctan2(p["accy"], p["accx"]))
+
+    # Fit polynomial to envelope
+    accx_vals = np.array([p["accx"] for p in envelope_points])
+    accy_vals = np.array([p["accy"] for p in envelope_points])
+    poly_coeffs = fit_polynomial_envelope(accx_vals, accy_vals, degree=5)
+
+    # Create field-wide envelope entry
     envelopes = {}
+    envelopes["all"] = {
+        "envelope_points": envelope_points,
+        "poly_coeffs": poly_coeffs.tolist(),
+    }
 
+    max_g = max(point["total_g"] for point in envelope_points)
+    print(
+        f"  Field-wide envelope: {len(envelope_points)} points, max grip = {max_g:.2f}g"
+    )
+
+    print("\n=== Step 6: Build Per-Driver Friction Envelopes (for visualization) ===")
+
+    # Keep adding to existing envelopes dict (field-wide "all" is already in there)
     for vehicle_num in sorted(df["vehicle_number"].unique()):
         vehicle_data = df[df["vehicle_number"] == vehicle_num].copy()
 
@@ -311,8 +367,8 @@ def build_friction_circle_data(
             vehicle_data = race_data[race_data["vehicle_number"] == vehicle_num].copy()
             zone_stats[race][str(vehicle_num)] = []
 
-            # Get polynomial coefficients for this driver's envelope
-            poly_coeffs = np.array(envelopes[str(vehicle_num)]["poly_coeffs"])
+            # Use field-wide shared envelope (same for all drivers - competitive comparison)
+            poly_coeffs = np.array(envelopes["all"]["poly_coeffs"])
 
             for zone in turn_zones:
                 zone_data = vehicle_data[vehicle_data["zone_id"] == zone["zone_id"]]

@@ -70,6 +70,33 @@ function rotateCoordinates(x, y, angleDegrees) {
     svg.attr('width', width)
        .attr('height', height);
 
+    // Create defs for checkered pattern
+    const defs = svg.append('defs');
+
+    // Checkered flag pattern (minimalistic racing start/finish)
+    const squareSize = 0.5; // meters per square (larger squares)
+    const checkerPattern = defs.append('pattern')
+        .attr('id', 'checkerPattern')
+        .attr('patternUnits', 'userSpaceOnUse')
+        .attr('width', squareSize * 2)
+        .attr('height', squareSize * 2);
+
+    // Background matches track color to hide the line
+    checkerPattern.append('rect')
+        .attr('x', 0).attr('y', 0)
+        .attr('width', squareSize * 2).attr('height', squareSize * 2)
+        .attr('fill', '#2a2a2a'); // Same as track color
+
+    checkerPattern.append('rect')
+        .attr('x', 0).attr('y', 0)
+        .attr('width', squareSize).attr('height', squareSize)
+        .attr('fill', 'rgba(180, 180, 180, 0.6)'); // Light gray
+
+    checkerPattern.append('rect')
+        .attr('x', squareSize).attr('y', squareSize)
+        .attr('width', squareSize).attr('height', squareSize)
+        .attr('fill', 'rgba(180, 180, 180, 0.6)'); // Light gray
+
     // Create main group for zoom/pan
     const g = svg.append('g');
 
@@ -170,6 +197,53 @@ function rotateCoordinates(x, y, angleDegrees) {
     }
 
     // Direction triangles removed
+
+    // Draw checkered start/finish marker
+    // Calculate track direction at start/finish using ±5 points
+    const startIdx = 0;
+    const prevIdx = Math.max(0, startIdx - 5);
+    const nextIdx = Math.min(centerlineWithDistance.length - 1, startIdx + 5);
+
+    const prevPoint = centerlineWithDistance[prevIdx];
+    const nextPoint = centerlineWithDistance[nextIdx];
+    const centerPoint = centerlineWithDistance[startIdx];
+
+    // Calculate track angle in degrees
+    const dx = nextPoint.x - prevPoint.x;
+    const dy = nextPoint.y - prevPoint.y;
+    const trackAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    // Calculate track width at start/finish
+    const innerPt = boundaries.inner[0];
+    const outerPt = boundaries.outer[0];
+    const startFinishTrackWidth = Math.sqrt(
+        Math.pow(outerPt.x - innerPt.x, 2) +
+        Math.pow(outerPt.y - innerPt.y, 2)
+    );
+
+    // Checkered flag dimensions
+    const flagLength = 20.0; // 20m along track
+    const flagWidth = startFinishTrackWidth * 0.95; // 95% of track width (5% smaller)
+
+    // Calculate the perpendicular offset to center the flag on the track
+    const perpAngle = (trackAngle + 90) * Math.PI / 180;
+    const centerOffset = startFinishTrackWidth / 2;
+    const flagCenterX = (innerPt.x + outerPt.x) / 2;
+    const flagCenterY = (innerPt.y + outerPt.y) / 2;
+
+    // Transform pattern to match data scale
+    const patternScale = checkerPattern
+        .attr('patternTransform', `scale(${1 / (xScale(1) - xScale(0))}, ${1 / (yScale(0) - yScale(1))})`);
+
+    g.append('rect')
+        .attr('class', 'checkered-start-finish')
+        .attr('x', xScale(flagCenterX) - xScale(flagLength / 2) + xScale(0))
+        .attr('y', yScale(flagCenterY) - (yScale(0) - yScale(flagWidth / 2)))
+        .attr('width', xScale(flagLength) - xScale(0))
+        .attr('height', yScale(0) - yScale(flagWidth))
+        .attr('transform', `rotate(${trackAngle - 7.5}, ${xScale(flagCenterX)}, ${yScale(flagCenterY)})`)
+        .style('fill', 'url(#checkerPattern)')
+        .style('opacity', 0.9);
 
     // Draw corner labels
     const cornerLabelGroup = g.append('g').attr('class', 'corner-labels');

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle #13 Complete GPS Trace - R1</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(42, 42, 42, 0.9);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        #info h1 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+            color: #fbbf24;
+        }
+
+        #info .stat {
+            margin: 5px 0;
+        }
+
+        #info .label {
+            color: #888;
+            margin-right: 8px;
+        }
+
+        svg {
+            display: block;
+        }
+
+        .gps-trace {
+            fill: none;
+            stroke: #3b82f6;
+            stroke-width: 1;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.6;
+        }
+
+        .gps-points {
+            fill: #3b82f6;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Vehicle #46 - Complete Trace</h1>
+        <div class="stat"><span class="label">Session:</span>R1 (with pit stop on lap 9)</div>
+        <div class="stat"><span class="label">Total Points:</span><span id="point-count">Loading...</span></div>
+        <div class="stat"><span class="label">Controls:</span>Scroll to zoom, drag to pan</div>
+    </div>
+
+    <svg id="track-svg"></svg>
+
+    <script>
+        async function init() {
+            // Load vehicle data
+            const vehicleData = await d3.json('data/processed/vehicle_46_gps.json');
+
+            console.log(`Loaded vehicle #${vehicleData.vehicle_number}`);
+            console.log(`Total points: ${vehicleData.total_points}`);
+
+            // Update info
+            document.getElementById('point-count').textContent =
+                vehicleData.total_points.toLocaleString();
+
+            // Set up SVG
+            const svg = d3.select('#track-svg');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            svg.attr('width', width)
+               .attr('height', height);
+
+            const g = svg.append('g');
+
+            // Calculate bounds from all coordinates
+            const xExtent = d3.extent(vehicleData.coordinates, d => d.x);
+            const yExtent = d3.extent(vehicleData.coordinates, d => d.y);
+
+            const trackWidth = xExtent[1] - xExtent[0];
+            const trackHeight = yExtent[1] - yExtent[0];
+
+            // Add padding
+            const padding = 0.05;
+            const xPadding = trackWidth * padding;
+            const yPadding = trackHeight * padding;
+
+            // Create scales
+            const xScale = d3.scaleLinear()
+                .domain([xExtent[0] - xPadding, xExtent[1] + xPadding])
+                .range([0, width]);
+
+            const yScale = d3.scaleLinear()
+                .domain([yExtent[0] - yPadding, yExtent[1] + yPadding])
+                .range([height, 0]);
+
+            // Create line generator
+            const line = d3.line()
+                .x(d => xScale(d.x))
+                .y(d => yScale(d.y))
+                .curve(d3.curveLinear);
+
+            // Draw the GPS trace as a continuous line
+            g.append('path')
+                .datum(vehicleData.coordinates)
+                .attr('class', 'gps-trace')
+                .attr('d', line);
+
+            // Draw points
+            g.selectAll('circle')
+                .data(vehicleData.coordinates)
+                .enter()
+                .append('circle')
+                .attr('class', 'gps-points')
+                .attr('cx', d => xScale(d.x))
+                .attr('cy', d => yScale(d.y))
+                .attr('r', 0.5);
+
+            // Add zoom behavior
+            const zoom = d3.zoom()
+                .scaleExtent([0.5, 50])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+
+                    // Scale point size with zoom
+                    const newRadius = 0.5 / event.transform.k;
+                    g.selectAll('circle').attr('r', newRadius);
+                });
+
+            svg.call(zoom);
+
+            console.log('Visualization ready!');
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

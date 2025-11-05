@@ -24,7 +24,7 @@ Shows where drivers waste time by being too cautious or lose it by overdriving. 
 
 - **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more—no technique changes needed.
 
-![Friction Circle Dashboard](./docs/images/Envelope.png)
+![Friction Circle Dashboard](./hackathon/docs/images/Envelope.png)
 *Example: Driver friction envelope showing grip usage across all corners*
 
 ## Quick Start

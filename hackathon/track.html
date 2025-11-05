@@ -1024,7 +1024,13 @@ function rotateCoordinates(x, y, angleDegrees) {
                 .attr('stroke', d => classificationColors[d.data.classification])
                 .attr('stroke-width', 0.5)
                 .merge(slices)
-                .attr('d', arc);
+                .transition()
+                .duration(300)
+                .attrTween('d', function(d) {
+                    const interpolate = d3.interpolate(this._current || d, d);
+                    this._current = interpolate(1);
+                    return t => arc(interpolate(t));
+                });
 
             // Data join for labels (text)
             const labels = group.selectAll('text.label')
@@ -1039,18 +1045,21 @@ function rotateCoordinates(x, y, angleDegrees) {
                 .attr('class', 'label')
                 .attr('text-anchor', 'middle')
                 .attr('dy', '0.35em')
-                .style('fill', 'white')
-                .style('font-size', '8px')
-                .style('font-weight', '600')
+                .style('fill', '#000000')
+                .style('font-size', '3.5px')
+                .style('font-weight', '700')
                 .style('pointer-events', 'none')
                 .merge(labels)
-                .attr('transform', d => {
-                    const [x, y] = arc.centroid(d);
-                    return `translate(${x}, ${y})`;
-                })
-                .text(d => {
+                .transition()
+                .duration(300)
+                .attr('transform', d => `translate(${arc.centroid(d)})`)
+                .tween('text', function(d) {
                     const percentage = Math.round((d.data.value / zoneData.total) * 100);
-                    return percentage >= 5 ? `${percentage}%` : ''; // Only show if >= 5%
+                    const text = percentage >= 5 ? `${percentage}%` : '';
+                    const node = this;
+                    return function(t) {
+                        node.textContent = text;
+                    };
                 });
         });
     }

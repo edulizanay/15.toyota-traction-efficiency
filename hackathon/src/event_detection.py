@@ -23,13 +23,13 @@ MACRO_EVENT_COVERAGE_THRESHOLD = (
     0.10  # fraction of samples with events (balanced tweak from 0.11)
 )
 MACRO_EVENT_RUN_LENGTH_THRESHOLD = (
-    7  # samples in longest contiguous event run (raised from 6)
+    6  # samples in longest contiguous event run (balanced tweak)
 )
 OPTIMAL_UTILIZATION_THRESHOLD = (
     0.81  # utilization threshold for optimal classification (lowered from 0.90)
 )
 AGGRESSIVE_HIGH_UTIL_THRESHOLD = (
-    0.85  # require high utilization for aggressive classification
+    0.84  # require high utilization for aggressive classification
 )
 
 

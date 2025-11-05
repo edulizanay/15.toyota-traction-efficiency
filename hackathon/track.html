@@ -909,7 +909,7 @@ function rotateCoordinates(x, y, angleDegrees) {
 
     // Load drivers from friction envelopes
     const frictionEnvelopes = await d3.json('data/processed/friction_envelopes.json');
-    const drivers = Object.keys(frictionEnvelopes).map(d => parseInt(d)).filter(d => d !== 0).sort((a, b) => a - b);
+    const drivers = Object.keys(frictionEnvelopes).map(d => parseInt(d)).filter(d => !isNaN(d) && d !== 0).sort((a, b) => a - b);
 
     console.log(`Loaded ${drivers.length} drivers:`, drivers);
 

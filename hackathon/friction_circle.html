@@ -416,6 +416,7 @@
             // Filter data for current driver
             const driverData = allSamples.filter(d => d.vehicle === currentDriver);
             const envelopeData = envelopes[currentDriver.toString()] || null;
+            const fieldEnvelopeData = envelopes["all"] || null;
 
             // Update stats
             let maxGrip = 0;
@@ -530,7 +531,53 @@
                 .attr('fill', d => colorScale(d.length))
                 .attr('opacity', 0.8);
 
-            // Use pre-computed envelope points and polynomial coefficients
+            // Draw field-wide envelope FIRST (as background reference)
+            const fieldEnvelopePoints = fieldEnvelopeData && fieldEnvelopeData.envelope_points ?
+                fieldEnvelopeData.envelope_points : [];
+            const fieldCoeffs = fieldEnvelopeData && fieldEnvelopeData.poly_coeffs ?
+                fieldEnvelopeData.poly_coeffs.slice().reverse() : null;
+
+            if (fieldCoeffs) {
+                const fieldCurvePoints = [];
+                for (let theta = 0; theta <= Math.PI / 2; theta += Math.PI / 180) {
+                    const r = polyEval(fieldCoeffs, theta);
+                    fieldCurvePoints.push({
+                        accx: r * Math.cos(theta),
+                        accy: r * Math.sin(theta)
+                    });
+                }
+
+                // Draw field-wide fitted curve in orange (background)
+                const lineGenerator = d3.line()
+                    .x(d => xScale(d.accx))
+                    .y(d => yScale(d.accy))
+                    .curve(d3.curveLinear);
+
+                svg.append('path')
+                    .datum(fieldCurvePoints)
+                    .attr('fill', 'none')
+                    .attr('stroke', '#ff8c42')  // orange
+                    .attr('stroke-width', 3)
+                    .attr('stroke-dasharray', '5,5')  // dashed line
+                    .attr('opacity', 0.6)
+                    .attr('d', lineGenerator);
+            }
+
+            // Draw field-wide envelope points in orange
+            if (fieldEnvelopePoints.length > 0) {
+                svg.append('g')
+                    .selectAll('circle')
+                    .data(fieldEnvelopePoints)
+                    .enter()
+                    .append('circle')
+                    .attr('cx', d => xScale(d.accx))
+                    .attr('cy', d => yScale(d.accy))
+                    .attr('r', 2)
+                    .attr('fill', '#ff8c42')  // orange
+                    .attr('opacity', 0.4);
+            }
+
+            // Use pre-computed driver envelope points and polynomial coefficients
             const p995EnvelopePoints = envelopeData && envelopeData.envelope_points ?
                 envelopeData.envelope_points : [];
             // Python np.polyfit returns descending order [a5,a4,...,a0], JavaScript polyEval expects ascending [a0,a1,...,a5]
@@ -548,7 +595,7 @@
                     });
                 }
 
-                // Draw fitted curve in cyan
+                // Draw driver's fitted curve in cyan
                 const lineGenerator = d3.line()
                     .x(d => xScale(d.accx))
                     .y(d => yScale(d.accy))
@@ -562,7 +609,7 @@
                     .attr('d', lineGenerator);
             }
 
-            // Draw 99.5th percentile envelope in blue
+            // Draw driver's 99.5th percentile envelope in blue
             if (p995EnvelopePoints.length > 0) {
                 svg.append('g')
                     .selectAll('circle')
@@ -601,6 +648,45 @@
                 .attr('x', -height / 2)
                 .attr('y', -45)
                 .text('Lateral G (|accy|)');
+
+            // Add legend
+            const legend = svg.append('g')
+                .attr('class', 'legend')
+                .attr('transform', `translate(${width - 180}, 10)`);
+
+            // Field envelope legend item
+            legend.append('line')
+                .attr('x1', 0)
+                .attr('x2', 30)
+                .attr('y1', 0)
+                .attr('y2', 0)
+                .attr('stroke', '#ff8c42')
+                .attr('stroke-width', 3)
+                .attr('stroke-dasharray', '5,5')
+                .attr('opacity', 0.6);
+
+            legend.append('text')
+                .attr('x', 35)
+                .attr('y', 4)
+                .attr('fill', '#d4d4d4')
+                .style('font-size', '12px')
+                .text('Field Standard');
+
+            // Driver envelope legend item
+            legend.append('line')
+                .attr('x1', 0)
+                .attr('x2', 30)
+                .attr('y1', 20)
+                .attr('y2', 20)
+                .attr('stroke', 'cyan')
+                .attr('stroke-width', 2);
+
+            legend.append('text')
+                .attr('x', 35)
+                .attr('y', 24)
+                .attr('fill', '#d4d4d4')
+                .style('font-size', '12px')
+                .text(`Vehicle #${currentDriver}`);
         }
     </script>
 </body>

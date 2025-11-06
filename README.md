@@ -2,18 +2,18 @@
 
 **Hack the Track 2025 - Driver Training & Insights**
 
-Shows where drivers waste time by being too cautious or aggressive. We use g-force data to measure grip utilization in every corner, giving coaches precise feedback for each driver.
+**78% of race corners are driven too cautiously.** Drivers leave 20% more speed on the table by not trusting their tires.
 
-> **"How do you find the right balance between speed and control?"**
+We built a grip analyzer that pinpoints exactly where each driver wastes time. Coaches get corner-by-corner feedback: "Turn 3: you're using 68% of available grip—brake later and carry more speed."
 
-The answer lies in the **friction circle**—a visualization showing how much available grip each driver uses.
+The core insight comes from the **friction circle**—a visualization that measures how much grip each driver actually uses versus what their tires can handle.
 
 ![Friction Circle Dashboard](./hackathon/docs/images/Envelope.png)
 *Driver friction envelope showing grip usage across all corners*
 
-Your tires have a fixed grip budget that's shared between acceleration/braking (**Longitudinal**) and cornering (**Lateral**). The envelope shows your maximum grip in any direction. Points inside the envelope mean unused grip; points on the envelope mean optimal driving.
+Tires have a fixed grip budget split between acceleration/braking (**Longitudinal**) and cornering (**Lateral**). The envelope shows maximum grip in any direction. Points inside = unused grip. Points on the envelope = optimal driving.
 
-We track two key metrics:
+We track two patterns:
 
 **Conservative driving**: Grip left unused (operating inside the envelope)
 - The driver could go faster but is holding back
@@ -24,7 +24,7 @@ We track two key metrics:
 - **Understeer**: driver tries to turn harder (steering↑) but loses lateral force (`accy_can`↓)
 - **Oversteer**: driver loses rear grip causing lateral spike (`accy_can` spike) with forward drop (`accx_can`↓)
 
-This enables coaches to give per-corner feedback like:
+**Per-corner coaching feedback:**
 
 > **Turn 3**: You're only using 68% of available grip—brake later and carry more speed through the apex
 
@@ -42,7 +42,7 @@ This enables coaches to give per-corner feedback like:
 *Driver friction envelope showing grip usage across all corners*
 
 
-- **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more.
+- **78% of corners are driven with caution**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more.
 
  - Counter-intuitive result: Higher optimal% shows a weak POSITIVE correlation with worse finishing positions (r ≈ 0.20-0.24). Meaning drivers who use more grip tend to finish worse, not better. Conservative driving shows the opposite: Weak NEGATIVE correlation (r ≈ -0.22 to -0.24) with position - more conservative = slightly better finishes. 
 
@@ -237,10 +237,6 @@ After coaching session, re-run analysis:
 - Measure lap time improvement zone by zone
 
 **Result**: Moving just 3 turns from Conservative to Optimal can gain 0.5-1.0 seconds per lap.
-
-### Looking at the Future
-
-By giving drivers precise, data-driven feedback on grip utilization, we transform subjective "feel" into measurable performance metrics. This enables targeted coaching: where to push harder, where to ease off, and where technique is already optimal—turning telemetry into competitive advantage.
 
 ## Project Structure
 

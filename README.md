@@ -38,12 +38,19 @@ This enables coaches to give per-corner feedback like:
 
 - **Mid-turn (the apex) is where drivers hold back** because the tires are already working overtime just to turn. Adding brake or throttle triggers a slide, and there's barely any lap time to gain in that short section anyway.
 
+![Friction Circle Dashboard](./hackathon/docs/images/Track.png)
+*Driver friction envelope showing grip usage across all corners*
 
-- **Confidence gaps are bigger than skill gaps**: Turn 8 sees 92% of drivers at 1.35g (near maximum grip). Turn 7, one corner earlier, sees 100% conservative driving at only 1.02g. Same cars, same drivers, 0.33g difference—it's all mental.
 
-- **Aggressive ≠ Fast**: Drivers who cross the envelope pull 1.36g but lose time correcting wheelspin and slides. Optimal drivers use 1.31g cleanly and go faster because the car does what they want.
+- **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more.
 
-- **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more—no technique changes needed.
+ - Counter-intuitive result: Higher optimal% shows a weak POSITIVE correlation with worse finishing positions (r ≈ 0.20-0.24). Meaning drivers who use more grip tend to finish worse, not better. Conservative driving shows the opposite: Weak NEGATIVE correlation (r ≈ -0.22 to -0.24) with position - more conservative = slightly better finishes. 
+
+
+![Friction Circle Dashboard](./hackathon/docs/images/CorrelationCharts.png)
+*Driver friction envelope showing grip usage across all corners*
+
+
 
 ## Demo
 

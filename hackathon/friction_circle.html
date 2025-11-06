@@ -363,8 +363,9 @@
             // Attempt corrected envelopes JSON first
             d3.json(`data/processed/friction_envelopes_corrected.json?v=${timestamp}`)
                 .catch(() => d3.json(`data/processed/friction_envelopes.json?v=${timestamp}`)),
-            d3.json(`data/processed/zone_statistics.json?v=${timestamp}`)
-        ]).then(([samples, envelopeData, zoneStatsData]) => {
+            d3.json(`data/processed/zone_statistics.json?v=${timestamp}`),
+            d3.json(`data/processed/driver_best_laps.json?v=${timestamp}`)
+        ]).then(([samples, envelopeData, zoneStatsData, driverBestLaps]) => {
             // Parse samples
             allSamples = samples.map(d => ({
                 vehicle: +d.vehicle_number,
@@ -375,8 +376,11 @@
             envelopes = envelopeData;
             zoneStats = zoneStatsData;
 
-            // Populate driver dropdown
-            const vehicles = Array.from(new Set(allSamples.map(d => d.vehicle))).sort((a, b) => a - b);
+            // Populate driver dropdown - only include drivers with timing data
+            const driversWithTiming = new Set(Object.keys(driverBestLaps).map(d => parseInt(d)));
+            const vehicles = Array.from(new Set(allSamples.map(d => d.vehicle)))
+                .filter(d => driversWithTiming.has(d))
+                .sort((a, b) => a - b);
             const select = d3.select('#driverSelect');
 
             select.selectAll('option').remove();
@@ -614,18 +618,19 @@
             }
 
             // Draw driver's 99.5th percentile envelope in blue
-            if (p995EnvelopePoints.length > 0) {
-                svg.append('g')
-                    .selectAll('circle')
-                    .data(p995EnvelopePoints)
-                    .enter()
-                    .append('circle')
-                    .attr('cx', d => xScale(d.accx))
-                    .attr('cy', d => yScale(d.accy))
-                    .attr('r', 3)
-                    .attr('fill', 'blue')
-                    .attr('opacity', 0.9);
-            }
+            // Hidden per user request
+            // if (p995EnvelopePoints.length > 0) {
+            //     svg.append('g')
+            //         .selectAll('circle')
+            //         .data(p995EnvelopePoints)
+            //         .enter()
+            //         .append('circle')
+            //         .attr('cx', d => xScale(d.accx))
+            //         .attr('cy', d => yScale(d.accy))
+            //         .attr('r', 3)
+            //         .attr('fill', 'blue')
+            //         .attr('opacity', 0.9);
+            // }
 
             // Add axes
             svg.append('g')

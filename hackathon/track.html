@@ -907,19 +907,23 @@ function rotateCoordinates(x, y, angleDegrees) {
     let currentRace = 'R1';
     let selectedDrivers = new Set();
 
-    // Load drivers from friction envelopes
-    const frictionEnvelopes = await d3.json('data/processed/friction_envelopes.json');
-    const drivers = Object.keys(frictionEnvelopes).map(d => parseInt(d)).filter(d => !isNaN(d) && d !== 0).sort((a, b) => a - b);
-
-    console.log(`Loaded ${drivers.length} drivers:`, drivers);
-
-    // Load driver best lap times (optional; show placeholders if missing)
+    // Load driver best lap times
     let driverBestLaps = {};
     try {
         driverBestLaps = await d3.json('data/processed/driver_best_laps.json');
     } catch (e) {
         console.warn('driver_best_laps.json missing or invalid; showing placeholders');
     }
+
+    // Load drivers from friction envelopes and filter to only those with timing data
+    const frictionEnvelopes = await d3.json('data/processed/friction_envelopes.json');
+    const driversWithTiming = new Set(Object.keys(driverBestLaps).map(d => parseInt(d)));
+    const drivers = Object.keys(frictionEnvelopes)
+        .map(d => parseInt(d))
+        .filter(d => !isNaN(d) && driversWithTiming.has(d))
+        .sort((a, b) => a - b);
+
+    console.log(`Loaded ${drivers.length} drivers:`, drivers);
 
     // Color scale for drivers
     const driverColors = [

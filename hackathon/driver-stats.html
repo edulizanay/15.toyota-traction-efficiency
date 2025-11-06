@@ -217,6 +217,9 @@ body {
 
     console.log(`Loaded ${classifications.length} classifications`);
 
+    // Create set of drivers with timing data
+    const driversWithTiming = new Set(Object.keys(driverTotalTimes));
+
     // Current state
     let currentRace = 'R1';
     let currentSort = { column: 'driver', direction: 'asc' };
@@ -233,6 +236,8 @@ body {
         const stats = [];
 
         byDriver.forEach((zones, driver) => {
+            // Skip drivers without timing data
+            if (!driversWithTiming.has(driver)) return;
             const total = zones.length;
             const optimal = zones.filter(z => z.classification === 'Optimal').length;
             const conservative = zones.filter(z => z.classification === 'Conservative').length;

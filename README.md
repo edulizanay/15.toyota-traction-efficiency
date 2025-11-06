@@ -2,10 +2,48 @@
 
 **Hack the Track 2025 - Driver Training & Insights**
 
-Shows where drivers waste time by being too cautious or lose it by overdriving. Uses g-force data to measure how much grip each driver uses in every corner, then classifies their approach as Conservative, Aggressive, or Optimal.
+Shows where drivers waste time by being too cautious or aggressive. We use g-force data to measure grip utilization in every corner, giving coaches precise feedback for each driver.
 
-> **"Too aggressive and you'll slip. Too cautious and you'll get passed. How do you find the right balance?"**
+> **"How do you find the right balance between speed and control?"**
 
+The answer lies in the **friction circle**—a visualization showing how much available grip each driver uses.
+
+![Friction Circle Dashboard](./hackathon/docs/images/Envelope.png)
+*Driver friction envelope showing grip usage across all corners*
+
+Your tires have a fixed grip budget that's shared between acceleration/braking (**Longitudinal**) and cornering (**Lateral**). The envelope shows your maximum grip in any direction. Points inside the envelope mean unused grip; points on the envelope mean optimal driving.
+
+We track two key metrics:
+
+**Conservative driving**: Grip left unused (operating inside the envelope)
+- The driver could go faster but is holding back
+- Most common issue: 78% of corners show this pattern
+
+**Aggressive driving**: Trying to exceed the envelope causes:
+- **Wheelspin**: driver tries to accelerate (throttle↑) but loses forward force (`accx_can`↓)
+- **Understeer**: driver tries to turn harder (steering↑) but loses lateral force (`accy_can`↓)
+- **Oversteer**: driver loses rear grip causing lateral spike (`accy_can` spike) with forward drop (`accx_can`↓)
+
+This enables coaches to give per-corner feedback like:
+
+> **Turn 3**: You're only using 68% of available grip—brake later and carry more speed through the apex
+
+> **Turn 7**: Wheelspin on exit is costing you time—ease off the throttle 10% for cleaner power delivery
+
+> **Turn 9**: You're nailing it at 85% grip utilization—that's optimal driving, keep it up
+
+## Key Findings
+
+- **Entry and exit zones show the most optimal use of grip** because the car is straighter. Drivers can brake hard on entry and throttle early on exit with less risk and bigger lap time gains.
+
+- **Mid-turn (the apex) is where drivers hold back** because the tires are already working overtime just to turn. Adding brake or throttle triggers a slide, and there's barely any lap time to gain in that short section anyway.
+
+
+- **Confidence gaps are bigger than skill gaps**: Turn 8 sees 92% of drivers at 1.35g (near maximum grip). Turn 7, one corner earlier, sees 100% conservative driving at only 1.02g. Same cars, same drivers, 0.33g difference—it's all mental.
+
+- **Aggressive ≠ Fast**: Drivers who cross the envelope pull 1.36g but lose time correcting wheelspin and slides. Optimal drivers use 1.31g cleanly and go faster because the car does what they want.
+
+- **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more—no technique changes needed.
 
 ## Demo
 
@@ -15,17 +53,6 @@ Shows where drivers waste time by being too cautious or lose it by overdriving. 
 
 - **Try the tool here**: [TODO: ADD_GITHUB_PAGES_URL]
 - **Official Dataset**: `barber-motorsports-park.zip` from [trddev.com/hackathon-2025](https://trddev.com/hackathon-2025)
-
-## What We Learned
-
-- **Confidence gaps are bigger than skill gaps**: Turn 8 sees 92% of drivers at 1.35g (near maximum grip). Turn 7, one corner earlier, sees 100% conservative driving at only 1.02g. Same cars, same drivers, 0.33g difference—it's all mental.
-
-- **Aggressive ≠ Fast**: Drivers who cross the envelope pull 1.36g but lose time correcting wheelspin and slides. Optimal drivers use 1.31g cleanly and go faster because the car does what they want.
-
-- **78% of corners are driven scared**: Most drivers use only 70% of available grip. They could go 20% faster in those turns just by trusting the tires more—no technique changes needed.
-
-![Friction Circle Dashboard](./hackathon/docs/images/Envelope.png)
-*Example: Driver friction envelope showing grip usage across all corners*
 
 ## Quick Start
 
@@ -102,7 +129,7 @@ Think of it like a wallet with $100:
 We measure this using g-forces:
 - **Longitudinal (accx)**: How hard you're accelerating or braking
 - **Lateral (accy)**: How hard you're cornering
-- **Total grip used**: `sqrt(accx² + accy²)`
+- **Total grip used**: `sqrt(a * accx² + b * accy²)`
 
 **The friction circle** plots every combination of braking/acceleration vs cornering. The outer boundary—your envelope—shows the maximum grip available.
 
